@@ -1,0 +1,39 @@
+ion-grid { 
+    background: url('C:/Users/Zhana Mitova/Desktop/triangle.png');
+    height: 700px;
+    position: fixed;
+    width: 100%;
+}
+
+.border-style {
+    border: 3px solid #333333;
+    border-radius: 12px;
+    height: 550px;
+}
+
+ion-item {
+    border-bottom: 2px solid #4d4d4d;
+    width: 100%;
+    margin: 0 5px 0 5px;
+    --background: none;
+}
+
+ion-checkbox {
+    --border-color: white;
+}
+
+ion-button {
+    width: 100%;
+}
+
+.grid-style {
+    margin: 100px 20px;
+    border: 2px solid #333333;
+    border-radius: 5%;
+    padding: 20px 5px;
+}
+
+.label-style {
+    font-size: 13px;
+    margin: auto;
+}

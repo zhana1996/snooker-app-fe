@@ -1,0 +1,42 @@
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-row>
+                    <ion-button style="width: 100%;" color="danger" size="small" shape="block" fill="outline">Ранклиста</ion-button>
+                </ion-row>
+                <ion-row>
+                    <ion-button style="width: 100%;" color="warning" size="small" shape="block" fill="outline">Мачове</ion-button>
+                </ion-row>
+            </ion-col>
+            <ion-col>
+                <ion-row>
+                    <ion-button style="width: 100%;" color="primary" size="small" shape="block" fill="outline">Титли</ion-button>
+                </ion-row>
+                <ion-row>
+                    <ion-button style="width: 100%;" color="light" size="small" shape="block" fill="outline">Точки</ion-button>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let player of players" style="background-color: #262626; margin-bottom: 10px;">
+            <ion-col size="6">
+                <ion-row>
+                    <ion-label><h4>{{player.name}}</h4>
+                        <p>{{player.club}}</p></ion-label>
+                </ion-row>
+            </ion-col>
+            <ion-col>
+                <ion-row>
+                    <ion-button size="small" color="danger" class="button-scores" shape="round" fill="outline">{{player.rank}}</ion-button>
+                    <ion-button size="small" color="warning" class="button-scores" shape="round" fill="outline">{{player.matches}}</ion-button>
+                    <ion-button size="small" class="button-scores" shape="round" fill="outline">{{player.titles}}</ion-button>
+                </ion-row>
+            </ion-col>
+            <ion-col size="1" style="margin: auto; margin-right: 3px;">
+                <ion-row>
+                    <ion-label>{{player.points}}</ion-label>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

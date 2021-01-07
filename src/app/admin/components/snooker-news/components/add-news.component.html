@@ -1,0 +1,27 @@
+<ion-content>
+    <form [formGroup]="form">
+        <ion-grid style="background: white; border-bottom-left-radius: 50px;">
+            <ion-row>
+                <ion-item>
+                    <ion-label position="stacked">Заглавие на статията<span style="color: red;">*</span></ion-label>
+                    <ion-input type="text" formControlName="title"></ion-input>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-item>
+                    <ion-label position="stacked">Url към статията<span style="color: red;">*</span></ion-label>
+                    <ion-input type="text" formControlName="url"></ion-input>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-item>
+                    <ion-label position="stacked">Снимка<span style="color: red;">*</span></ion-label>
+                    <ion-input type="text" formControlName="img"></ion-input>
+                </ion-item>
+            </ion-row>
+            <ion-row class="ion-justify-content-end">
+                <ion-button color="danger" [disabled]="form.invalid">Запази</ion-button>
+            </ion-row>
+        </ion-grid>
+    </form>
+</ion-content>

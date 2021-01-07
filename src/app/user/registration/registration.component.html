@@ -1,0 +1,102 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>Регистрация</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+    <ion-grid>
+        <ion-row class="">
+            <ion-col>
+                <form [formGroup]="form">
+                    <ion-row>
+                        <ion-item>
+                            <ion-label position="floating">Потребителско име</ion-label>
+                            <ion-input formControlName="userName"></ion-input>
+                        </ion-item>
+                    </ion-row>
+                    <ion-row>
+                        <ion-item>
+                            <ion-label position="floating">Парола</ion-label>
+                            <ion-input type="password" formControlName="password"></ion-input>
+                        </ion-item>
+                    </ion-row>
+                    <ion-row>
+                        <ion-item>
+                            <ion-label position="floating">Име, Фамилия</ion-label>
+                            <ion-input formControlName="name"></ion-input>
+                        </ion-item>
+                    </ion-row>
+                    <ion-row>
+                        <ion-item>
+                            <ion-label position="floating">Имейл</ion-label>
+                            <ion-input formControlName="email"></ion-input>
+                        </ion-item>
+                    </ion-row>
+                    <ion-row>
+                        <ion-item>
+                            <ion-label position="floating">Клуб</ion-label>
+                            <ion-input formControlName="club"></ion-input>
+                        </ion-item>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label position="floating">Възраст</ion-label>
+                                <ion-input formControlName="age"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label position="floating">Пол</ion-label>
+                                <ion-select interface="popover" formControlName="gender">
+                                    <ion-select-option value="women">Жена</ion-select-option>
+                                    <ion-select-option value="men">Мъж</ion-select-option>
+                                  </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label position="floating">Брейк</ion-label>
+                                <ion-input formControlName="break"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label position="floating">Начало</ion-label>
+                                <ion-datetime display-format="YYYY" picker-format="YYYY" value="2021" formControlName="startPeriod"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <ion-radio-group allow-empty-selection formControlName="role">
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-item>
+                                            <ion-label>Треньор</ion-label>
+                                            <ion-radio slot="end" color="primary" value="COACH"></ion-radio>
+                                          </ion-item>
+                                    </ion-col>
+                                    <ion-col>
+                                        <ion-item>
+                                            <ion-label>Играч</ion-label>
+                                            <ion-radio slot="end" color="secondary" value="PLAYER"></ion-radio>
+                                          </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                                </ion-radio-group>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-button style="color: white;" color="warning" expand="block">Качи снимка</ion-button>
+                    </ion-row>
+                    <ion-row>
+                        <ion-button [disabled]="form.invalid" color="danger" (click)="createNewUserProfile()" expand="block">ЗАПАЗИ</ion-button>
+                    </ion-row>
+                </form>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

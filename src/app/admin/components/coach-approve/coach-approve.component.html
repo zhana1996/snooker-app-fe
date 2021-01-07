@@ -1,0 +1,33 @@
+<ion-content>
+    <ion-grid class="border-style">
+        <ion-row>
+            <ion-label>
+                <h1>Чакащи за одобрение регистрации на треньори</h1>
+            </ion-label>
+        </ion-row>
+        <ion-row *ngIf="showResults">
+            <ion-list style="margin: auto; width: 100%;">
+                <ion-item *ngFor="let coach of coaches" class="list-style">
+                    <ion-avatar slot="start" style="margin-bottom: 50px;">
+                        <img src = {{coach.img}}>
+                    </ion-avatar>
+                    <ion-label style="margin: 0px;">
+                      <ion-grid>
+                          <ion-row>
+                              <ion-col>
+                                <h2>{{coach.name}}</h2>
+                                <h4>{{coach.number}}</h4>
+                                <p>{{coach.location}}</p>
+                              </ion-col>
+                          </ion-row>
+                          <ion-row class="ion-justify-content-end">
+                            <ion-button size="small" color="success" (click)="approveRegistration(coach.id)"><ion-icon name="add-outline"></ion-icon></ion-button>
+                            <ion-button size="small" color="danger" (click)="deleteRegistration(coach.id)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+                        </ion-row>
+                      </ion-grid>
+                  </ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,107 @@
+.home-page-card {
+    background: url("C:/Users/Zhana Mitova/Desktop/rsz_39237-20201108_coc_snooker_tgw_d5x_6342_1.jpg");
+    height: 560px;
+}
+.home-page-second-card {
+    background: url("C:/Users/Zhana Mitova/Desktop/classification.png");
+}
+
+.home-page-third-card {
+    background: url("C:/Users/Zhana Mitova/Desktop/crucible_1.jpg");
+    background-repeat: no-repeat;
+}
+
+.home-page-fourth-card {
+    background: url("C:/Users/Zhana Mitova/Desktop/tab_fourth_1.png");
+    background-repeat: no-repeat;
+}
+
+.home-page-fifth-card {
+    background: url("C:/Users/Zhana Mitova/Desktop/coach_1.png");
+    background-repeat: no-repeat;
+}
+.title {
+    margin-top: 10px;
+    color: white;
+    font-size: 25px;
+    content: center;
+    text-align: center;
+    margin-top: 75px;
+}
+
+.title-second-card {
+    color: white;
+    font-size: 20px;
+}
+
+.subtitle {
+    color: white;
+    text-align: center;
+}
+
+.subtitle-second-card {
+    color: white;
+    margin-left: 17px;
+}
+
+.button {
+    text-align: center;
+}
+
+.move-me-img-1 {
+    display: inline-block;
+    padding: 0px;
+    margin: 30px;;
+    position: relative;
+    animation: mymove 10s;
+    height: 40%;
+    width: 40%;
+}
+
+.move-me-img-2 {
+    display: inline-block;
+    padding: 0px;
+    position: relative;
+    animation: mymove 10s;
+    height: 40%;
+    width: 40%;
+}
+.move-me-1 {
+    animation: move-in-steps-1 infinite;
+    animation-direction: reverse;
+    animation-duration: 15s;
+    animation-play-state: running;
+}
+.move-me-2 {
+    animation: move-in-steps-2 infinite;
+    animation-delay: 7s;
+    animation-direction: reverse;
+    animation-duration: 15s;
+    animation-play-state: running;
+}
+  
+  body {
+    padding: 200px;
+  }
+  
+  @keyframes move-in-steps-1 {
+    0% {
+      left: 0px;
+      top: 600px;
+    }
+    100% {
+      left: 0px;
+      top: -300px;
+    }
+  }
+  
+  @keyframes move-in-steps-2 {
+    0% {
+      left: 0px;
+      top: 600px;
+    }
+    100% {
+      left: 0px;
+      top: -300px;
+    }
+  }

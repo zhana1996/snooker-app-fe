@@ -1,0 +1,34 @@
+<ion-content>
+    <ion-grid class="border-style">
+        <ion-row>
+            <ion-label>
+                <h1>Новини</h1>
+            </ion-label>
+        </ion-row>
+        <ion-row *ngIf="showResults">
+            <ion-list style="margin: auto; width: 100%;">
+                <ion-item *ngFor="let item of news" [ngStyle]="{'background': 'url(' + item.img + ')'}">
+                    <ion-card class="news-card">
+                        <ion-card-header class="title">
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col size="8">
+                                        <strong><span>{{item.title}}</span></strong>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card-header>
+                        <ion-card-content>
+                            <ion-button size="small" color="danger" (click)="deleteNews(item.id)">Изтрий</ion-button>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-item>
+            </ion-list>
+        </ion-row>
+    </ion-grid>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 10px; margin-right: 10px;">
+        <ion-fab-button color="danger" style="width: 40px; height: 40px;" (click)="presentPopover()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+</ion-content>

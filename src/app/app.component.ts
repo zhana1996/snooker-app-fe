@@ -13,37 +13,32 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'Inbox',
-      url: '/folder/Inbox',
-      icon: 'mail'
+      title: 'Начало',
+      url: '/folder/homePage',
+      icon: 'extension-puzzle'
     },
     {
-      title: 'Outbox',
-      url: '/folder/Outbox',
-      icon: 'paper-plane'
+      title: 'Новини',
+      url: '/folder/news',
+      icon: 'newspaper'
     },
     {
-      title: 'Favorites',
-      url: '/folder/Favorites',
-      icon: 'heart'
+      title: 'Резултати',
+      url: '/folder/scores/months',
+      icon: 'stats-chart'
     },
     {
-      title: 'Archived',
-      url: '/folder/Archived',
-      icon: 'archive'
+      title: 'Турнири 2021',
+      url: '/folder/tournaments',
+      icon: 'cube'
     },
     {
-      title: 'Trash',
-      url: '/folder/Trash',
-      icon: 'trash'
-    },
-    {
-      title: 'Spam',
-      url: '/folder/Spam',
-      icon: 'warning'
+      title: 'Играчи',
+      url: '/folder/players',
+      icon: 'people'
     }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  public labels = ['Класация', 'Предстоящ турнир', 'Запиши се за турнир', 'Тренировка'];
 
   constructor(
     private platform: Platform,

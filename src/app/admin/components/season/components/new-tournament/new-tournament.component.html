@@ -1,0 +1,27 @@
+<ion-content>
+    <form [formGroup]="newTournamentForm">
+        <ion-grid style="background: white; border-bottom-left-radius: 50px;">
+            <ion-row>
+                <ion-item>
+                    <ion-label position="stacked">Наименование на турнира<span style="color: red;">*</span></ion-label>
+                    <ion-input type="text" formControlName="name"></ion-input>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-item>
+                    <ion-label position="stacked">Наименование на клуба<span style="color: red;">*</span></ion-label>
+                    <ion-input type="text" formControlName="location"></ion-input>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-item>
+                    <ion-label position="stacked">Дата<span style="color: red;">*</span></ion-label>
+                    <ion-datetime formControlName="date"></ion-datetime>
+                </ion-item>
+            </ion-row>
+            <ion-row class="ion-justify-content-end">
+                <ion-button color="danger" [disabled]="newTournamentForm.invalid">Запази</ion-button>
+            </ion-row>
+        </ion-grid>
+    </form>
+</ion-content>

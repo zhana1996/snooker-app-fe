@@ -1,0 +1,83 @@
+<ion-content>
+    <ion-card class="home-page-card">
+        <ion-card-header class="title">
+            Мобилно приложение
+        </ion-card-header>
+        <ion-card-subtitle class="subtitle">
+            Това приложение е създадено с цел да се организират турнири по снукър,
+            както и всеки състезател да може да си създаде свой профил, чрез който да 
+            записва тренировка с определено избран от него треньор, да следи новините
+            свързани със снукъра в България и по света, да си определя мачове с други
+            играчи, да следи настоящата ранглиста и предстоящите турнири и още много
+            други възможности.
+        </ion-card-subtitle>
+    </ion-card>
+
+    <ion-card class="home-page-second-card">
+        <ion-card-header class="title-second-card">
+            Класация сезон 2020-2021
+        </ion-card-header>
+        <ion-card-subtitle class="subtitle-second-card">
+            Класацията до момента на всички играчи
+            участвали на турнирите през сезон 
+            2020-2021.
+        </ion-card-subtitle>
+        <ion-card-content>
+            <ion-button color="success" (click)="goToStatisticsPage()">ВИЖ ПОВЕЧЕ</ion-button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="home-page-third-card">
+        <ion-card-header style="text-align: center; font-size: 20px; color: white;">
+            Следващият турнир
+        </ion-card-header>
+        <ion-card-subtitle style="text-align: center;" class="subtitle-second-card">
+            The Academy 
+        </ion-card-subtitle>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row class="ion-justify-content-center" style="font-size: 20px;"><ion-label class="subtitle">{{nextTournament}}</ion-label></ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-label>
+                        <span style="color: red;">D </span> 
+                        <strong><span style="font-size: 20px; color: white;">8</span></strong>
+                        <span style="color: red;"> H </span> 
+                        <strong><span style="font-size: 20px; color: white;">12</span></strong>
+                        <span style="color: red;"> M </span>
+                        <strong><span style="font-size: 20px; color: white;">24</span></strong>
+                </ion-label>
+            </ion-row>
+                <ion-row class="ion-justify-content-center" style="color: white;"><ion-label> бул. „Тодор Александров“ 64, София</ion-label></ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="home-page-fourth-card">
+        <ion-card-header class="title-second-card">
+            Запиши се за турнир
+        </ion-card-header>
+        <ion-card-subtitle class="subtitle-second-card">
+            За да можеш да участваш във всеки един
+            предстоящ турнир провеждан от Българската
+            Снукър федерация е необходимо да се регистрираш
+            първо и след това да се запишеш тук.
+        </ion-card-subtitle>
+        <ion-card-content>
+            <ion-button color="success" (click)="presentAlertConfirm()">ЗАПИШИ</ion-button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="home-page-fifth-card">
+        <ion-card-header class="title-second-card">
+            Тренировка
+        </ion-card-header>
+        <ion-card-subtitle class="subtitle-second-card">
+            Запиши си тренировка с избран от теб треньор,
+            в избрана от теб дата и час, за да се потопиш
+            в магията на тази световна игра.
+        </ion-card-subtitle>
+        <ion-card-content>
+            <ion-button color="success">ИЗБЕРИ</ion-button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

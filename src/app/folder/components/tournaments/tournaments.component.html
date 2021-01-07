@@ -1,0 +1,62 @@
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-row>
+                    <ion-button class="button-styles">СЕП</ion-button>
+                </ion-row>
+                <ion-row>
+                    <ion-button class="button-styles">ДЕК</ion-button>
+                </ion-row>
+                <ion-row>
+                    <ion-button class="button-styles">МАР</ion-button>
+                </ion-row>
+            </ion-col>
+            <ion-col>
+                <ion-row>
+                    <ion-button class="button-styles">ОКТ</ion-button>
+                </ion-row>
+                <ion-row>
+                    <ion-button class="button-styles">ЯНУ</ion-button>
+                </ion-row>
+                <ion-row>
+                    <ion-button class="button-styles">АПР</ion-button>
+                </ion-row>
+            </ion-col>
+            <ion-col>
+                <ion-row>
+                    <ion-button class="button-styles">НОЕ</ion-button>
+                </ion-row>
+                <ion-row>
+                    <ion-button class="button-styles">ФЕВ</ion-button>
+                </ion-row>
+                <ion-row>
+                    <ion-button class="button-styles">МАЙ</ion-button>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+      <ion-row>
+        <ion-col>
+            <ion-row><ion-icon class="icons-tournament"
+                name="calendar-outline"></ion-icon></ion-row>
+            <ion-row>Дата</ion-row>
+        </ion-col>
+        <ion-col>
+            <ion-row><ion-icon class="icons-tournament"
+                 name="ribbon-outline"></ion-icon></ion-row>
+            <ion-row clas>Име</ion-row>
+        </ion-col>
+        <ion-col>
+            <ion-row><ion-icon class="icons-tournament"
+                 name="location-outline"></ion-icon></ion-row>
+            <ion-row clas>Място</ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let tournament of tournaments; index as i">
+        <ion-col style="width: 5px; background-color: red;">{{ tournament.date }}</ion-col>
+        <ion-col>{{ tournament.name }}</ion-col>
+        <ion-col>{{ tournament.location }}</ion-col>
+      </ion-row>
+    </ion-grid>
+<ion-content></ion-content>
+  

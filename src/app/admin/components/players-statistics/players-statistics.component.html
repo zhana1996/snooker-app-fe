@@ -1,0 +1,38 @@
+<ion-content>
+    <ion-grid class="border-style">
+        <ion-row>
+            <ion-label>
+                <h1>Играчи</h1>
+            </ion-label>
+        </ion-row>
+        <ion-row *ngIf="showResults">
+            <ion-list style="margin: auto; width: 100%;">
+                <ion-item *ngFor="let player of players" class="list-style">
+                    <ion-avatar slot="start" style="margin-bottom: 50px;">
+                        <img src = {{player.img}}>
+                    </ion-avatar>
+                    <ion-label style="margin: 0px;">
+                      <ion-grid>
+                          <ion-row>
+                              <ion-col size="7">
+                                <h2>{{player.name}}</h2>
+                                <h4>{{player.club}}</h4>
+                                <p>Брейк: {{player.break}}</p>
+                              </ion-col>
+                              <ion-col size="5">
+                                  <ion-row style="margin: 5px 5px 0px 30px;">
+                                    <ion-button size="small" color="danger" class="button-scores" shape="round" fill="outline">{{player.rank > 0 ? player.rank : ''}}</ion-button>
+                                  </ion-row>
+                              </ion-col>
+                          </ion-row>
+                          <ion-row class="ion-justify-content-end">
+                            <ion-button size="small" color="success" (click)="editPlayer(player)"><ion-icon name="create-outline"></ion-icon></ion-button>
+                            <ion-button size="small" color="danger" (click)="deletePlayer(player.id)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+                        </ion-row>
+                      </ion-grid>
+                  </ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-row>
+    </ion-grid>
+</ion-content>

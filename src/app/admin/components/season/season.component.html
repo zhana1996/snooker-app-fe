@@ -1,0 +1,50 @@
+<ion-content>
+    <ion-grid class="border-style">
+        <ion-row>
+            <ion-label>
+                <h1>Турнири през сезона</h1>
+            </ion-label>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <form [formGroup]="myForm">
+                    <ion-row>
+                        <ion-item>
+                            <ion-label>Изберете сезон</ion-label>
+                            <ion-datetime formControlName="fromDate" max="2020" (ionChange)="changeFromDate()" display-format="YYYY" picker-format="YYYY"></ion-datetime>
+                            <ion-datetime formControlName="toDate" display-format="YYYY" picker-format="YYYY" disabledFormControl></ion-datetime>
+                        </ion-item>
+                    </ion-row>
+                </form>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="showTournment">
+            <ion-list style="margin: auto;">
+                <ion-item *ngFor="let tournament of tournaments" class="list-style">
+                    <ion-label style="margin: 0px;">
+                      <ion-grid>
+                          <ion-row>
+                              <ion-col size="8">
+                                <h2>{{tournament.name}}</h2>
+                                <p>{{tournament.location}}</p>
+                              </ion-col>
+                              <ion-col size="4" style="margin-top: 3.5px;">
+                                  {{tournament.date}}
+                              </ion-col>
+                          </ion-row>
+                          <ion-row class="ion-justify-content-end">
+                              <ion-button size="small" (click)="presentPopover(tournament)" color="warning"><ion-icon name="create-outline"></ion-icon></ion-button>
+                              <ion-button size="small" (click)="presentAlertConfirm(tournament.name)" color="danger"><ion-icon name="trash-outline"></ion-icon></ion-button>
+                          </ion-row>
+                      </ion-grid>
+                  </ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-row>
+    </ion-grid>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 10px; margin-right: 10px;">
+        <ion-fab-button color="danger" style="width: 40px; height: 40px;" (click)="presentPopover()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+</ion-content>

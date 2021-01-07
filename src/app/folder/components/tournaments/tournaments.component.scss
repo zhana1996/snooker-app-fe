@@ -1,0 +1,47 @@
+.title-tournament {
+    margin-top: 10px;
+    color: white;
+    font-size: 25px;
+}
+
+.icons-tournament {
+    font-size: 25px;
+}
+
+ion-grid {
+    --ion-grid-column-padding: 10px;
+    border-collapse: collapse;
+    border-style: hidden;
+    
+    ion-row:first-child {
+      font-weight: bold;
+    }
+    ion-col {
+      border: 1px solid black;
+      border-bottom: 0;
+      border-right: 0;
+    }
+    ion-col:first-child {
+      border-right: 1px solid black;
+    }
+    
+    ion-row:last-child {
+      border-bottom: 1px solid black;
+    }
+  }
+
+  .button-styles {
+    width: 100%;
+    border-color: red;
+    border: 2px solid red;
+    border-radius: 8px;
+  }
+
+  ion-button {
+    --background: black;
+  }
+
+  ion-button:hover {
+    --background: red;
+    border: 0px;
+  }

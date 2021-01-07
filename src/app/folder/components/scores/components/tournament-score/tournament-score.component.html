@@ -1,0 +1,193 @@
+<ion-content>
+    <ion-grid *ngIf="firstStep">
+        <ion-row>
+            <ion-col size="6">
+                <ion-row><ion-icon disabled="!prevStep" [class.ion-icon-disabled]="!prevStep" (click)="goToPreviousStep()" name="chevron-back-outline"></ion-icon></ion-row>
+            </ion-col>
+            <ion-col size="6" *ngIf="nextStep" style="margin: auto;">
+                <ion-row><ion-icon name="chevron-forward-outline" (click)="goToNextStep()"></ion-icon></ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <ion-row>
+                    <ion-col size="7" style="background-color: #ce132d; font-size: 15px; margin-bottom: 10px; border-top-right-radius: 30px;">
+                        Рунд 1
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-bottom: 10px;">
+                    <ion-col size="1" style="background-color: #ce132d; font-size: 15px;">1</ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px;" size="10">
+                        <ion-row style="border-bottom: 3px solid #ce132d; color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Георги Величков</ion-row>
+                        <ion-row style="color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Братислав Кръстев</ion-row>
+                    </ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px; font-size: 15px;" size="1">
+                        <ion-row style="border-bottom: 3px solid #ce132d;">1</ion-row>
+                        <ion-row>2</ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-bottom: 10px;">
+                    <ion-col size="1" style="background-color: #ce132d; font-size: 15px;">2</ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px;" size="10">
+                        <ion-row style="border-bottom: 3px solid #ce132d; color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Георги Величков</ion-row>
+                        <ion-row style="color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Братислав Кръстев</ion-row>
+                    </ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px; font-size: 15px;" size="1">
+                        <ion-row style="border-bottom: 3px solid #ce132d;">1</ion-row>
+                        <ion-row>2</ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-bottom: 10px;">
+                    <ion-col size="1" style="background-color: #ce132d; font-size: 15px;">3</ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px;" size="10">
+                        <ion-row style="border-bottom: 3px solid #ce132d; color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Георги Величков</ion-row>
+                        <ion-row style="color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Братислав Кръстев</ion-row>
+                    </ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px; font-size: 15px;" size="1">
+                        <ion-row style="border-bottom: 3px solid #ce132d;">1</ion-row>
+                        <ion-row>2</ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-bottom: 10px;">
+                    <ion-col size="1" style="background-color: #ce132d; font-size: 15px;">4</ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px;" size="10">
+                        <ion-row style="border-bottom: 3px solid #ce132d; color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Георги Величков</ion-row>
+                        <ion-row style="color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Братислав Кръстев</ion-row>
+                    </ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px; font-size: 15px;" size="1">
+                        <ion-row style="border-bottom: 3px solid #ce132d;">1</ion-row>
+                        <ion-row>2</ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="secondStep">
+        <ion-row>
+            <ion-col size="6">
+                <ion-row><ion-icon style="margin:auto;" (click)="goToPreviousStep()" name="chevron-back-outline"></ion-icon></ion-row>
+            </ion-col>
+            <ion-col size="6" style="margin: auto;">
+                <ion-row><ion-icon disabled="!nextStep" [class.ion-icon-disabled]="!nextStep" name="chevron-forward-outline" (click)="goToNextStep()"></ion-icon></ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <ion-row>
+                    <ion-col size="7" style="background-color: #ce132d; font-size: 15px; margin-bottom: 10px;">
+                        Рунд 2
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-bottom: 10px;">
+                    <ion-col size="1" style="background-color: #ce132d; font-size: 15px;">1</ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px;" size="10">
+                        <ion-row style="border-bottom: 3px solid #ce132d; color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Георги Величков</ion-row>
+                        <ion-row style="color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Братислав Кръстев</ion-row>
+                    </ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px; font-size: 15px;" size="1">
+                        <ion-row style="border-bottom: 3px solid #ce132d;">1</ion-row>
+                        <ion-row>2</ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-bottom: 10px;">
+                    <ion-col size="1" style="background-color: #ce132d; font-size: 15px;">1</ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px;" size="10">
+                        <ion-row style="border-bottom: 3px solid #ce132d; color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Георги Величков</ion-row>
+                        <ion-row style="color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Братислав Кръстев</ion-row>
+                    </ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px; font-size: 15px;" size="1">
+                        <ion-row style="border-bottom: 3px solid #ce132d;">1</ion-row>
+                        <ion-row>2</ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-bottom: 10px;">
+                    <ion-col size="1" style="background-color: #ce132d; font-size: 15px;">1</ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px;" size="10">
+                        <ion-row style="border-bottom: 3px solid #ce132d; color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Георги Величков</ion-row>
+                        <ion-row style="color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Братислав Кръстев</ion-row>
+                    </ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px; font-size: 15px;" size="1">
+                        <ion-row style="border-bottom: 3px solid #ce132d;">1</ion-row>
+                        <ion-row>2</ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-bottom: 10px;">
+                    <ion-col size="1" style="background-color: #ce132d; font-size: 15px;">1</ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px;" size="10">
+                        <ion-row style="border-bottom: 3px solid #ce132d; color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Георги Величков</ion-row>
+                        <ion-row style="color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Братислав Кръстев</ion-row>
+                    </ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px; font-size: 15px;" size="1">
+                        <ion-row style="border-bottom: 3px solid #ce132d;">1</ion-row>
+                        <ion-row>2</ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="thirdStep">
+        <ion-row>
+            <ion-col size="6">
+                <ion-row><ion-icon style="margin:auto;" (click)="goToPreviousStep()" name="chevron-back-outline"></ion-icon></ion-row>
+            </ion-col>
+            <ion-col size="6" style="margin: auto;">
+                <ion-row><ion-icon disabled="!nextStep" [class.ion-icon-disabled]="!nextStep" name="chevron-forward-outline" (click)="goToNextStep()"></ion-icon></ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <ion-row>
+                    <ion-col size="7" style="background-color: #ce132d; font-size: 15px; margin-bottom: 10px;">
+                        Рунд 3
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-bottom: 10px;">
+                    <ion-col size="1" style="background-color: #ce132d; font-size: 15px;">1</ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px;" size="10">
+                        <ion-row style="border-bottom: 3px solid #ce132d; color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Георги Величков</ion-row>
+                        <ion-row style="color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Братислав Кръстев</ion-row>
+                    </ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px; font-size: 15px;" size="1">
+                        <ion-row style="border-bottom: 3px solid #ce132d;">1</ion-row>
+                        <ion-row>2</ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-bottom: 10px;">
+                    <ion-col size="1" style="background-color: #ce132d; font-size: 15px;">1</ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px;" size="10">
+                        <ion-row style="border-bottom: 3px solid #ce132d; color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Георги Величков</ion-row>
+                        <ion-row style="color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Братислав Кръстев</ion-row>
+                    </ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px; font-size: 15px;" size="1">
+                        <ion-row style="border-bottom: 3px solid #ce132d;">1</ion-row>
+                        <ion-row>2</ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-bottom: 10px;">
+                    <ion-col size="1" style="background-color: #ce132d; font-size: 15px;">1</ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px;" size="10">
+                        <ion-row style="border-bottom: 3px solid #ce132d; color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Георги Величков</ion-row>
+                        <ion-row style="color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Братислав Кръстев</ion-row>
+                    </ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px; font-size: 15px;" size="1">
+                        <ion-row style="border-bottom: 3px solid #ce132d;">1</ion-row>
+                        <ion-row>2</ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="margin-bottom: 10px;">
+                    <ion-col size="1" style="background-color: #ce132d; font-size: 15px;">1</ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px;" size="10">
+                        <ion-row style="border-bottom: 3px solid #ce132d; color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Георги Величков</ion-row>
+                        <ion-row style="color: white; background-image: linear-gradient(to right, #024538 , #000000); font-size: 15px;">Братислав Кръстев</ion-row>
+                    </ion-col>
+                    <ion-col style="padding: 0px; font-size: 13px; font-size: 15px;" size="1">
+                        <ion-row style="border-bottom: 3px solid #ce132d;">1</ion-row>
+                        <ion-row>2</ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
