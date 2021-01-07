@@ -9,7 +9,7 @@ export class TokenInterceptor implements HttpInterceptor {
     
     request = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${this.auth.getUser()}`
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
       }
     });
     return next.handle(request);

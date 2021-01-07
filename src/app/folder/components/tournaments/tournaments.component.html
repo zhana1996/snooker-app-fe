@@ -1,40 +1,27 @@
 <ion-content>
     <ion-grid>
-        <ion-row>
-            <ion-col>
-                <ion-row>
-                    <ion-button class="button-styles">СЕП</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button class="button-styles">ДЕК</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button class="button-styles">МАР</ion-button>
-                </ion-row>
-            </ion-col>
-            <ion-col>
-                <ion-row>
-                    <ion-button class="button-styles">ОКТ</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button class="button-styles">ЯНУ</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button class="button-styles">АПР</ion-button>
-                </ion-row>
-            </ion-col>
-            <ion-col>
-                <ion-row>
-                    <ion-button class="button-styles">НОЕ</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button class="button-styles">ФЕВ</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button class="button-styles">МАЙ</ion-button>
-                </ion-row>
-            </ion-col>
-        </ion-row>
+        <form [formGroup]="form">
+            <ion-row>
+                <ion-item>
+                    <ion-label>Изберете сезон</ion-label>
+                    <ion-datetime formControlName="fromYear" max="2020" (ionChange)="changeFromDate()" display-format="YYYY" picker-format="YYYY"></ion-datetime>
+                    <ion-datetime formControlName="toYear" display-format="YYYY" picker-format="YYYY" disabledFormControl></ion-datetime>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-col *ngFor="let month of months; index as i">
+                    <ion-row *ngIf="i === 0 || i === 3 || i === 6">
+                        <ion-button (click)="onSubmit(month.value)" class="button-styles">{{month.label}}</ion-button>
+                    </ion-row>
+                    <ion-row *ngIf="i === 1 || i === 4 || i === 7">
+                        <ion-button (click)="onSubmit(month.value)" class="button-styles">{{month.label}}</ion-button>
+                    </ion-row>
+                    <ion-row *ngIf="i === 2 || i === 5 || i === 8">
+                        <ion-button (click)="onSubmit(month.value)" class="button-styles">{{month.label}}</ion-button>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </form>
       <ion-row>
         <ion-col>
             <ion-row><ion-icon class="icons-tournament"

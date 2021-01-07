@@ -1,33 +1,25 @@
 <ion-content>
     <ion-grid>
-        <ion-row class="row-margin">
+        <ion-row>
+            <form [formGroup]="form">
+                <ion-item>
+                    <ion-label>Изберете сезон</ion-label>
+                    <ion-datetime formControlName="fromYear" max="2020" (ionChange)="changeFromDate()" display-format="YYYY" picker-format="YYYY"></ion-datetime>
+                    <ion-datetime formControlName="toYear" display-format="YYYY" picker-format="YYYY" disabledFormControl></ion-datetime>
+                </ion-item>
+            </form>
+        </ion-row>
+        <ion-row>
             <ion-col>
-                <ion-row>
-                    <ion-button style="width: 100%;" shape="round" color="danger" expand="block" (click)="goToTournaments('9')">СЕПТЕМВРИ</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button style="width: 100%;" shape="round" color="danger" expand="block" (click)="goToTournaments('10')">ОКТОМВРИ</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button style="width: 100%;" shape="round" color="danger" expand="block" (click)="goToTournaments('11')">НОЕМВРИ</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button style="width: 100%;" shape="round" color="danger" expand="block" (click)="goToTournaments('12')">ДЕКЕМВРИ</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button style="width: 100%;" shape="round" color="danger" expand="block" (click)="goToTournaments('1')">ЯНУАРИ</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button style="width: 100%;" shape="round" color="danger" expand="block" (click)="goToTournaments('2')">ФЕВРУАРИ</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button style="width: 100%;" shape="round" color="danger" expand="block" (click)="goToTournaments('3')">МАРТ</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button style="width: 100%;" shape="round" color="danger" expand="block" (click)="goToTournaments('4')">АПРИЛ</ion-button>
-                </ion-row>
-                <ion-row>
-                    <ion-button style="width: 100%;" shape="round" color="danger" expand="block" (click)="goToTournaments('5')">МАЙ</ion-button>
+                <ion-row *ngFor="let month of months">
+                    <ion-button 
+                    style="width: 100%;" 
+                    shape="round" 
+                    color="danger" 
+                    expand="block" 
+                    (click)="goToTournaments(month.value)">
+                    {{month.label}}
+                </ion-button>
                 </ion-row>
             </ion-col>
         </ion-row>
