@@ -11,16 +11,16 @@
         <ion-row>
             <ion-col>
                 <ion-row>
-                    <h1 style="border-bottom: 2px solid red; margin-left: 10px;">{{player['name']}}</h1>
+                    <h1 style="border-bottom: 2px solid red; margin-left: 10px;">{{player.userDetails.name}}</h1>
                 </ion-row>
                 <ion-row style="margin-top: 30px;">
-                    <ion-label><span style="color: red; margin-left: 10px; margin-right: 20px;">Клуб: </span>{{player['club']}}</ion-label>
+                    <ion-label><span style="color: red; margin-left: 10px; margin-right: 20px;">Клуб: </span>{{player.userDetails.club}}</ion-label>
                 </ion-row>
                 <ion-row>
-                    <ion-label><span style="color: red; margin-left: 10px; margin-right: 20px;">Възраст: </span>{{player['age']}}</ion-label>
+                    <ion-label><span style="color: red; margin-left: 10px; margin-right: 20px;">Възраст: </span>{{player.userDetails.age}}</ion-label>
                 </ion-row>
                 <ion-row>
-                    <ion-label><span style="color: red; margin-left: 10px; margin-right: 20px;">Започнал: </span>{{player['startPeriod']}}</ion-label>
+                    <ion-label><span style="color: red; margin-left: 10px; margin-right: 20px;">Започнал: </span>{{player.userDetails.startDate.substring(0, 4)}}</ion-label>
                 </ion-row>
             </ion-col>
         </ion-row>
@@ -28,32 +28,32 @@
             <ion-col style="margin-top: 65px; margin-left: 10px;">
                 <ion-row>
                     <ion-col size="8" class="col-style-text">Спечелени титли</ion-col>
-                    <ion-col size="4" class="col-style-results">{{player['titles']}}</ion-col>
+                    <ion-col size="4" class="col-style-results">{{player.userDetails.titles ? player.userDetails.titles : ''}}</ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col size="8" class="col-style-text">Спечелени мача</ion-col>
-                    <ion-col size="4" class="col-style-results">{{player['wins']}}</ion-col>
+                    <ion-col size="4" class="col-style-results">{{player.userDetails.wins ? player.userDetails.wins : ''}}</ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col size="8" class="col-style-text">Загубени мача</ion-col>
-                    <ion-col size="4" class="col-style-results">{{player['lost']}}</ion-col>
+                    <ion-col size="4" class="col-style-results">{{player.userDetails.losts ? player.userDetails.losts : ''}}</ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col size="8" class="col-style-text">Изиграни мача</ion-col>
-                    <ion-col size="4" class="col-style-results">{{player['matches']}}</ion-col>
+                    <ion-col size="4" class="col-style-results">{{player.userDetails.matches ? player.userDetails.matches : ''}}</ion-col>
                 </ion-row>
             </ion-col>
             <ion-col>
                 <ion-row>
                     <ion-col>
                         <ion-row class="ion-justify-content-center" style="color: red;"><ion-label><strong>Място</strong></ion-label></ion-row>
-                        <ion-row class="ion-justify-content-center"><ion-button color="danger" class="button-scores" shape="round" fill="outline"><span style="color: white; font-size: 25px;">{{player['rank']}}</span></ion-button></ion-row>
+                        <ion-row class="ion-justify-content-center"><ion-button color="danger" class="button-scores" shape="round" fill="outline"><span style="color: white; font-size: 25px;">{{player.userDetails.rank ? player.userDetails.rank : ''}}</span></ion-button></ion-row>
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>
                         <ion-row class="ion-justify-content-center" style="color: red;"><ion-label><strong>Брейк</strong></ion-label></ion-row>
-                        <ion-row class="ion-justify-content-center"><ion-button color="danger"  class="button-scores" shape="round" fill="outline"><span style="color: white; font-size: 25px;">{{player['break']}}</span></ion-button></ion-row>
+                        <ion-row class="ion-justify-content-center"><ion-button color="danger"  class="button-scores" shape="round" fill="outline"><span style="color: white; font-size: 25px;">{{player.userDetails.break ? player.userDetails.break : ''}}</span></ion-button></ion-row>
                     </ion-col>
                 </ion-row>
             </ion-col>

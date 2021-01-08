@@ -1,26 +1,29 @@
 <ion-content>
     <ion-grid>
         <ion-row>
-            <ion-col size="6">
-                <ion-row><ion-button class="button-header" color="danger" shape="round" fill="outline">Мъже</ion-button></ion-row>
+            <ion-col size="4">
+                <ion-row><ion-button class="button-header" color="danger" shape="round" fill="outline" (click)="getAllPlayersByGender('')">Всички</ion-button></ion-row>
             </ion-col>
-            <ion-col size="6">
-                <ion-row><ion-button class="button-header" color="danger" shape="round" fill="outline">Жени</ion-button></ion-row>
+            <ion-col size="4">
+                <ion-row><ion-button class="button-header" style="padding-left: 8px;" color="danger" shape="round" fill="outline" (click)="getAllPlayersByGender('MALE')">Мъже</ion-button></ion-row>
+            </ion-col>
+            <ion-col size="4">
+                <ion-row><ion-button class="button-header" color="danger" shape="round" fill="outline" (click)="getAllPlayersByGender('FEMALE')">Жени</ion-button></ion-row>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-list>
                 <ion-item *ngFor="let player of players">
                     <ion-avatar slot="start">
-                        <img src = {{player.img}}>
+                        <img src = {{player.userDetails.image}}>
                     </ion-avatar>
                       <ion-label>
                           <ion-grid>
                               <ion-row>
                                   <ion-col size="8">
-                                    <h2>{{player.name}}</h2>
-                                    <h3>Години: {{player.age}}</h3>
-                                    <h4>Най-висок брейк: {{player.break}}</h4>
+                                    <h2>{{player.userDetails.name}}</h2>
+                                    <h3>Години: {{player.userDetails.age}}</h3>
+                                    <h4>Най-висок брейк: {{player.userDetails.break}}</h4>
                                   </ion-col>
                                   <ion-col size="4">
                                       <ion-button class="button-item" (click)="presentModal(player)">Виж повече</ion-button>

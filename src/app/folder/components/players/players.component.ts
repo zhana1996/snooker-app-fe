@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { Observable, Subscription } from 'rxjs';
+import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
+import { FolderFacade } from '../../store/facade/folder.facade';
+import { IUser } from '../../store/models/players';
 import { PlayerComponent } from './components/player/player.component';
 
 @Component({
@@ -8,70 +12,32 @@ import { PlayerComponent } from './components/player/player.component';
   templateUrl: 'players.component.html',
   styleUrls: ['players.component.scss']
 })
-export class PlayersComponent implements OnInit {
-  public players = [
-      {
-          name: 'Братислав Кръстев',
-          age: '31',
-          break: '123',
-          club: 'The Academy, София',
-          startPeriod: '2001',
-          titles: 12,
-          rank: 2,
-          wins: 30,
-          lost: 49,
-          matches: 115,
-          points: 234,
-          img: 'assets/images/profile_1.png'
-      },
-      {
-        name: 'Георги Величков',
-        age: '25',
-        break: '141',
-        club: 'The Academy, София',
-        startPeriod: '2001',
-        titles: 24,
-        rank: 1,
-        wins: 45,
-        lost: 35,
-        matches: 140,
-        points: 234,
-        img: 'assets/images/profile_2.png'
-    },
-    {
-        name: 'Виктор Гайдов',
-        age: '31',
-        break: '89',
-        club: 'The Academy, София',
-        startPeriod: '2001',
-        titles: 1,
-        rank: 4,
-        wins: 30,
-        lost: 49,
-        matches: 115,
-        points: 234,
-        img: 'assets/images/profile_3.png'
-    },
-    {
-        name: 'Теодор Чомовски',
-        age: '22',
-        break: '119',
-        club: 'The Academy, София',
-        startPeriod: '2001',
-        titles: 9,
-        rank: 3,
-        wins: 30,
-        lost: 49,
-        matches: 115,
-        points: 234,
-        img: 'assets/images/profile_1.png'
-    }
-  ];
-  constructor(public router: Router,
-              public modalController: ModalController) {}
-  ngOnInit() {}
+export class PlayersComponent implements OnInit, OnDestroy {
+  private player$: Observable<IUser[]>;
+  private playersSubs: Subscription;
+  public players: IUser[] = [];
 
-  async presentModal(player: Object) {
+  constructor(public router: Router,
+              public facade: FolderFacade,
+              public toaster: ToasterService,
+              public modalController: ModalController) {
+    this.player$ = this.facade.players$;
+  }
+  ngOnInit() {
+    this.facade.getAllPlayers('');
+    this.playersSubs = this.player$.subscribe((data: IUser[]) => {
+      if (data) {
+        if (data.length > 0) {
+          this.players = data;
+        } else {
+          this.players = [];
+          this.toaster.showToaster('Няма намерени играчи', 'danger');
+        }
+      }
+    })
+  }
+
+  async presentModal(player: IUser) {
     const modal = await this.modalController.create({
       component: PlayerComponent,
       componentProps: { player },
@@ -81,5 +47,13 @@ export class PlayersComponent implements OnInit {
     if (!data) {
       return;
     }
+  }
+
+  getAllPlayersByGender(gender: string): void {
+    this.facade.getAllPlayers(gender);
+  }
+
+  ngOnDestroy(): void {
+    this.playersSubs.unsubscribe();
   }
 }

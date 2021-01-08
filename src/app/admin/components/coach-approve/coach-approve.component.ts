@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 
 @Component({
   selector: 'coach-approve',
@@ -18,23 +19,14 @@ export class CoachApproveComponent implements OnInit {
       ];
     public showResults = false;
   
-    constructor(public toastController: ToastController,
+    constructor(public toaster: ToasterService,
                 public alertController: AlertController) {}
     ngOnInit() {
         if(this.coaches.length > 0) {
             this.showResults = true;
         } else {
-          this.presentToast();
+          this.toaster.showToaster('Няма нови регистрации на учители', 'danger');
         }
-    }
-  
-    async presentToast() {
-      const toast = await this.toastController.create({
-        message: 'Няма нови регистрации на учители.',
-        duration: 2000,
-        color: 'danger'
-      });
-      toast.present();
     }
 
     async deleteRegistration(coach_id: string) {

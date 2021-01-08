@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController, PopoverController, ToastController } from '@ionic/angular';
-import { NewTournamentComponent } from '../season/components/new-tournament/new-tournament.component';
+import { AlertController, PopoverController } from '@ionic/angular';
+import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { AddNewsComponent } from './components/add-news.component';
 
 @Component({
@@ -19,7 +19,7 @@ export class SnookerNewsComponent implements OnInit {
         ];
       public showResults = false;
     
-      constructor(public toastController: ToastController,
+      constructor(public toaster: ToasterService,
                   public popoverController: PopoverController,
                   public alertController: AlertController) {}
       ngOnInit() {
@@ -29,17 +29,8 @@ export class SnookerNewsComponent implements OnInit {
             //   document.getElementById('news-item').style.backgroundImage = 'C:/Users/Zhana Mitova/Desktop/rsz_news_1.jpg'
             // });
           } else {
-              this.presentToast();
+              this.toaster.showToaster('Няма добавени новини', 'danger');
           }
-      }
-    
-      async presentToast() {
-        const toast = await this.toastController.create({
-          message: 'Няма бавени новини',
-          duration: 2000,
-          color: 'danger'
-        });
-        toast.present();
       }
   
       async deleteNews(news_id: string) {

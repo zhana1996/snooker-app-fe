@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, PopoverController, ToastController } from '@ionic/angular';
+import { AlertController, PopoverController } from '@ionic/angular';
+import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { NewTournamentComponent } from './components/new-tournament/new-tournament.component';
 
 @Component({
@@ -31,7 +32,7 @@ export class SeasonComponent implements OnInit {
   public showTournment = false;
 
   constructor(private formBuilder: FormBuilder,
-              public toastController: ToastController,
+              public toaster: ToasterService,
               public popoverController: PopoverController,
               private alertController: AlertController) {
     this.initForm();
@@ -39,17 +40,8 @@ export class SeasonComponent implements OnInit {
   ngOnInit() {
     this.showTournment = true;
     if (this.tournaments.length === 0) {
-        this.presentToast();
+        this.toaster.showToaster('Няма въведени турнири за този сезон.', 'danger');
     }
-  }
-
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'Няма въведени турнири за този сезон.',
-      duration: 2000,
-      color: 'danger'
-    });
-    toast.present();
   }
 
   async presentAlertConfirm(tournamentName: string) {
@@ -123,7 +115,7 @@ export class SeasonComponent implements OnInit {
           ];
     }
     if (this.tournaments.length === 0) {
-        this.presentToast();
+      this.toaster.showToaster('Няма въведени турнири за този сезон.', 'danger');
     }
-    }
+  }
 }

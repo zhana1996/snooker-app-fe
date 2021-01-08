@@ -21,20 +21,20 @@
         <ion-row *ngFor="let player of players" style="background-color: #262626; margin-bottom: 10px;">
             <ion-col size="6">
                 <ion-row>
-                    <ion-label><h4>{{player.name}}</h4>
-                        <p>{{player.club}}</p></ion-label>
+                    <ion-label><h4>{{player.userDetails.name}}</h4>
+                        <p>{{player.userDetails.club}}</p></ion-label>
                 </ion-row>
             </ion-col>
             <ion-col>
                 <ion-row>
-                    <ion-button size="small" color="danger" class="button-scores" shape="round" fill="outline">{{player.rank}}</ion-button>
-                    <ion-button size="small" color="warning" class="button-scores" shape="round" fill="outline">{{player.matches}}</ion-button>
-                    <ion-button size="small" class="button-scores" shape="round" fill="outline">{{player.titles}}</ion-button>
+                    <ion-button size="small" color="danger" class="button-scores" shape="round" fill="outline">{{player.userDetails.rank}}</ion-button>
+                    <ion-button size="small" color="warning" class="button-scores" shape="round" fill="outline">{{player.userDetails.matches}}</ion-button>
+                    <ion-button size="small" class="button-scores" shape="round" fill="outline">{{player.userDetails.titles}}</ion-button>
                 </ion-row>
             </ion-col>
             <ion-col size="1" style="margin: auto; margin-right: 3px;">
                 <ion-row>
-                    <ion-label>{{player.points}}</ion-label>
+                    <ion-label>{{player.userDetails.points}}</ion-label>
                 </ion-row>
             </ion-col>
         </ion-row>

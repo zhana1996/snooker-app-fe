@@ -5,6 +5,7 @@ import { switchMap, map, catchError, tap } from "rxjs/operators";
 import { UserService } from "../services/user.services";
 import { Router } from "@angular/router";
 import { ToasterService } from "src/app/core/services/toaster/toaster.service";
+import { IUser } from "src/app/folder/store/models/players";
 
 @Injectable()
 export class UserEffects {
@@ -18,7 +19,7 @@ export class UserEffects {
       ofType(fromActions.createUser),
       switchMap((action) =>
         this.service.createNewUser(action.user).pipe(
-          map((user: Object) =>
+          map((user: IUser) =>
             fromActions.createUserSuccess({ user })
           ),
           catchError((error: Error) => [fromActions.createUserError(error)])

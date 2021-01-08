@@ -1,8 +1,9 @@
 import { Action, createReducer, on, createFeatureSelector } from '@ngrx/store';
+import { IUser } from 'src/app/folder/store/models/players';
 import * as fromActions from '../actions/user.actions';
 
 export interface UserState {
-    user: object,
+    user: IUser,
     logIn: Object
 }
 

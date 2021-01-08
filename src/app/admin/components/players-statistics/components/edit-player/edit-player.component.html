@@ -1,57 +1,63 @@
 <ion-content>
-    <form [formGroup]="newTournamentForm">
-        <ion-grid style="background: white; border-bottom-left-radius: 50px;">
-            <ion-row>
-                <ion-item>
-                    <ion-label position="stacked">Най-висок брейк</ion-label>
-                    <ion-input type="text" formControlName="break"></ion-input>
-                </ion-item>
-            </ion-row>
-            <ion-row>
-                <ion-item>
-                    <ion-label position="stacked">Наименование на клуба</ion-label>
-                    <ion-input type="text" formControlName="location"></ion-input>
-                </ion-item>
-            </ion-row>
-            <ion-row>
-                <ion-item>
-                    <ion-label position="stacked">Класация</ion-label>
-                    <ion-input type="text" formControlName="rank"></ion-input>
-                </ion-item>
-            </ion-row>
-            <ion-row>
-                <ion-item>
-                    <ion-label position="stacked">Tочки</ion-label>
-                    <ion-input type="text" formControlName="points"></ion-input>
-                </ion-item>
-            </ion-row>
-            <ion-row>
-                <ion-item>
-                    <ion-label position="stacked">Победи</ion-label>
-                    <ion-input type="text" formControlName="wins"></ion-input>
-                </ion-item>
-            </ion-row>
-            <ion-row>
-                <ion-item>
-                    <ion-label position="stacked">Загуби</ion-label>
-                    <ion-input type="text" formControlName="losts"></ion-input>
-                </ion-item>
-            </ion-row>
-            <ion-row>
-                <ion-item>
-                    <ion-label position="stacked">Мачове</ion-label>
-                    <ion-input type="text" formControlName="matches"></ion-input>
-                </ion-item>
-            </ion-row>
-            <ion-row>
-                <ion-item>
-                    <ion-label position="stacked">Титли</ion-label>
-                    <ion-input type="text" formControlName="titles"></ion-input>
-                </ion-item>
-            </ion-row>
-            <ion-row class="ion-justify-content-end">
-                <ion-button color="danger">Запази</ion-button>
-            </ion-row>
-        </ion-grid>
+    <ion-grid style="background: white; border-bottom-left-radius: 50px;">
+        <form [formGroup]="playerForm">
+        <ion-row>
+            <ion-item>
+                <ion-label position="stacked">Най-висок брейк</ion-label>
+                <ion-input type="number" formControlName="break"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <ion-label position="stacked">Наименование на клуба</ion-label>
+                <ion-input type="text" formControlName="club"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <ion-label position="stacked">Класация</ion-label>
+                <ion-input type="number" formControlName="rank"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <ion-label position="stacked">Tочки</ion-label>
+                <ion-input type="number" formControlName="points"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <ion-label position="stacked">Победи</ion-label>
+                <ion-input type="number" formControlName="wins"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <ion-label position="stacked">Загуби</ion-label>
+                <ion-input type="number" formControlName="losts"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <ion-label position="stacked">Мачове</ion-label>
+                <ion-input type="number" formControlName="matches"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <ion-label position="stacked">Титли</ion-label>
+                <ion-input type="number" formControlName="titles"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <ion-label position="stacked">Години</ion-label>
+                <ion-input type="number" formControlName="age"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-row class="ion-justify-content-end">
+            <ion-button color="danger" (click)="editPlayer()">Запази</ion-button>
+        </ion-row>
     </form>
+    </ion-grid>
 </ion-content>

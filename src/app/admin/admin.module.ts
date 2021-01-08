@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
-import { SeasonComponent } from './components/season/season.component';
-import { TournamentResultsComponent } from './components/tournament-results/tournament-results.component';
-import { GamesComponent } from './components/tournament-results/components/games/games.component';
-import { TournamentGamesResultsComponent } from './components/tournament-results/components/tournament-games-results/tournament-games-results.component';
-import { CoachApproveComponent } from './components/coach-approve/coach-approve.component';
-import { SnookerNewsComponent } from './components/snooker-news/snooker-news.component';
-import { AddNewsComponent } from './components/snooker-news/components/add-news.component';
-import { PlayersStatisticsComponent } from './components/players-statistics/players-statistics.component';
+import { AdminStoreModule } from './store/admin-store.module';
+import { AdminService } from './store/services/admin.services';
+import { AdminFacade } from './store/facade/admin.facade';
+import { PlayersStatisticsModule } from './components/players-statistics/players-statistics.module';
+import { SeasonModule } from './components/season/season.module';
+import { TournamentResultsModule } from './components/tournament-results/tournament-results.module';
+import { CoachApproveModule } from './components/coach-approve/coach-approve.module';
+import { SnookerNewsModule } from './components/snooker-news/snooker-news.module';
 
 @NgModule({
   imports: [
@@ -19,19 +19,17 @@ import { PlayersStatisticsComponent } from './components/players-statistics/play
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    PlayersStatisticsModule,
+    SeasonModule,
+    TournamentResultsModule,
+    CoachApproveModule,
+    SnookerNewsModule,
+    AdminStoreModule
   ],
   declarations: [
-   AdminComponent,
-   SeasonComponent,
-   TournamentResultsComponent,
-   GamesComponent,
-   TournamentGamesResultsComponent,
-   CoachApproveComponent,
-   SnookerNewsComponent,
-   AddNewsComponent,
-   PlayersStatisticsComponent
+   AdminComponent
 ],
-  providers: []
+  providers: [AdminService, AdminFacade]
 })
 export class AdminModule {}

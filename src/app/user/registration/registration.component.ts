@@ -1,8 +1,6 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonCheckbox } from '@ionic/angular';
-import { Observable, Subscription } from 'rxjs';
 import { UserFacade } from '../store/facade/user.facade';
 
 @Component({
@@ -10,24 +8,15 @@ import { UserFacade } from '../store/facade/user.facade';
   templateUrl: 'registration.component.html',
   styleUrls: ['registration.component.scss']
 })
-export class RegistrationComponent implements OnInit, OnDestroy {
-  @ViewChild('player') player: IonCheckbox;
-  @ViewChild('coach') coach: IonCheckbox;
+export class RegistrationComponent{
   public form: FormGroup;
-
-  private createNewUser$: Observable<Object>;
-  private createNewUserSubs: Subscription;
-  public createNewUser: Object;
 
   constructor(public router: Router,
               public facade: UserFacade,
               public formBuilder: FormBuilder,
               public route: ActivatedRoute) {
-                this.initForm();
-              }
-  ngOnInit() {}
-
-  ngOnDestroy(): void {}
+    this.initForm();
+  }
 
   createNewUserProfile(): void {
     let user = this.form.value;
@@ -57,7 +46,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         age: +user['age'],
         break: +user['break'],
         club: user['club'],
-        startDate: new Date(user['startPeriod']),
+        startDate: user['startPeriod'],
         image: ''
       }
     });

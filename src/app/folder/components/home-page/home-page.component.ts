@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Observable, Subscription } from 'rxjs';
+import { FolderFacade } from '../../store/facade/folder.facade';
+import { IUser } from '../../store/models/players';
 
 @Component({
   selector: 'home-page',
@@ -10,6 +13,7 @@ import { AlertController } from '@ionic/angular';
 export class HomePageComponent implements OnInit {
   public nextTournament = 'Ранкинг Турнир 5';
   constructor(public router: Router,
+              private facade: FolderFacade,
               public route: ActivatedRoute,
               private alertController: AlertController) {}
   ngOnInit() {}
