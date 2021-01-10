@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page.component';
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { StatisticComponent } from './components/statistics/statistics.component';
+import { WorkoutModule } from './components/workout/workout.module';
+import { NgCalendarModule } from 'ionic2-calendar';
 
 @NgModule({
   imports: [
@@ -12,7 +14,9 @@ import { StatisticComponent } from './components/statistics/statistics.component
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HomePageRoutingModule
+    WorkoutModule,
+    HomePageRoutingModule,
+    NgCalendarModule
   ],
   declarations: [
     HomePageComponent,

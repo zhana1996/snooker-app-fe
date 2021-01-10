@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptors/http-token.interceptor';
+import { NgCalendarModule } from 'ionic2-calendar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,8 @@ import { TokenInterceptor } from './core/interceptors/http-token.interceptor';
     EffectsModule.forRoot([]),
     HttpClientModule,
     AppRoutingModule,
-    CoreModule
+    CoreModule,
+    NgCalendarModule
   ],
   providers: [
     StatusBar,

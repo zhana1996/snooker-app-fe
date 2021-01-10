@@ -1,0 +1,22 @@
+<ion-card style="margin: 0px;">
+    <ion-card-header tappable>
+        <ion-card-title style="color: white;">Запис на нов час</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        <ion-item>
+            <ion-input type="text" placeholder="Заглавие" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="text" placeholder="Описание" [(ngModel)]="event.desc"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Начало</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYY HH:mm" placeholder="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label>Край</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYY HH:mm" placeholder="MMM D:HH:mm" [(ngModel)]="event.endTime" [min]="minDate"></ion-datetime>
+        </ion-item>
+        <ion-button fil="outline" color="danger" expand="block" (click)="addEvent()" [disabled]="event.title === ''">Добави</ion-button>
+    </ion-card-content>
+</ion-card>

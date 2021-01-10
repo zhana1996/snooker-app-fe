@@ -1,35 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
+import { IUser } from 'src/app/folder/store/models/players';
+import { AdminFacade } from '../../store/facade/admin.facade';
 
 @Component({
   selector: 'coach-approve',
   templateUrl: 'coach-approve.component.html',
   styleUrls: ['coach-approve.component.scss']
 })
-export class CoachApproveComponent implements OnInit {
-    public coaches = [
-      {
-          name: 'Георги Величков',
-          id: '1',
-          location: 'The Academy, София',
-          number: '0885121855',
-          img: 'assets/images/profile_1.png'
-      }
-      ];
+export class CoachApproveComponent implements OnInit, OnDestroy {
+    public users: IUser[] = [];
+    private users$: Observable<IUser[]>;
+    private usersSubs: Subscription;
+
+    private approveUser$: Observable<IUser>;
+    private approveUserSubs: Subscription;
+
+    public selectedRole: string;
     public showResults = false;
   
     constructor(public toaster: ToasterService,
-                public alertController: AlertController) {}
-    ngOnInit() {
-        if(this.coaches.length > 0) {
-            this.showResults = true;
-        } else {
-          this.toaster.showToaster('Няма нови регистрации на учители', 'danger');
-        }
+                private facade: AdminFacade,
+                public alertController: AlertController) {
+      this.users$ = this.facade.disabledUsers$;
     }
 
-    async deleteRegistration(coach_id: string) {
+    ngOnInit() {
+      this.usersSubs = this.users$.subscribe((data: IUser[]) => {
+        if(data) {
+          if(data.length > 0) {
+            this.users = data;
+            this.showResults = true;
+          } else {
+            this.users = [];
+            this.showResults = false;
+            this.toaster.showToaster('Няма чакащи за одобрение потребители', 'success');
+          }
+        }
+      });
+    }
+
+    async deleteRegistration(user_id: string) {
         const alert = await this.alertController.create({
           header: 'Премахване на регистрация',
           message: 'Сигурен ли сте, че искате да изтриете заявката?',
@@ -41,7 +54,10 @@ export class CoachApproveComponent implements OnInit {
             {
               text: 'Да',
               handler: () => {
-                // изтриване на регистрацията
+                this.facade.deletePlayer(user_id);
+                setTimeout(() => {
+                  this.facade.getDisabledUsers(this.selectedRole);
+                }, 1500);
               },
             },
           ],
@@ -50,8 +66,9 @@ export class CoachApproveComponent implements OnInit {
         await alert.present();
       }
 
-      async approveRegistration(tournamentName: string) {
+      async approveRegistration(userId: string) {
         const alert = await this.alertController.create({
+          cssClass: 'my-custom-class',
           header: 'Приемане на регистрация',
           message: 'Сигурен ли сте, че искате да приемете заявката?',
           buttons: [
@@ -62,12 +79,25 @@ export class CoachApproveComponent implements OnInit {
             {
               text: 'Да',
               handler: () => {
-                // добавяне на регистрацията
+                this.facade.approveUser(userId);
+                this.toaster.showToaster('Успешно одобрихте регистрацията', 'success');
+                setTimeout(() => {
+                  this.facade.getDisabledUsers(this.selectedRole);
+                }, 1500);
               },
             },
           ],
         });
     
         await alert.present();
+      }
+
+      getAllPlayersByRole(role: string): void {
+        this.selectedRole = role;
+        this.facade.getDisabledUsers(role);
+      }
+
+      ngOnDestroy(): void {
+        this.usersSubs.unsubscribe();
       }
 }

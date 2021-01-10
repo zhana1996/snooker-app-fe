@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StatisticComponent } from './components/home-page/components/statistics/statistics.component';
+import { WorkoutComponent } from './components/home-page/components/workout/workout.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { NewsComponent } from './components/news/news.component';
 import { PlayersComponent } from './components/players/players.component';
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'homePage/statistics',
         component: StatisticComponent
+      },
+      {
+        path: 'homePage/workout',
+        component: WorkoutComponent
       },
       {
         path: 'news',

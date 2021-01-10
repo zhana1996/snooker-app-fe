@@ -53,7 +53,9 @@ export class PlayersStatisticsComponent implements OnInit, OnDestroy {
           text: 'Да',
           handler: () => {
           this.facade.deletePlayer(player_id);
-          this.facade.getAllPlayers('');
+          setTimeout(() => {
+            this.facade.getAllPlayers('');
+          }, 1500);
         },
         },],
       });

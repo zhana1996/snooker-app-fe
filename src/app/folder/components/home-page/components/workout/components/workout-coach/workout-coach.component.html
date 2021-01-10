@@ -1,0 +1,88 @@
+<!-- <ion-item>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-label>{{viewTitle}}</ion-label>
+            </ion-col>
+            <ion-col style="text-align: end;">
+                <ion-button color="danger" (click)="today()">Днес</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col style="text-align: start;">
+                <ion-button color="danger" (click)="showAddNewTraining = true">Запис на нов час</ion-button>
+                <ion-button *ngIf="showAddNewTraining" color="danger" (click)="showAddNewTraining = false">Скрий</ion-button>
+                <add-new-event *ngIf="showAddNewTraining" [event]="event" (eventObject)="addEvent($event)"></add-new-event>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-item> -->
+<!-- <ion-card>
+    <ion-card-header tappable (click)="collapseCard= !collapseCard">
+        <ion-card-title style="color: white;"><ion-icon name="arrow-forward-outline"></ion-icon>  Запис на нов час</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="!collapseCard">
+        <ion-item>
+            <ion-input type="text" placeholder="Заглавие" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="text" placeholder="Описание" [(ngModel)]="event.desc"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Начало</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYY HH:mm" placeholder="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label>Край</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYY HH:mm" placeholder="MMM D:HH:mm" [(ngModel)]="event.endTime" [min]="minDate"></ion-datetime>
+        </ion-item>
+        <ion-button fil="outline" color="danger" expand="block" (click)="addEvent()" [disabled]="event.title === ''">Добави</ion-button>
+    </ion-card-content>
+</ion-card> -->
+<ion-grid>
+    <ion-row>
+        <ion-col>
+            <ion-button class="button-styles" (click)="showAddNewTraining = true">Запис на нов час</ion-button>
+            <ion-button *ngIf="showAddNewTraining" class="button-styles" (click)="showAddNewTraining = false">Скрий</ion-button>
+            <add-new-event *ngIf="showAddNewTraining" [event]="event" (eventObject)="addEvent($event)"></add-new-event>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <!--Calendar Mode-->
+        <ion-col size="3">
+            <ion-button class="button-styles"  (click)="changeMode('month')">Месец</ion-button>
+        </ion-col>
+        <ion-col size="3">
+            <ion-button class="button-styles" (click)="changeMode('week')">Седмица</ion-button>
+        </ion-col>
+        <ion-col size="3">
+            <ion-button class="button-styles" (click)="changeMode('day')">Ден</ion-button>
+        </ion-col>
+        <ion-col size="3">
+            <ion-button class="button-styles" (click)="today()">Днес</ion-button>
+        </ion-col>
+        <!--Back-->
+        <ion-col size="6" text-left>
+            <ion-button fill="clear" color="danger" (click)="back()">
+                <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-col>
+        <!--Next-->
+        <ion-col size="6" style="text-align: end;" text-end>
+            <ion-button fill="clear" color="danger" (click)="next()">
+                <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+<calendar [eventSource]="eventSource"
+          [calendarMode]="calendar.mode"
+          [currentDate]="calendar.currentDate"
+          (onEventSelected)="onEventSelected($event)"
+          (onTitleChanged)="onViewTitleChanged($event)"
+          (onTimeSelected)="onTimeSelected($event)"   
+          startHour="10"
+          endHour="20"
+          step="30"
+          startingDayWeek="1">
+</calendar>

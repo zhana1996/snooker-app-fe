@@ -3,6 +3,7 @@ export interface IUser {
     id?: string;
     role: string;
     userDetails: IUserDetails;
+    isEnabled?: boolean;
     username: string;
     password?: string;
 }

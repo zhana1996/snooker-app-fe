@@ -234,5 +234,13 @@
 
   ion-content {
     background: #000000;
-    }
+  }
+}
+
+.alert-wrapper {
+  --background: #e5e5e5;
+}
+
+.alert-title.sc-ion-alert-md {
+  color: black;
 }

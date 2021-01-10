@@ -19,22 +19,22 @@
             </ion-col>
         </ion-row>
         <ion-row *ngIf="showTournment">
-            <ion-list style="margin: auto;">
+            <ion-list style="margin: auto; width: 100%;">
                 <ion-item *ngFor="let tournament of tournaments" class="list-style">
                     <ion-label style="margin: 0px;">
                       <ion-grid>
                           <ion-row>
                               <ion-col size="8">
                                 <h2>{{tournament.name}}</h2>
-                                <p>{{tournament.location}}</p>
+                                <p>{{tournament.place}}</p>
                               </ion-col>
                               <ion-col size="4" style="margin-top: 3.5px;">
-                                  {{tournament.date}}
+                                  {{tournament.startDate.toString().substring(0, 10)}}
                               </ion-col>
                           </ion-row>
                           <ion-row class="ion-justify-content-end">
-                              <ion-button size="small" (click)="presentPopover(tournament)" color="warning"><ion-icon name="create-outline"></ion-icon></ion-button>
-                              <ion-button size="small" (click)="presentAlertConfirm(tournament.name)" color="danger"><ion-icon name="trash-outline"></ion-icon></ion-button>
+                              <ion-button size="small" (click)="presentPopover({tournament: tournament, season: season,  edit: true})" color="warning"><ion-icon name="create-outline"></ion-icon></ion-button>
+                              <ion-button size="small" (click)="presentAlertConfirm(tournament)" color="danger"><ion-icon name="trash-outline"></ion-icon></ion-button>
                           </ion-row>
                       </ion-grid>
                   </ion-label>
@@ -43,7 +43,7 @@
         </ion-row>
     </ion-grid>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 10px; margin-right: 10px;">
-        <ion-fab-button color="danger" style="width: 40px; height: 40px;" (click)="presentPopover()">
+        <ion-fab-button color="danger" style="width: 40px; height: 40px;" (click)="presentPopover({tournament: {}, season: season, edit: false})">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>

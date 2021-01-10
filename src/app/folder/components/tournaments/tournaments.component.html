@@ -11,18 +11,23 @@
             <ion-row>
                 <ion-col *ngFor="let month of months; index as i">
                     <ion-row *ngIf="i === 0 || i === 3 || i === 6">
-                        <ion-button (click)="onSubmit(month.value)" class="button-styles">{{month.label}}</ion-button>
+                        <ion-button (click)="selectedMonth = month.value" class="button-styles">{{month.label}}</ion-button>
                     </ion-row>
                     <ion-row *ngIf="i === 1 || i === 4 || i === 7">
-                        <ion-button (click)="onSubmit(month.value)" class="button-styles">{{month.label}}</ion-button>
+                        <ion-button (click)="selectedMonth = month.value" class="button-styles">{{month.label}}</ion-button>
                     </ion-row>
                     <ion-row *ngIf="i === 2 || i === 5 || i === 8">
-                        <ion-button (click)="onSubmit(month.value)" class="button-styles">{{month.label}}</ion-button>
+                        <ion-button (click)="selectedMonth = month.value" class="button-styles">{{month.label}}</ion-button>
                     </ion-row>
                 </ion-col>
             </ion-row>
+            <ion-row>
+                <ion-col>
+                  <ion-button expand="block" (click)="onSubmit()" color="danger">Търси</ion-button>
+                </ion-col>
+            </ion-row>
         </form>
-      <ion-row>
+      <ion-row *ngIf="showResults">
         <ion-col>
             <ion-row><ion-icon class="icons-tournament"
                 name="calendar-outline"></ion-icon></ion-row>
@@ -39,10 +44,14 @@
             <ion-row clas>Място</ion-row>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let tournament of tournaments; index as i">
-        <ion-col style="width: 5px; background-color: red;">{{ tournament.date }}</ion-col>
-        <ion-col>{{ tournament.name }}</ion-col>
-        <ion-col>{{ tournament.location }}</ion-col>
+      <ion-row *ngIf="showResults">
+          <ion-col>
+            <ion-row *ngFor="let tournament of tournaments; index as i">
+                <ion-col style="width: 5px; background-color: red;">{{ tournament.startDate }}</ion-col>
+                <ion-col>{{ tournament.name }}</ion-col>
+                <ion-col>{{ tournament.place }}</ion-col>
+              </ion-row>
+          </ion-col>
       </ion-row>
     </ion-grid>
 <ion-content></ion-content>

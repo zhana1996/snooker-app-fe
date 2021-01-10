@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, PopoverController } from '@ionic/angular';
+import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
+import { ITournament } from 'src/app/folder/store/models/tournament';
+import { AdminFacade } from '../../store/facade/admin.facade';
 import { NewTournamentComponent } from './components/new-tournament/new-tournament.component';
 
 @Component({
@@ -9,45 +12,55 @@ import { NewTournamentComponent } from './components/new-tournament/new-tourname
   templateUrl: 'season.component.html',
   styleUrls: ['season.component.scss']
 })
-export class SeasonComponent implements OnInit {
+export class SeasonComponent implements OnInit, OnDestroy {
   public myForm: FormGroup;
+  public season = '2020/2021';
   public toDate = '2021';
-  public tournaments = [
-    {
-        name: 'Ранкинг Турнир No 1',
-        location: 'Stix, София',
-        date: '19/10/2020'
-    },
-    {
-        name: 'Ранкинг Турнир No 2',
-        location: 'The Acasemy, София',
-        date: '22/11/2020'
-    },
-    {
-        name: 'Ранкинг Турнир No 3',
-        location: 'Emotion, София',
-        date: '16/12/2020'
-    }
-    ];
   public showTournment = false;
+
+  public tournaments: ITournament[] = [];
+  private tournaments$: Observable<ITournament[]>;
+  private tournamentsSubs: Subscription;
+
+  private deleteTournament$: Observable<ITournament>;
+  private deleteTournamentSubs: Subscription;
 
   constructor(private formBuilder: FormBuilder,
               public toaster: ToasterService,
+              private facade: AdminFacade,
               public popoverController: PopoverController,
               private alertController: AlertController) {
     this.initForm();
+    this.tournaments$ = this.facade.tournaments$;
+    this.deleteTournament$ = this.facade.deleteTournament$;
   }
   ngOnInit() {
-    this.showTournment = true;
-    if (this.tournaments.length === 0) {
-        this.toaster.showToaster('Няма въведени турнири за този сезон.', 'danger');
-    }
+    this.facade.getTournaments({season: this.season});
+
+    this.tournamentsSubs = this.tournaments$.subscribe((data: ITournament[]) => {
+      if(data) {
+        if(data.length > 0) {
+          this.tournaments = data;
+          this.showTournment = true;
+        } else {
+          this.showTournment = false;
+          this.toaster.showToaster('Няма въведени турнири за този сезон.', 'danger');
+        }
+      }
+    });
+
+    this.deleteTournamentSubs = this.deleteTournament$.subscribe((data: ITournament) => {
+      if(data) {
+        this.toaster.showToaster('Успешно изтрихте турнира', 'success');
+        this.facade.getTournaments({season: this.season});
+      }
+    });
   }
 
-  async presentAlertConfirm(tournamentName: string) {
+  async presentAlertConfirm(tournament: ITournament) {
     const alert = await this.alertController.create({
-      header: 'Изтриване на турнир ' + tournamentName,
-      message: 'Сигурен ли си, че искаш да изтриеш турнира?',
+      header: 'Изтриване на турнир ' + tournament.name,
+      message: 'Сигурни ли сте, че искате да изтриете турнира?',
       buttons: [
         {
           text: 'Не',
@@ -56,7 +69,7 @@ export class SeasonComponent implements OnInit {
         {
           text: 'Да',
           handler: () => {
-            // изтриване на турнира
+            this.facade.deleteTournament(tournament.id);
           },
         },
       ],
@@ -79,43 +92,22 @@ export class SeasonComponent implements OnInit {
         fromDate: fromDate,
         toDate: this.myForm.controls['toDate'].value
     });
-    this.tournamentsResult();
+    this.season = fromDate + '/' + this.myForm.controls['toDate'].value;
+    this.facade.getTournaments({season: this.season});
   }
 
-  async presentPopover(tournament: Object) {
+  async presentPopover(event?: Object) {
     const popover = await this.popoverController.create({
       component: NewTournamentComponent,
       cssClass: 'my-custom-class',
-      componentProps: { tournament },
+      componentProps: { tournament: event['tournament'], season: event['season'], edit: event['edit'] },
       translucent: true
     });
     return await popover.present();
   }
 
-  tournamentsResult(): void {
-    if (this.myForm.controls['toDate'].value === '2018') {
-        this.tournaments = [];
-    } else {
-        this.tournaments = [
-          {
-              name: 'Ранкинг Турнир No 1',
-              location: 'Stix, София',
-              date: '19/10/2020'
-          },
-          {
-              name: 'Ранкинг Турнир No 2',
-              location: 'The Acasemy, София',
-              date: '22/11/2020'
-          },
-          {
-              name: 'Ранкинг Турнир No 3',
-              location: 'Emotion, София',
-              date: '16/12/2020'
-          }
-          ];
-    }
-    if (this.tournaments.length === 0) {
-      this.toaster.showToaster('Няма въведени турнири за този сезон.', 'danger');
-    }
+  ngOnDestroy(): void {
+    this.tournamentsSubs.unsubscribe();
+    this.deleteTournamentSubs.unsubscribe();
   }
 }

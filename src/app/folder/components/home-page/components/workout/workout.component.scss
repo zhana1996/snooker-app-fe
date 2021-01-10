@@ -1,0 +1,31 @@
+.alert-wrapper .sc-ion-alert-md {
+    background: white;
+}
+
+.list-style {
+    background-color: #333333;
+    border: 3px solid #333333;
+    border-radius: 12px;
+    margin: 10px 0 10px 0;
+}
+
+.monthview-datetable td.monthview-primary-with-event {
+  padding: 0 !important;
+  background-color: 'red' !important;
+}
+
+.button-styles {
+    width: 100%;
+    border-color: #ce132d;
+    border: 2px solid #ce132d;
+    border-radius: 8px;
+  }
+
+ion-button {
+  --background: black;
+}
+
+ion-button:hover {
+  --background: #ce132d;
+  border: 0px;
+}

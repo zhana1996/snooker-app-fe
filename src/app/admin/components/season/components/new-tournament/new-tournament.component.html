@@ -10,17 +10,17 @@
             <ion-row>
                 <ion-item>
                     <ion-label position="stacked">Наименование на клуба<span style="color: red;">*</span></ion-label>
-                    <ion-input type="text" formControlName="location"></ion-input>
+                    <ion-input type="text" formControlName="place"></ion-input>
                 </ion-item>
             </ion-row>
             <ion-row>
                 <ion-item>
                     <ion-label position="stacked">Дата<span style="color: red;">*</span></ion-label>
-                    <ion-datetime formControlName="date"></ion-datetime>
+                    <ion-datetime formControlName="startDate" display-timezone="utc" displayFormat="YYYY-MM-DDTHH:mm" [min]="minDate" [max]="maxDate"></ion-datetime>
                 </ion-item>
             </ion-row>
             <ion-row class="ion-justify-content-end">
-                <ion-button color="danger" [disabled]="newTournamentForm.invalid">Запази</ion-button>
+                <ion-button color="danger" [disabled]="newTournamentForm.invalid" (click)="createTournament()">Запази</ion-button>
             </ion-row>
         </ion-grid>
     </form>

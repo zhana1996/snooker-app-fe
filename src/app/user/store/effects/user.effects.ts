@@ -70,8 +70,9 @@ export class UserEffects {
       ofType(fromActions.logInUserSuccess),
       tap(({logIn})=> {
         localStorage.setItem('accessToken', logIn['accessToken']);
-        console.log(logIn);
         const user = this.service.getUser();
+        localStorage.setItem('role', user['role']);
+        localStorage.setItem('id', user['id']);
         if (user['role'] === 'ADMIN') {
           this.router.navigateByUrl('/admin');
         } else {

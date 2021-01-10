@@ -27,27 +27,27 @@
         </ion-card-content>
     </ion-card>
 
-    <ion-card class="home-page-third-card">
-        <ion-card-header style="text-align: center; font-size: 20px; color: white;">
+    <ion-card class="home-page-third-card" *ngIf="showEarliestTournament">
+        <ion-card-header style="text-align: center; font-size: 18px; color: white;">
             Следващият турнир
         </ion-card-header>
-        <ion-card-subtitle style="text-align: center;" class="subtitle-second-card">
-            The Academy 
+        <ion-card-subtitle style="text-align: center; font-size: 20px;" class="subtitle-second-card">
+            {{this.tournament.tournament.name}} 
         </ion-card-subtitle>
         <ion-card-content>
             <ion-grid>
-                <ion-row class="ion-justify-content-center" style="font-size: 20px;"><ion-label class="subtitle">{{nextTournament}}</ion-label></ion-row>
+                <ion-row class="ion-justify-content-center" style="font-size: 20px;"><ion-label class="subtitle">Сезон {{this.tournament.tournament.season}}</ion-label></ion-row>
                 <ion-row class="ion-justify-content-center">
                     <ion-label>
                         <span style="color: red;">D </span> 
-                        <strong><span style="font-size: 20px; color: white;">8</span></strong>
+                        <strong><span style="font-size: 20px; color: white;">{{this.tournament.days}}</span></strong>
                         <span style="color: red;"> H </span> 
-                        <strong><span style="font-size: 20px; color: white;">12</span></strong>
+                        <strong><span style="font-size: 20px; color: white;">{{this.tournament.hours - 2}}</span></strong>
                         <span style="color: red;"> M </span>
-                        <strong><span style="font-size: 20px; color: white;">24</span></strong>
+                        <strong><span style="font-size: 20px; color: white;">{{this.tournament.minutes}}</span></strong>
                 </ion-label>
             </ion-row>
-                <ion-row class="ion-justify-content-center" style="color: white;"><ion-label> бул. „Тодор Александров“ 64, София</ion-label></ion-row>
+                <ion-row class="ion-justify-content-center" style="color: white;"><ion-label>{{this.tournament.tournament.place}}</ion-label></ion-row>
             </ion-grid>
         </ion-card-content>
     </ion-card>
@@ -77,7 +77,7 @@
             в магията на тази световна игра.
         </ion-card-subtitle>
         <ion-card-content>
-            <ion-button color="success">ИЗБЕРИ</ion-button>
+            <ion-button color="success" (click)="goToWorkoutPage()">ИЗБЕРИ</ion-button>
         </ion-card-content>
     </ion-card>
 </ion-content>

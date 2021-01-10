@@ -1,0 +1,42 @@
+<ion-grid>
+    <ion-row>
+        <ion-col size="12">
+            <form [formGroup]="form">
+                <ion-item>
+                    <ion-label position="floating">Треньор</ion-label>
+                    <ion-select formControlName="userId">
+                        <ng-container *ngIf="trainers?.length > 0; else emptyTrainers">
+                            <ion-select-option *ngFor="let trainer of trainers" [value]="trainer.id">
+                                {{trainer.userDetails.name}}
+                            </ion-select-option>
+                        </ng-container>
+                        <ng-template #emptyTrainers>
+                            <ion-select-option disabled>Няма треньори</ion-select-option>
+                        </ng-template>
+                    </ion-select>
+                </ion-item>
+            </form>
+        </ion-col>
+    </ion-row>
+    <ion-row *ngIf="showResults">
+        <ion-list style="margin: auto; width: 100%;">
+            <ion-item *ngFor="let training of trainings" class="list-style">
+                <ion-label style="margin: 0px;">
+                  <ion-grid>
+                      <ion-row>
+                          <ion-col size="8">
+                            <h2>Заглавие: {{training.title}}</h2>
+                            <h4>Ден: {{training.startDate.toString().substring(0, 10)}}</h4>
+                            <h4>Час: {{training.startDate.toString().substring(11, 16)}} - {{training.endDate.toString().substring(11, 16)}}</h4>
+                            <p>Клуб: {{training.user.userDetails.club}}</p>
+                          </ion-col>
+                          <ion-col size="4" style="margin: auto; text-align: end;" class="ion-justify-content-end">
+                            <ion-button size="small" color="success" (click)="applyTraining(training.id)"><ion-icon name="add-outline"></ion-icon></ion-button>
+                          </ion-col>
+                      </ion-row>
+                  </ion-grid>
+              </ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-row>
+</ion-grid>

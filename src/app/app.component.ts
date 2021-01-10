@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
       icon: 'stats-chart'
     },
     {
-      title: 'Турнири 2021',
+      title: 'Турнири',
       url: '/folder/tournaments',
       icon: 'cube'
     },

@@ -1,0 +1,6 @@
+<ion-content padding>
+    <workout-coach *ngIf="userRole === 'TRAINER'; else playerTemplate"></workout-coach>
+    <ng-template #playerTemplate>
+        <workout-player></workout-player>
+    </ng-template>
+</ion-content>

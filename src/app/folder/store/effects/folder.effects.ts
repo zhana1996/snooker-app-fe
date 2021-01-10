@@ -6,6 +6,8 @@ import { Router } from "@angular/router";
 import { ToasterService } from "src/app/core/services/toaster/toaster.service";
 import { FolderService } from "../services/folder.services";
 import { IUser } from "../models/players";
+import { ITraining } from "../models/trainings";
+import { IEarliestTournament } from "../models/tournament";
 
 @Injectable()
 export class FolderEffects {
@@ -17,7 +19,7 @@ export class FolderEffects {
   getAllPlayers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.getAllPlayers),
-      switchMap((actions?) =>
+      switchMap((actions) =>
         this.service.getAllPlayers(actions.gender).pipe(
           map((players: IUser[]) =>
             fromActions.getAllPlayersSuccess({ players })
@@ -26,5 +28,87 @@ export class FolderEffects {
         )
       )
     )
+  );
+
+  // Trainings
+  
+  createTraining$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.createTraining),
+    switchMap((actions) =>
+      this.service.createTraining(actions.userId, actions.training).pipe(
+        map((training: Object) =>
+          fromActions.CreateTrainingSuccess({ training })
+        ),
+        catchError((error: Error) => [fromActions.CreateTrainingError(error)])
+      )
+    )
+  )
+);
+
+  getTrainings$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.getTrainings),
+    switchMap((actions) =>
+      this.service.getTrainings(actions.userId).pipe(
+        map((trainings: ITraining[]) =>
+          fromActions.getTrainingsSuccess({ trainings })
+        ),
+        catchError((error: Error) => [fromActions.getTrainingsError(error)])
+      )
+    )
+  )
+  );
+
+  getTrainers$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.getTrainers),
+    switchMap(() =>
+      this.service.getTrainers().pipe(
+        map((trainers: IUser[]) =>
+          fromActions.getTrainersSuccess({ trainers })
+        ),
+        catchError((error: Error) => [fromActions.getTrainersError(error)])
+      )
+    )
+  )
+  );
+
+  applyTraining$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.applyTraining),
+    switchMap((action) =>
+      this.service.applyTraining(action.participats_ids).pipe(
+        map((training: Object) =>
+          fromActions.applyTrainingSuccess({ training })
+        ),
+        catchError((error: Error) => [fromActions.applyTrainingError(error)])
+      )
+    )
+  )
+  );
+
+  applyTrainingSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.applyTrainingSuccess),
+      tap(()=> {
+        this.toaster.showToaster('Успешно записахте тренировка', 'success')
+      })
+    ),
+    {dispatch: false}
+  );
+
+  getEarliestTournament$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.getEarliestTournament),
+    switchMap(() =>
+      this.service.getEarliestTournament().pipe(
+        map((tournament: IEarliestTournament) =>
+          fromActions.getEarliestTournamentSuccess({ tournament })
+        ),
+        catchError((error: Error) => [fromActions.getEarliestTournamentError(error)])
+      )
+    )
+  )
   );
 }
