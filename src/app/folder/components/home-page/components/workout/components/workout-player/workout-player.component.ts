@@ -46,6 +46,7 @@ export class WorkoutPlayerComponent implements OnInit, OnDestroy {
           this.showResults = false;
           this.toaster.showToaster('Няма свободни тренировки за избрания от вас треньор', 'danger');
         }
+        this.facade.resetTrainings();
       }
     });
 
@@ -53,6 +54,7 @@ export class WorkoutPlayerComponent implements OnInit, OnDestroy {
       if(data) {
         if(data.length > 0) {
           this.trainers = data;
+          this.form.controls['userId'].setValue(this.trainers[0].id);
         } else {
           this.trainers = [];
         }
@@ -76,6 +78,9 @@ export class WorkoutPlayerComponent implements OnInit, OnDestroy {
       trainingId: training_id,
       playerId: this.player_id
     });
+    setTimeout(() => {
+      this.facade.getTrainings(this.form.value['userId']);
+    }, 1500);
   }
 
   ngOnDestroy(): void {

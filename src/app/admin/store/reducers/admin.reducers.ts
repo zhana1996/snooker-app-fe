@@ -1,4 +1,5 @@
 import { Action, createReducer, on, createFeatureSelector, createSelector } from '@ngrx/store';
+import { INews } from 'src/app/folder/store/models/news';
 import { IUser, IUserDetails } from 'src/app/folder/store/models/players';
 import { ITournament } from 'src/app/folder/store/models/tournament';
 import * as fromActions from '../actions/admin.actions';
@@ -8,7 +9,8 @@ export interface AdminState {
     player: IUserDetails;
     users: IUser[];
     tournaments: ITournament[],
-    deleteTournament: ITournament
+    deleteTournament: ITournament,
+    news: INews[]
 }
 
 export const initialState: AdminState = {
@@ -16,7 +18,8 @@ export const initialState: AdminState = {
     player: null,
     users: null,
     tournaments: null,
-    deleteTournament: null
+    deleteTournament: null,
+    news: null
 }
 
 const featureReducer = createReducer (
@@ -55,6 +58,13 @@ const featureReducer = createReducer (
     on (fromActions.deleteTournamentSuccess, (state, {deleteTournament} )=> ({
         ...state,
         deleteTournament
+    })),
+    on (fromActions.getAllNews, state => ({
+        ...state
+    })),
+    on (fromActions.getAllNewsSuccess, (state, {news} )=> ({
+        ...state,
+        news
     }))
 );
 
@@ -68,6 +78,7 @@ export const getUpdatePlayer = createSelector(getAdminState,(state: AdminState) 
 export const disabledUsers = createSelector(getAdminState,(state: AdminState) => state.users);
 export const getTournaments = createSelector(getAdminState,(state: AdminState) => state.tournaments);
 export const deleteTournament = createSelector(getAdminState,(state: AdminState) => state.deleteTournament);
+export const getAllNews = createSelector(getAdminState,(state: AdminState) => state.news);
 
 export function adminReducer (state: AdminState | undefined, action: Action) {
     return featureReducer(state, action);

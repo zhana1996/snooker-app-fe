@@ -32,8 +32,8 @@ ion-grid {
 
   .button-styles {
     width: 100%;
-    border-color: red;
-    border: 2px solid red;
+    border-color: #ce132d;
+    border: 2px solid #ce132d;
     border-radius: 8px;
   }
 
@@ -42,6 +42,6 @@ ion-grid {
   }
 
   ion-button:hover {
-    --background: red;
+    --background: #ce132d;
     border: 0px;
   }

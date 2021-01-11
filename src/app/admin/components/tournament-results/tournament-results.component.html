@@ -1,10 +1,13 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="router.navigate(['./admin']);" color="danger"><ion-icon style="color: white;" name="arrow-back-outline"></ion-icon></ion-button>
+          </ion-buttons>
+      <ion-title>Турнири през сезона</ion-title>
+    </ion-toolbar>
+</ion-header>
 <ion-content>
     <ion-grid class="border-style">
-        <ion-row>
-            <ion-label>
-                <h1>Турнири през сезона</h1>
-            </ion-label>
-        </ion-row>
         <ion-row>
             <ion-col>
                 <form [formGroup]="myForm">

@@ -23,4 +23,5 @@ export interface IUserDetails {
     startDate?: string;
     titles?: number;
     wins?: number;
+    percentage?: string;
 }

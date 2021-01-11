@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, PopoverController } from '@ionic/angular';
+import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
+import { INews } from 'src/app/folder/store/models/news';
+import { AdminFacade } from '../../store/facade/admin.facade';
 import { AddNewsComponent } from './components/add-news.component';
 
 @Component({
@@ -8,58 +12,73 @@ import { AddNewsComponent } from './components/add-news.component';
   templateUrl: 'snooker-news.component.html',
   styleUrls: ['snooker-news.component.scss']
 })
-export class SnookerNewsComponent implements OnInit {
-    public news = [
-        {
-            title: 'Георги Величков триумфира в последния турнир за сезона',
-            id: '1',
-            img: 'C:/Users/Zhana Mitova/Desktop/rsz_news_1.jpg',
-            site: 'https://www.bulgariansnooker.com/index.php/2012-10-25-10-49-34/128-2018-04-30-09-29-35.html'
-        }
-        ];
-      public showResults = false;
+export class SnookerNewsComponent implements OnInit, OnDestroy {
+  public news: INews[] = [];
+  private news$: Observable<INews[]>;
+  private newsSubs: Subscription;
+  public showResults = false;
     
-      constructor(public toaster: ToasterService,
-                  public popoverController: PopoverController,
-                  public alertController: AlertController) {}
-      ngOnInit() {
-          if(this.news.length > 0) {
-              this.showResults = true;
-            // this.news.forEach(element => {
-            //   document.getElementById('news-item').style.backgroundImage = 'C:/Users/Zhana Mitova/Desktop/rsz_news_1.jpg'
-            // });
-          } else {
-              this.toaster.showToaster('Няма добавени новини', 'danger');
-          }
-      }
-  
-      async deleteNews(news_id: string) {
-          const alert = await this.alertController.create({
-            header: 'Премахване на новината',
-            message: 'Сигурен ли сте, че искате да изтриете новината?',
-            buttons: [
-              {
-                text: 'Не',
-                role: 'cancel',
-              },
-              {
-                text: 'Да',
-                handler: () => {
-                  // изтриване на новината
-                },
-              },
-            ],
-          });
-      
-          await alert.present();
-        }
+  constructor(public toaster: ToasterService,
+              private facade: AdminFacade,
+              public route: ActivatedRoute,
+              public router: Router,
+              public popoverController: PopoverController,
+              public alertController: AlertController) {
+    this.news$ = this.facade.allNews$;
+  }
 
-        async presentPopover() {
-          const popover = await this.popoverController.create({
-            component: AddNewsComponent,
-            cssClass: 'my-custom-class',
-            translucent: true
-          });
-          return await popover.present();
+  ngOnInit() {
+    this.facade.getAllNews();
+
+    this.newsSubs = this.news$.subscribe((data: INews[]) => {
+      if(data) {
+        if(data.length > 0) {
+          this.news = data;
+          this.showResults = true;
+        } else {
+          this.showResults = false;
+          this.toaster.showToaster('Няма добавени новини все още.', 'danger');
         }
+        this.facade.resetNews();
+      }
+    });
+  }
+  
+  async deleteNews(news_id: string) {
+    const alert = await this.alertController.create({
+      header: 'Премахване на новината',
+      message: 'Сигурен ли сте, че искате да изтриете новината?',
+      buttons: [
+        {
+          text: 'Не',
+          role: 'cancel',
+        },
+        {
+          text: 'Да',
+          handler: () => {
+            this.facade.deleteNews(news_id);
+            setTimeout(() => {
+              this.facade.getAllNews();
+            }, 1500);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async addNews(event: Object) {
+    const popover = await this.popoverController.create({
+      component: AddNewsComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {news: event['news'], edit: event['edit']},
+      translucent: true,
+    });
+    return await popover.present();
+  }
+
+  ngOnDestroy(): void {
+    this.newsSubs.unsubscribe();
+  }
 }

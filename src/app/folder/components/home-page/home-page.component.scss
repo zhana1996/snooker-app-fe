@@ -48,60 +48,6 @@
     text-align: center;
 }
 
-.move-me-img-1 {
-    display: inline-block;
-    padding: 0px;
-    margin: 30px;;
-    position: relative;
-    animation: mymove 10s;
-    height: 40%;
-    width: 40%;
+.item-style {
+  background-image: linear-gradient(90deg, #ce132d 20%, black 20%, black 100%);
 }
-
-.move-me-img-2 {
-    display: inline-block;
-    padding: 0px;
-    position: relative;
-    animation: mymove 10s;
-    height: 40%;
-    width: 40%;
-}
-.move-me-1 {
-    animation: move-in-steps-1 infinite;
-    animation-direction: reverse;
-    animation-duration: 15s;
-    animation-play-state: running;
-}
-.move-me-2 {
-    animation: move-in-steps-2 infinite;
-    animation-delay: 7s;
-    animation-direction: reverse;
-    animation-duration: 15s;
-    animation-play-state: running;
-}
-  
-  body {
-    padding: 200px;
-  }
-  
-  @keyframes move-in-steps-1 {
-    0% {
-      left: 0px;
-      top: 600px;
-    }
-    100% {
-      left: 0px;
-      top: -300px;
-    }
-  }
-  
-  @keyframes move-in-steps-2 {
-    0% {
-      left: 0px;
-      top: 600px;
-    }
-    100% {
-      left: 0px;
-      top: -300px;
-    }
-  }

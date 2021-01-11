@@ -8,6 +8,7 @@ import { FolderService } from "../services/folder.services";
 import { IUser } from "../models/players";
 import { ITraining } from "../models/trainings";
 import { IEarliestTournament } from "../models/tournament";
+import { INews } from "../models/news";
 
 @Injectable()
 export class FolderEffects {
@@ -107,6 +108,69 @@ export class FolderEffects {
           fromActions.getEarliestTournamentSuccess({ tournament })
         ),
         catchError((error: Error) => [fromActions.getEarliestTournamentError(error)])
+      )
+    )
+  )
+  );
+
+  // Add and Delete player to/from Tournament
+
+  addPlayerToTournament$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.addPlayerToTournament),
+    switchMap((action) =>
+      this.service.addPlayerToTournament(action.tournamentParticipant).pipe(
+        map((addResponse: Object) =>
+          fromActions.addPlayerToTournamentSuccess({ addResponse })
+        ),
+        catchError((error: Error) => [fromActions.addPlayerToTournamentError(error)])
+      )
+    ))
+  );
+
+  addPlayerToTournamentSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.addPlayerToTournamentSuccess),
+      tap(()=> {
+        this.toaster.showToaster('Успешно се записахте за турнира', 'success')
+      })
+    ),
+    {dispatch: false}
+  );
+  
+  deletePlayerFromTournament$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.deletePlayerFromTournament),
+    switchMap((action) =>
+      this.service.deletePlayerFromTournament(action.tournamentId).pipe(
+        map((deleteResponse: Object) =>
+          fromActions.deletePlayerFromTournamentSuccess({ deleteResponse })
+        ),
+        catchError((error: Error) => [fromActions.deletePlayerFromTurnamentError(error)])
+      )
+    )
+  )
+  );
+
+  deletePlayerFromTournamentSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.deletePlayerFromTournamentSuccess),
+      tap(()=> {
+        this.toaster.showToaster('Успешно се отписахте от турнира', 'success')
+      })
+    ),
+    {dispatch: false}
+  );
+
+  getAllNews$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.getAllNews),
+    switchMap(() =>
+      this.service.getAllNews().pipe(
+        map((news: INews[]) =>
+          fromActions.getAllNewsSuccess({ news })
+        ),
+        catchError((error: Error) => [fromActions.getAllNewsError(error)])
       )
     )
   )

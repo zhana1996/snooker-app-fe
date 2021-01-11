@@ -9,11 +9,6 @@
     margin: 10px 0 10px 0;
 }
 
-.monthview-datetable td.monthview-primary-with-event {
-  padding: 0 !important;
-  background-color: 'red' !important;
-}
-
 .button-styles {
     width: 100%;
     border-color: #ce132d;
@@ -28,4 +23,8 @@ ion-button {
 ion-button:hover {
   --background: #ce132d;
   border: 0px;
+}
+
+td .monthview-primary-with-event[_ngcontent-hhn-c131] {
+  background-color: #ce132d !important;
 }

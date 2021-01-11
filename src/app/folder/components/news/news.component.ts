@@ -1,18 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
+import { FolderFacade } from '../../store/facade/folder.facade';
+import { INews } from '../../store/models/news';
 
 @Component({
   selector: 'news',
   templateUrl: 'news.component.html',
   styleUrls: ['news.component.scss']
 })
-export class NewsComponent implements OnInit {
-  public news = 'https://www.bulgariansnooker.com/index.php/2012-10-25-10-49-34/128-2018-04-30-09-29-35.html';
-  constructor(public router: Router) {}
-  ngOnInit() {}
+export class NewsComponent implements OnInit, OnDestroy {
+  public news: INews[] = [];
+  private news$: Observable<INews[]>;
+  private newsSubs: Subscription;
 
-  //kakto na rabotata s otdelen prozorec
-  navigateToNews(): void {
-      this.router.navigateByUrl(this.news);
+  public showResults = false;
+
+  constructor(public router: Router,
+              public toaster: ToasterService,
+              private facade: FolderFacade) {
+    this.news$ = this.facade.allNews$;
+  }
+  ngOnInit() {
+    this.facade.getAllNews();
+
+    this.newsSubs = this.news$.subscribe((data: INews[]) => {
+      if(data) {
+        if(data.length > 0) {
+          this.news = data;
+          this.showResults = true;
+        } else {
+          this.showResults = false;
+          this.toaster.showToaster('Няма добавени новини все още.', 'danger');
+        }
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.newsSubs.unsubscribe();
   }
 }

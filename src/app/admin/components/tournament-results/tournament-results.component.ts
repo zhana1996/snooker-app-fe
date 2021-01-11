@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { GamesComponent } from './components/games/games.component';
@@ -36,6 +37,7 @@ export class TournamentResultsComponent implements OnInit {
   public showTournment = false;
 
   constructor(private formBuilder: FormBuilder,
+              public router: Router,
               public toaster: ToasterService,
               public modalController: ModalController,
               public popoverController: PopoverController) {

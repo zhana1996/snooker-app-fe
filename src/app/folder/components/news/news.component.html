@@ -1,16 +1,20 @@
 <ion-content>
-    <ion-card class="news-card">
-        <ion-card-header class="title">
-            <ion-grid>
-                <ion-row>
-                    <ion-col size="8">
-                        <strong><span>Георги Величков триумфира в последния турнир за сезона</span></strong>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-header>
-        <ion-card-content class="button">
-            <ion-button color="success">ПРОЧЕТИ ПОВЕЧЕ</ion-button>
-        </ion-card-content>
-    </ion-card>
+    <ion-list *ngIf="showResults">
+        <ion-item *ngFor="let item of news">
+            <ion-card class="news-card" [ngStyle]="{'background-image': 'url(' + item.image + ')'}">
+                <ion-card-header class="title">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="8">
+                                <strong><span>{{item.title}}</span></strong>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-header>
+                <ion-card-content class="button">
+                    <ion-button color="success">ПРОЧЕТИ ПОВЕЧЕ</ion-button>
+                </ion-card-content>
+            </ion-card>
+        </ion-item>
+    </ion-list>
 </ion-content>

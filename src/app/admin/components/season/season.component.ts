@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
@@ -26,6 +27,7 @@ export class SeasonComponent implements OnInit, OnDestroy {
   private deleteTournamentSubs: Subscription;
 
   constructor(private formBuilder: FormBuilder,
+              public router: Router,
               public toaster: ToasterService,
               private facade: AdminFacade,
               public popoverController: PopoverController,

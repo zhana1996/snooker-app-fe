@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { INews } from '../models/news';
 import { IUser } from '../models/players';
 import { IEarliestTournament } from '../models/tournament';
 import { ITraining } from '../models/trainings';
@@ -26,3 +27,15 @@ export const applyTrainingError = createAction('[Folder Page] Apply Training Err
 export const getEarliestTournament = createAction('[Folder Page] Get Earliest Tournament');
 export const getEarliestTournamentSuccess = createAction('[Folder Page] Get Earliest Tournament Success', props<{ tournament: IEarliestTournament }>());
 export const getEarliestTournamentError = createAction('[Folder Page] Get Earliest Tournament Error', (error: Error) => error);
+
+export const addPlayerToTournament = createAction('[Folder Page] Add Player To Tournament', props<{tournamentParticipant: Object}>());
+export const addPlayerToTournamentSuccess = createAction('[Folder Page] Add Player To Tournament Success', props<{ addResponse: Object }>());
+export const addPlayerToTournamentError = createAction('[Folder Page] Add Player To Tournament Error', (error: Error) => error);
+
+export const deletePlayerFromTournament = createAction('[Folder Page] Delete Player From Tournament', props<{tournamentId: string}>());
+export const deletePlayerFromTournamentSuccess = createAction('[Folder Page] Delete Player From Tournament Success', props<{ deleteResponse: Object }>());
+export const deletePlayerFromTurnamentError = createAction('[Folder Page] Delete Player From Tournament Error', (error: Error) => error);
+
+export const getAllNews = createAction('[Folder Page] Get All News');
+export const getAllNewsSuccess = createAction('[Folder Page] Get All News Success', props<{ news: INews[] }>());
+export const getAllNewsError = createAction('[Folder Page] Get All News Error', (error: Error) => error);

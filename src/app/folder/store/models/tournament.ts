@@ -4,6 +4,7 @@ export interface ITournament {
     place: string,
     startDate: Date,
     season: string
+    tournamentParticipants?: Object[]
 }
 
 export interface IEarliestTournament {

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { select, Store } from '@ngrx/store';
+import { INews } from "src/app/folder/store/models/news";
 import { IUserDetails } from "src/app/folder/store/models/players";
 import { ITournament } from "src/app/folder/store/models/tournament";
 import * as fromAction from '../actions/admin.actions';
@@ -13,6 +14,7 @@ export class AdminFacade {
     disabledUsers$ = this.store.pipe(select(fromReducer.disabledUsers));
     tournaments$ = this.store.pipe(select(fromReducer.getTournaments));
     deleteTournament$ = this.store.pipe(select(fromReducer.deleteTournament));
+    allNews$ = this.store.pipe(select(fromReducer.getAllNews));
 
     constructor(private store: Store<fromReducer.AdminState>) {}
 
@@ -56,5 +58,26 @@ export class AdminFacade {
 
     deleteTournament(tournamentId: string): void {
         this.store.dispatch(fromAction.deleteTournament({tournamentId}));
+    }
+
+    //News
+    createNews(news: Object): void {
+        this.store.dispatch(fromAction.createNews({news}));
+    }
+
+    getAllNews(): void {
+        this.store.dispatch(fromAction.getAllNews());
+    }
+
+    deleteNews(newsId: string): void {
+        this.store.dispatch(fromAction.deleteNews({newsId}));
+    }
+
+    updateNews(news: INews): void {
+        this.store.dispatch(fromAction.updateNews({news}));
+    }
+
+    resetNews(): void {
+        this.store.dispatch(fromAction.getAllNewsSuccess(null));
     }
 }

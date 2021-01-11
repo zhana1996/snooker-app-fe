@@ -6,6 +6,7 @@ import { AdminService } from "../services/admin.services";
 import { IUser, IUserDetails } from "src/app/folder/store/models/players";
 import { ToasterService } from "src/app/core/services/toaster/toaster.service";
 import { ITournament } from "src/app/folder/store/models/tournament";
+import { INews } from "src/app/folder/store/models/news";
 
 @Injectable()
 export class AdminEffects {
@@ -159,5 +160,92 @@ export class AdminEffects {
         )
       )
     )
+  );
+
+  // News
+  createNews$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.createNews),
+    switchMap((action) =>
+      this.service.createNews(action.news).pipe(
+        map((createNews: Object) =>
+          fromActions.createNewsSuccess({ createNews })
+        ),
+        catchError((error: Error) => [fromActions.createNewsError(error)])
+      )
+    )
+  )
+  );
+
+  createNewsSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.createNewsSuccess),
+      tap(()=> {
+        this.toaster.showToaster('Успешно създадохте статията', 'success')
+      })
+    ),
+    {dispatch: false}
+  );
+
+  getAllNews$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.getAllNews),
+    switchMap(() =>
+      this.service.getAllNews().pipe(
+        map((news: INews[]) =>
+          fromActions.getAllNewsSuccess({ news })
+        ),
+        catchError((error: Error) => [fromActions.getAllNewsError(error)])
+      )
+    )
+  )
+  );
+
+  deleteNews$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.deleteNews),
+    switchMap((action) =>
+      this.service.deleteNews(action.newsId).pipe(
+        map((deleteNews: Object) =>
+          fromActions.deleteNewsSuccess({ deleteNews })
+        ),
+        catchError((error: Error) => [fromActions.deleteNewsError(error)])
+      )
+    )
+  )
+  );
+
+  deleteNewsSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.deleteNewsSuccess),
+      tap(()=> {
+        this.toaster.showToaster('Успешно изтрихте статията', 'success')
+      })
+    ),
+    {dispatch: false}
+  );
+
+  updateNews$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.updateNews),
+    switchMap((action) =>
+      this.service.updateNews(action.news).pipe(
+        map((updateNews: INews) =>
+          fromActions.updateNewsSuccess({ updateNews })
+        ),
+        catchError((error: Error) => [fromActions.updateNewsError(error)])
+      )
+    )
+  )
+  );
+
+  updateNewsSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.updateNewsSuccess),
+      tap(()=> {
+        this.toaster.showToaster('Успешно направихте промяната', 'success')
+      })
+    ),
+    {dispatch: false}
   );
 }

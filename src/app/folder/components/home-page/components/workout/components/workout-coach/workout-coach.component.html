@@ -86,3 +86,10 @@
           step="30"
           startingDayWeek="1">
 </calendar>
+
+<!-- <ng-template #template let-view="view" let-row="row" let-col="col">
+  <div *ngIf="view.dates[row*7+col].events == ''">{{view.dates[row*7+col].label}}</div>
+  <div style="height: 100%;" *ngFor="let obj of view.dates[row*7+col].events">
+    <div [ngStyle]="{'background': obj.eventColor } ">{{view.dates[row*7+col].label}}</div>
+  </div>
+</ng-template> -->

@@ -1,8 +1,13 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button color="danger">
+                <ion-icon color="light" name="person-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-buttons slot="end">
             <ion-button color="danger" (click)="logOut()">
-              Изход
+                <ion-icon color="light" name="log-out-outline"></ion-icon>
             </ion-button>
           </ion-buttons>
     </ion-toolbar>
@@ -10,7 +15,10 @@
 <ion-content>
     <ion-grid class="border-style">
         <ion-row>
-            <ion-col style="margin-top: 75px;">
+            <img style="margin: 15% 25% 0 25%; width: 50%;" src="assets/images/logo.png">
+        </ion-row>
+        <ion-row>
+            <ion-col style="margin-top: 60px;">
                 <ion-row>
                     <ion-button style="width: 100%;" shape="round" color="danger" expand="block" (click)="router.navigate(['./season'], { relativeTo: this.route });">Въвеждане на турнири</ion-button>
                 </ion-row>

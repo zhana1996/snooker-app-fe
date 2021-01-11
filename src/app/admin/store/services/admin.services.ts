@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { IUser, IUserDetails } from 'src/app/folder/store/models/players';
 import { ITournament } from 'src/app/folder/store/models/tournament';
 import { ITournamentsParams } from '../models/tournamentsParams';
+import { INews } from 'src/app/folder/store/models/news';
 
 @Injectable({
     providedIn: 'root'
@@ -65,5 +66,23 @@ export class AdminService {
         const params = new HttpParams()
         .set('tournamentId', tournamentId);
         return this.http.delete<ITournament>(`${environment.API_URL_TOURNAMENT}`, {params});
+    }
+
+    createNews(news: Object): Observable<Object> {
+        return this.http.post<Object>(`${environment.API_URL_NEWS}`, news);
+    }
+
+    getAllNews(): Observable<INews[]> {
+        return this.http.get<INews[]>(`${environment.API_URL_NEWS}`);
+    }
+
+    deleteNews(newsId: string): Observable<Object> {
+        const params = new HttpParams()
+        .set('newsId', newsId);
+        return this.http.delete<Object>(`${environment.API_URL_NEWS}`, {params});
+    }
+
+    updateNews(news: INews): Observable<INews> {
+        return this.http.put<INews>(`${environment.API_URL_NEWS}`, news);
     }
 }   

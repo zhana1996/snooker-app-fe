@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { FolderFacade } from '../../store/facade/folder.facade';
+import { IUser } from '../../store/models/players';
 import { IEarliestTournament } from '../../store/models/tournament';
 
 @Component({
@@ -16,27 +17,61 @@ export class HomePageComponent implements OnInit, OnDestroy {
   private tournament$: Observable<IEarliestTournament>;
   private tournamentSubs: Subscription;
 
+  public players: IUser[] = [];
+  private players$: Observable<IUser[]>;
+  private playersSubs: Subscription;
+
   public showEarliestTournament = false;
+  public style: string[] = [];
+
+  public isPlayerParticipant = false;
 
   constructor(public router: Router,
               private facade: FolderFacade,
               public route: ActivatedRoute,
               private alertController: AlertController) {
     this.tournament$ = this.facade.tournament$;
+    this.players$ = this.facade.players$;
   }
   ngOnInit() {
     this.facade.getEarliestTournament();
+    this.facade.getAllPlayers('');
 
     this.tournamentSubs = this.tournament$.subscribe((data: IEarliestTournament) => {
       if(data) {
         this.tournament = data;
         if (this.tournament.tournament) {
           this.showEarliestTournament = true;
+          this.isPlayerParticipant = this.tournament.tournament.tournamentParticipants.length > 0;
         } else {
           this.showEarliestTournament = false;
         }
       } else {
         this.showEarliestTournament = false;
+      }
+    });
+
+    this.playersSubs = this.players$.subscribe((data: IUser[]) => {
+      if(data) {
+        if(data.length > 0) {
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].userDetails && data[i].userDetails.titles && data[i].userDetails.titles > 0) {
+            this.players.push(data[i]);
+          }
+        }
+        if(this.players.length > 0) {
+          this.players = this.players.slice().sort((a, b) => b.userDetails.titles - a.userDetails.titles); // descending
+          const highestTitles = this.players[0].userDetails.titles;
+          for(let i = 0; i < this.players.length; i++) {
+            const percentages = Math.round((this.players[i].userDetails.titles / highestTitles) * 100) + '%';
+            this.style.push('linear-gradient(90deg, #ce132d '+ percentages +', black '+ percentages + ', black 100%)');
+            console.log(percentages);
+          }
+        }
+        } else {
+            this.players = [];
+        }
+        this.facade.resetPlayers();
       }
     });
   }
@@ -49,9 +84,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.router.navigate(['./workout'], { relativeTo: this.route });
   }
 
-  async presentAlertConfirm() {
+  async addPlayerInTournament() {
     const alert = await this.alertController.create({
-      header: 'Записване за турнир ' + this.tournament.tournament.name,
+      header: 'Записване за турнир: ' + this.tournament.tournament.name,
       message: 'Сигурен ли си, че искаш да се запишеш за турнира?',
       buttons: [
         {
@@ -61,7 +96,32 @@ export class HomePageComponent implements OnInit, OnDestroy {
         {
           text: 'Да',
           handler: () => {
-            // записване за турнира
+            this.facade.addPlayerToTournament({
+              id: this.tournament.tournament.id
+            });
+            this.isPlayerParticipant = true;
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async deletePlayerInTournament() {
+    const alert = await this.alertController.create({
+      header: 'Отписване от турнир: ' + this.tournament.tournament.name,
+      message: 'Сигурен ли си, че искаш да се отпишеш от турнира?',
+      buttons: [
+        {
+          text: 'Не',
+          role: 'cancel',
+        },
+        {
+          text: 'Да',
+          handler: () => {
+            this.facade.deletePlayerFromTournamet(this.tournament.tournament.id);
+            this.isPlayerParticipant = false;
           },
         },
       ],

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
@@ -22,6 +23,7 @@ export class CoachApproveComponent implements OnInit, OnDestroy {
     public showResults = false;
   
     constructor(public toaster: ToasterService,
+                public router: Router,
                 private facade: AdminFacade,
                 public alertController: AlertController) {
       this.users$ = this.facade.disabledUsers$;

@@ -60,7 +60,7 @@ export class WorkoutCoachComponent implements OnInit, OnDestroy {
               desc: this.trainings[i].description,
               startTime:  new Date(this.trainings[i].startDate),
               endTime: new Date(this.trainings[i].endDate),
-              eventColor: this.trainings[i].description === 'Свободна' ? '#3a87ad' : 'red',
+              eventColor: this.trainings[i].description === 'Свободна' ? '#3a87ad' : '',
               allDay: false
             });
           }

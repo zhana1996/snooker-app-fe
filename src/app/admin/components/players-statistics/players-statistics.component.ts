@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
@@ -21,6 +22,7 @@ export class PlayersStatisticsComponent implements OnInit, OnDestroy {
   constructor(public toaster: ToasterService,
               public popoverController: PopoverController,
               private facade: AdminFacade,
+              public router: Router,
               public alertController: AlertController) {
     this.players$ = this.facade.players$;
   }

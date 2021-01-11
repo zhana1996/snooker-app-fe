@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { IUser } from '../models/players';
 import { ITraining } from '../models/trainings';
 import { IEarliestTournament } from '../models/tournament';
+import { INews } from '../models/news';
 
 @Injectable({
     providedIn: 'root'
@@ -40,5 +41,19 @@ export class FolderService {
     
     getEarliestTournament(): Observable<IEarliestTournament> {
         return this.http.get<IEarliestTournament>(`${environment.API_URL_TOURNAMENT}/earliest`);
+    }
+
+    addPlayerToTournament(tournamentParticipant: Object): Observable<Object> {
+        return this.http.post<Object>(`${environment.API_URL_TOURNAMENT_PARTICIPANT}`, {tournamentParticipant});
+    }
+
+    deletePlayerFromTournament(tournamentId: string): Observable<Object> {
+        const params = new HttpParams()
+        .set('tournamentId', tournamentId);
+        return this.http.delete<Object>(`${environment.API_URL_TOURNAMENT_PARTICIPANT}`, {params});
+    }
+
+    getAllNews(): Observable<INews[]> {
+        return this.http.get<INews[]>(`${environment.API_URL_NEWS}`);
     }
 }   
