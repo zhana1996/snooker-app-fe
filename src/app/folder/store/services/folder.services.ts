@@ -44,13 +44,17 @@ export class FolderService {
     }
 
     addPlayerToTournament(tournamentParticipant: Object): Observable<Object> {
-        return this.http.post<Object>(`${environment.API_URL_TOURNAMENT_PARTICIPANT}`, {tournamentParticipant});
+        return this.http.post<Object>(`${environment.API_URL_TOURNAMENT_PARTICIPANT}`, { tournament: { id: tournamentParticipant['id'] } });
     }
 
     deletePlayerFromTournament(tournamentId: string): Observable<Object> {
         const params = new HttpParams()
         .set('tournamentId', tournamentId);
         return this.http.delete<Object>(`${environment.API_URL_TOURNAMENT_PARTICIPANT}`, {params});
+    }
+
+    getAllUsersByTitles(): Observable<IUser[]> {
+        return this.http.get<IUser[]>(`${environment.API_URL}user/all-by-titles`);
     }
 
     getAllNews(): Observable<INews[]> {

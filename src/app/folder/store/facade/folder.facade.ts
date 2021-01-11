@@ -12,16 +12,12 @@ export class FolderFacade {
     trainers$ = this.store.pipe(select(fromReducer.getTrainers));
     tournament$ = this.store.pipe(select(fromReducer.getEaliestTournament));
     allNews$ = this.store.pipe(select(fromReducer.getAllNews));
+    users$ = this.store.pipe(select(fromReducer.getAllUsersByTitles));
 
     constructor(private store: Store<FolderState>) {}
 
     getAllPlayers(gender?: string): void {
         this.store.dispatch(fromAction.getAllPlayers({gender}));
-    }
-
-    resetPlayers(): void {
-        this.store.dispatch(fromAction.getAllPlayersSuccess(null));
-
     }
 
     createTraining(userId: string, training: ITraining): void {
@@ -58,5 +54,9 @@ export class FolderFacade {
 
     getAllNews(): void {
         this.store.dispatch(fromAction.getAllNews());
+    }
+
+    getAllUsersByTitles(): void {
+        this.store.dispatch(fromAction.getAllUsersByTitles());
     }
 }

@@ -175,4 +175,18 @@ export class FolderEffects {
     )
   )
   );
+
+  getAllUsersByTitles$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromActions.getAllUsersByTitles),
+    switchMap(() =>
+      this.service.getAllUsersByTitles().pipe(
+        map((users: IUser[]) =>
+          fromActions.getAllUsersByTitlesSucces({ users })
+        ),
+        catchError((error: Error) => [fromActions.getAllUsersByTitlesError(error)])
+      )
+    )
+  )
+  );
 }

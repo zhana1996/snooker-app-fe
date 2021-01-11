@@ -31,11 +31,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
               public route: ActivatedRoute,
               private alertController: AlertController) {
     this.tournament$ = this.facade.tournament$;
-    this.players$ = this.facade.players$;
+    this.players$ = this.facade.users$;
   }
   ngOnInit() {
     this.facade.getEarliestTournament();
-    this.facade.getAllPlayers('');
+    this.facade.getAllUsersByTitles();
 
     this.tournamentSubs = this.tournament$.subscribe((data: IEarliestTournament) => {
       if(data) {
@@ -54,24 +54,15 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.playersSubs = this.players$.subscribe((data: IUser[]) => {
       if(data) {
         if(data.length > 0) {
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].userDetails && data[i].userDetails.titles && data[i].userDetails.titles > 0) {
-            this.players.push(data[i]);
-          }
-        }
-        if(this.players.length > 0) {
-          this.players = this.players.slice().sort((a, b) => b.userDetails.titles - a.userDetails.titles); // descending
+          this.players = data;
           const highestTitles = this.players[0].userDetails.titles;
           for(let i = 0; i < this.players.length; i++) {
             const percentages = Math.round((this.players[i].userDetails.titles / highestTitles) * 100) + '%';
             this.style.push('linear-gradient(90deg, #ce132d '+ percentages +', black '+ percentages + ', black 100%)');
-            console.log(percentages);
           }
-        }
         } else {
             this.players = [];
         }
-        this.facade.resetPlayers();
       }
     });
   }

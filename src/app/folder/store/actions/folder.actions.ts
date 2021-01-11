@@ -39,3 +39,7 @@ export const deletePlayerFromTurnamentError = createAction('[Folder Page] Delete
 export const getAllNews = createAction('[Folder Page] Get All News');
 export const getAllNewsSuccess = createAction('[Folder Page] Get All News Success', props<{ news: INews[] }>());
 export const getAllNewsError = createAction('[Folder Page] Get All News Error', (error: Error) => error);
+
+export const getAllUsersByTitles = createAction('[Folder Page] Get All Users By Titles');
+export const getAllUsersByTitlesSucces = createAction('[Folder Page] Get All Users By Titles Success', props<{ users: IUser[] }>());
+export const getAllUsersByTitlesError = createAction('[Folder Page] Get All Users By Titles Error', (error: Error) => error);
