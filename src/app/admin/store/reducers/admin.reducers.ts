@@ -10,7 +10,9 @@ export interface AdminState {
     users: IUser[];
     tournaments: ITournament[],
     deleteTournament: ITournament,
-    news: INews[]
+    news: INews[],
+    shuffleUsers: Object;
+    tournamentById: ITournament;
 }
 
 export const initialState: AdminState = {
@@ -19,7 +21,9 @@ export const initialState: AdminState = {
     users: null,
     tournaments: null,
     deleteTournament: null,
-    news: null
+    news: null,
+    shuffleUsers: null,
+    tournamentById: null
 }
 
 const featureReducer = createReducer (
@@ -65,6 +69,20 @@ const featureReducer = createReducer (
     on (fromActions.getAllNewsSuccess, (state, {news} )=> ({
         ...state,
         news
+    })),
+    on (fromActions.shuffleUsers, state => ({
+        ...state
+    })),
+    on (fromActions.shuffleUsersSuccess, (state, {shuffleUsers} )=> ({
+        ...state,
+        shuffleUsers
+    })),
+    on (fromActions.getTournamentById, state => ({
+        ...state
+    })),
+    on (fromActions.getTournamentByIdSuccess, (state, {tournamentById} )=> ({
+        ...state,
+        tournamentById
     }))
 );
 
@@ -79,6 +97,8 @@ export const disabledUsers = createSelector(getAdminState,(state: AdminState) =>
 export const getTournaments = createSelector(getAdminState,(state: AdminState) => state.tournaments);
 export const deleteTournament = createSelector(getAdminState,(state: AdminState) => state.deleteTournament);
 export const getAllNews = createSelector(getAdminState,(state: AdminState) => state.news);
+export const getShuffleUsers = createSelector(getAdminState,(state: AdminState) => state.shuffleUsers);
+export const getTournamentByID = createSelector(getAdminState,(state: AdminState) => state.tournamentById);
 
 export function adminReducer (state: AdminState | undefined, action: Action) {
     return featureReducer(state, action);

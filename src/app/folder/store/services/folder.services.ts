@@ -16,27 +16,27 @@ export class FolderService {
     getAllPlayers(gender?: string): Observable<IUser[]>{
         const params = new HttpParams()
         .set('gender', gender);
-        return this.http.get<IUser[]>(`${environment.API_URL}user/all`, {params});
+        return this.http.get<IUser[]>(`${environment.API_URL_USER}/all`, {params});
     }
 
     createTraining(userId: string, training: ITraining): Observable<Object>{
         const params = new HttpParams()
         .set('userId', userId);
-        return this.http.post<Object>(`${environment.API_URL}training`, training, {params});
+        return this.http.post<Object>(`${environment.API_URL}/training`, training, {params});
     }
 
     getTrainings(userId: string): Observable<ITraining[]>{
         const params = new HttpParams()
         .set('userId', userId);
-        return this.http.get<ITraining[]>(`${environment.API_URL}training`, {params});
+        return this.http.get<ITraining[]>(`${environment.API_URL}/training`, {params});
     }
 
     getTrainers(): Observable<IUser[]> {
-        return this.http.get<IUser[]>(`${environment.API_URL}user/trainers`);
+        return this.http.get<IUser[]>(`${environment.API_URL_USER}/trainers`);
     }
 
     applyTraining(participats_ids: Object): Observable<Object> {
-        return this.http.post<Object>(`${environment.API_URL}training-participant`, participats_ids);
+        return this.http.post<Object>(`${environment.API_URL}/training-participant`, participats_ids);
     }
     
     getEarliestTournament(): Observable<IEarliestTournament> {
@@ -54,7 +54,7 @@ export class FolderService {
     }
 
     getAllUsersByTitles(): Observable<IUser[]> {
-        return this.http.get<IUser[]>(`${environment.API_URL}user/all-by-titles`);
+        return this.http.get<IUser[]>(`${environment.API_URL_USER}/all-by-titles`);
     }
 
     getAllNews(): Observable<INews[]> {

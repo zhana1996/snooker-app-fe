@@ -16,29 +16,29 @@ export class AdminService {
     getAllPlayers(gender?: string): Observable<IUser[]>{
         const params = new HttpParams()
         .set('gender', gender);
-        return this.http.get<IUser[]>(`${environment.API_URL}user/all`, {params});
+        return this.http.get<IUser[]>(`${environment.API_URL_USER}/all`, {params});
     }
 
     updatePlayer(userDetails: IUserDetails): Observable<IUser>{
-        return this.http.put<IUser>(`${environment.API_URL}user/user-details`, userDetails);
+        return this.http.put<IUser>(`${environment.API_URL_USER}/user-details`, userDetails);
     }
 
     deletePlayer(userId: string): Observable<IUser>{
         const params = new HttpParams()
         .set('userId', userId);
-        return this.http.delete<IUser>(`${environment.API_URL}user`, {params});
+        return this.http.delete<IUser>(`${environment.API_URL_USER}`, {params});
     }
 
     getDisabledUsers(role?: string): Observable<IUser[]>{
         const params = new HttpParams()
         .set('role', role);
-        return this.http.get<IUser[]>(`${environment.API_URL}user/disabled`, {params});
+        return this.http.get<IUser[]>(`${environment.API_URL_USER}/disabled`, {params});
     }
 
     approveUser(userId?: string): Observable<IUser>{
         const params = new HttpParams()
         .set('userId', userId);
-        return this.http.get<IUser>(`${environment.API_URL}user/approve`, {params});
+        return this.http.get<IUser>(`${environment.API_URL_USER}/approve`, {params});
     }
 
     // Tournament
@@ -68,6 +68,14 @@ export class AdminService {
         return this.http.delete<ITournament>(`${environment.API_URL_TOURNAMENT}`, {params});
     }
 
+    getTournamentById(id: string): Observable<ITournament> {
+        return this.http.get<ITournament>(`${environment.API_URL_TOURNAMENT}/${id}`);
+    }
+
+    shuffleUsers(id: string): Observable<Object> {
+        return this.http.get<Object>(`${environment.API_URL_TOURNAMENT}/shuffle/${id}`);
+    }
+
     createNews(news: Object): Observable<Object> {
         return this.http.post<Object>(`${environment.API_URL_NEWS}`, news);
     }
@@ -84,5 +92,13 @@ export class AdminService {
 
     updateNews(news: INews): Observable<INews> {
         return this.http.put<INews>(`${environment.API_URL_NEWS}`, news);
+    }
+
+    downloadFile(name: string) {
+        return this.http.get(`${environment.API_URL}/file-storage/${name}`, {
+            responseType: 'blob',
+            reportProgress: true,
+            observe: 'events'
+        });
     }
 }   

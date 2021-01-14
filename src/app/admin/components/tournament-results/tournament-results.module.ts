@@ -6,6 +6,9 @@ import { TournamentResultsRoutingModule } from './tournament-results-routing.mod
 import { TournamentResultsComponent } from './tournament-results.component';
 import { GamesComponent } from './components/games/games.component';
 import { TournamentGamesResultsComponent } from './components/tournament-games-results/tournament-games-results.component';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @NgModule({
   imports: [
@@ -20,6 +23,6 @@ import { TournamentGamesResultsComponent } from './components/tournament-games-r
    GamesComponent,
    TournamentGamesResultsComponent
 ],
-  providers: []
+  providers: [FileTransfer, FileChooser, File]
 })
 export class TournamentResultsModule {}

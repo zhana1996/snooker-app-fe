@@ -12,11 +12,11 @@ export class UserService {
     constructor(private http: HttpClient) {}
 
     createNewUser(user: IUser): Observable<IUser>{
-        return this.http.post<IUser>(`${environment.API_URL}user/register`, user);
+        return this.http.post<IUser>(`${environment.API_URL_USER}/register`, user);
     }
 
     logIn(user: Object): Observable<Object>{
-        return this.http.post<Object>(`${environment.API_URL}auth/login`, user);
+        return this.http.post<Object>(`${environment.API_URL}/auth/login`, user);
     }
 
     getUser(){

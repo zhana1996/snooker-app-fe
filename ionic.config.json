@@ -1,5 +1,7 @@
 {
   "name": "snooker-app-fe",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

@@ -33,8 +33,12 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.tournament$ = this.facade.tournament$;
     this.players$ = this.facade.users$;
   }
-  ngOnInit() {
+
+  ionViewWillEnter(): void {
     this.facade.getEarliestTournament();
+  }
+
+  ngOnInit() {
     this.facade.getAllUsersByTitles();
 
     this.tournamentSubs = this.tournament$.subscribe((data: IEarliestTournament) => {

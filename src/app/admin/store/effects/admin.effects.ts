@@ -162,6 +162,34 @@ export class AdminEffects {
     )
   );
 
+  shuffleUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.shuffleUsers),
+      switchMap((action) =>
+        this.service.shuffleUsers(action.id).pipe(
+          map((shuffleUsers: Object) =>
+            fromActions.shuffleUsersSuccess({ shuffleUsers })
+          ),
+          catchError((error: Error) => [fromActions.shuffleUsersError(error)])
+        )
+      )
+    )
+  );
+
+  getTournamentByID$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.getTournamentById),
+      switchMap((action) =>
+        this.service.getTournamentById(action.id).pipe(
+          map((tournamentById: ITournament) =>
+            fromActions.getTournamentByIdSuccess({ tournamentById })
+          ),
+          catchError((error: Error) => [fromActions.getTournamentByIdError(error)])
+        )
+      )
+    )
+  );
+
   // News
   createNews$ = createEffect(() =>
   this.actions$.pipe(

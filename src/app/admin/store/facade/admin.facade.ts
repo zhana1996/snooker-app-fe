@@ -15,6 +15,8 @@ export class AdminFacade {
     tournaments$ = this.store.pipe(select(fromReducer.getTournaments));
     deleteTournament$ = this.store.pipe(select(fromReducer.deleteTournament));
     allNews$ = this.store.pipe(select(fromReducer.getAllNews));
+    shuffleUsers$ = this.store.pipe(select(fromReducer.getShuffleUsers));
+    tournamentById$ = this.store.pipe(select(fromReducer.getTournamentByID));
 
     constructor(private store: Store<fromReducer.AdminState>) {}
 
@@ -58,6 +60,14 @@ export class AdminFacade {
 
     deleteTournament(tournamentId: string): void {
         this.store.dispatch(fromAction.deleteTournament({tournamentId}));
+    }
+
+    shuffleUsers(id: string): void {
+        this.store.dispatch(fromAction.shuffleUsers({id}));
+    }
+
+    getTournamentByID(id: string): void {
+        this.store.dispatch(fromAction.getTournamentById({id}));
     }
 
     //News

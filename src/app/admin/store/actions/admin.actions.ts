@@ -42,20 +42,28 @@ export const getTournaments = createAction('[Admin Page] Get Tournaments', props
 export const getTournamentsSuccess = createAction('[Admin Page] Get Tournaments Success', props<{ tournaments: ITournament[] }>());
 export const getTournamentsError = createAction('[Admin Page] Get Tournaments Error', (error: Error) => error);
 
+export const shuffleUsers = createAction('[Admin Page] Shuffle Users', props<{id: string}>());
+export const shuffleUsersSuccess = createAction('[Admin Page] Shuffle Users Success', props<{ shuffleUsers: Object }>());
+export const shuffleUsersError = createAction('[Admin Page] Shuffle Users Error', (error: Error) => error);
+
+export const getTournamentById = createAction('[Admin Page] Get Tournament By ID', props<{id: string}>());
+export const getTournamentByIdSuccess = createAction('[Admin Page] Get Tournament By ID Success', props<{ tournamentById: ITournament }>());
+export const getTournamentByIdError = createAction('[Admin Page] Get Tournament By ID Error', (error: Error) => error);
+
 
 //News
-export const createNews = createAction('[Folder Page] Create News', props<{news: Object}>());
-export const createNewsSuccess = createAction('[Folder Page] Create News Success', props<{ createNews: Object }>());
-export const createNewsError = createAction('[Folder Page] Create News Error', (error: Error) => error);
+export const createNews = createAction('[Admin Page] Create News', props<{news: Object}>());
+export const createNewsSuccess = createAction('[Admin Page] Create News Success', props<{ createNews: Object }>());
+export const createNewsError = createAction('[Admin Page] Create News Error', (error: Error) => error);
 
-export const getAllNews = createAction('[Folder Page] Get All News');
-export const getAllNewsSuccess = createAction('[Folder Page] Get All News Success', props<{ news: INews[] }>());
-export const getAllNewsError = createAction('[Folder Page] Get All News Error', (error: Error) => error);
+export const getAllNews = createAction('[Admin Page] Get All News');
+export const getAllNewsSuccess = createAction('[Admin Page] Get All News Success', props<{ news: INews[] }>());
+export const getAllNewsError = createAction('[Admin Page] Get All News Error', (error: Error) => error);
 
-export const deleteNews = createAction('[Folder Page] Delete News', props<{newsId: string}>());
-export const deleteNewsSuccess = createAction('[Folder Page] Delete News Success', props<{ deleteNews: Object }>());
-export const deleteNewsError = createAction('[Folder Page] Delete News Error', (error: Error) => error);
+export const deleteNews = createAction('[Admin Page] Delete News', props<{newsId: string}>());
+export const deleteNewsSuccess = createAction('[Admin Page] Delete News Success', props<{ deleteNews: Object }>());
+export const deleteNewsError = createAction('[Admin Page] Delete News Error', (error: Error) => error);
 
-export const updateNews = createAction('[Folder Page] Update News', props<{news: INews}>());
-export const updateNewsSuccess = createAction('[Folder Page] Update News Success', props<{ updateNews: INews }>());
-export const updateNewsError = createAction('[Folder Page] Update News Error', (error: Error) => error);
+export const updateNews = createAction('[Admin Page] Update News', props<{news: INews}>());
+export const updateNewsSuccess = createAction('[Admin Page] Update News Success', props<{ updateNews: INews }>());
+export const updateNewsError = createAction('[Admin Page] Update News Error', (error: Error) => error);

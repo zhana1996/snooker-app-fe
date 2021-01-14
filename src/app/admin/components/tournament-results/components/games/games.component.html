@@ -2,19 +2,35 @@
     <ion-toolbar>
       <ion-title>Теглене на жребий</ion-title>
       <ion-buttons slot="end">
-        <ion-button color="primary" (click)="this.modalController.dismiss()">Close</ion-button>
+        <ion-button color="warning" (click)="this.modalController.dismiss()">Close</ion-button>
       </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-item>
-        <ion-grid>
+        <ion-grid style="margin-top: 10px; padding: 0px;">
             <ion-row>
-                <ion-label>Брой записани участници за турнира: 25</ion-label>
+                <ion-label>Брой записани участници за турнира: {{numberOfPlayers}}</ion-label>
             </ion-row>
-            <ion-row class="ion-justify-content-end">
-               <ion-button color='success'>Теглене на жребий</ion-button> 
+            <ion-row style="margin-top: 10px;" class="ion-justify-content-end">
+               <ion-button color='warning' (click)="shufflePlayers()">Теглене на жребий</ion-button> 
+            </ion-row>
+            <ion-row *ngIf="showResults">
+                <ion-list style="width: 100%; padding: 0px;">
+                    <ion-item class="list-style">
+                        <ion-label style="margin: 0px;">
+                          <ion-grid>
+                              <ion-row>
+                                  <ion-col class="col-style" size="1">1</ion-col>
+                                  <ion-col class="col-style" size="5">Zhana Mitova</ion-col>
+                                  <ion-col class="col-style" size="1">v</ion-col>
+                                  <ion-col class="col-style" size="5">Darko Andreev</ion-col>
+                              </ion-row>
+                          </ion-grid>
+                      </ion-label>
+                    </ion-item>
+                </ion-list>
             </ion-row>
         </ion-grid>
     </ion-item>

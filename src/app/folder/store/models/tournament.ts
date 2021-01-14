@@ -3,7 +3,9 @@ export interface ITournament {
     name: string,
     place: string,
     startDate: Date,
+    isEarliest?: boolean,
     season: string
+    fileName: string;
     tournamentParticipants?: Object[]
 }
 

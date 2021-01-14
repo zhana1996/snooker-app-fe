@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-button (click)="router.navigate(['./admin']);" color="danger"><ion-icon style="color: white;" name="arrow-back-outline"></ion-icon></ion-button>
+            <ion-button (click)="navigateToLogin()" color="danger"><ion-icon style="color: white;" name="arrow-back-outline"></ion-icon></ion-button>
           </ion-buttons>
       <ion-title>Турнири през сезона</ion-title>
     </ion-toolbar>
@@ -29,15 +29,16 @@
                           <ion-row>
                               <ion-col size="8">
                                 <h2>{{tournament.name}}</h2>
-                                <p>{{tournament.location}}</p>
+                                <p>{{tournament.place}}</p>
                               </ion-col>
                               <ion-col size="4" style="margin-top: 3.5px;">
-                                  {{tournament.date}}
+                                {{tournament.startDate.toString().substring(0, 10)}}
                               </ion-col>
                           </ion-row>
                           <ion-row class="ion-justify-content-end">
-                            <ion-button size="small" color="warning" (click)="openGamesResults(tournament)">Резултати</ion-button>
-                            <ion-button size="small" color="success" (click)="openGamesModal(tournament)" [disabled]="tournament.type !== 'next'">Жребий</ion-button>
+                            <ion-button size="small" color="warning" (click)="openFileChoose(tournament)">Качване</ion-button>
+                            <ion-button size="small" color="success" (click)="downLoadFile(tournament)">Преглед</ion-button>
+                            <ion-button size="small" color="danger" (click)="openGamesModal(tournament)" [disabled]="!tournament.isEarliest">Жребий</ion-button>
                         </ion-row>
                       </ion-grid>
                   </ion-label>
