@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { ITournament } from '../../store/models/tournament';
   templateUrl: 'tournaments.component.html',
   styleUrls: ['tournaments.component.scss']
 })
-export class TournamentsComponent implements OnInit {
+export class TournamentsComponent implements OnInit, OnDestroy {
     public form: FormGroup;
     public selectedMonth = -1;
     public season = '2020/2021';
@@ -92,5 +92,9 @@ export class TournamentsComponent implements OnInit {
         year = null;
         this.facade.getTournaments({season: this.season});
       }
+  }
+
+  ngOnDestroy(): void {
+    this.tournamentsSubs.unsubscribe;
   }
 }

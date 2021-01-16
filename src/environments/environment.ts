@@ -10,7 +10,6 @@ export const environment = {
   API_URL_TOURNAMENT_PARTICIPANT: 'http://localhost:3000/torunament-participant',
   API_URL_NEWS: 'http://localhost:3000/news'
 };
-//192.168.100.4
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -59,7 +59,7 @@ export class SeasonComponent implements OnInit, OnDestroy {
     });
   }
 
-  async presentAlertConfirm(tournament: ITournament) {
+  async deleteTournament(tournament: ITournament) {
     const alert = await this.alertController.create({
       header: 'Изтриване на турнир ' + tournament.name,
       message: 'Сигурни ли сте, че искате да изтриете турнира?',

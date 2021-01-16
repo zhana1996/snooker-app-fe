@@ -89,19 +89,15 @@ export class TournamentResultsComponent implements OnInit, OnDestroy {
   }
 
   async openFileChoose(tournament: ITournament): Promise<void> {
-    console.log(tournament);
     const file = await this.fileChooser.open();
     const fileTransfer: FileTransferObject  = this.transfer.create();
     const result = await fileTransfer.upload(file, 'http://192.168.0.101:3000/file-storage/upload');
-    console.log(result);
     if (result.responseCode === 201) {
       const file = JSON.parse(result.response);
       tournament = {
         ...tournament,
         fileName: file.filename
      };
-     console.log(file);
-     console.log(tournament);
      this.facade.editTournament(tournament);
     }
   }

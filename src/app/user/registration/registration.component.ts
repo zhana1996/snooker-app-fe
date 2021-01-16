@@ -20,21 +20,6 @@ export class RegistrationComponent{
 
   createNewUserProfile(): void {
     let user = this.form.value;
-    console.log({
-      username: user['userName'],
-      email: user['email'],
-      password: user['password'],
-      role: user['role'],
-      userDetails: {
-        name: user['name'],
-        gender: user['gender'],
-        age: +user['age'],
-        break: +user['break'],
-        club: user['club'],
-        startDate: new Date(user['startPeriod']),
-        image: ''
-      }
-    });
     this.facade.createNewUser({
       username: user['userName'],
       email: user['email'],
