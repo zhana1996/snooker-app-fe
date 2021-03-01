@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
+import { ITournamentsParams } from 'src/app/admin/store/models/tournamentsParams';
 import { INews } from '../models/news';
 import { IUser } from '../models/players';
-import { IEarliestTournament } from '../models/tournament';
+import { IEarliestTournament, ITournament } from '../models/tournament';
 import { ITraining } from '../models/trainings';
 
 export const getAllPlayers = createAction('[Folder Page] Get All Players', props<{gender?: string}>());
@@ -43,3 +44,7 @@ export const getAllNewsError = createAction('[Folder Page] Get All News Error', 
 export const getAllUsersByTitles = createAction('[Folder Page] Get All Users By Titles');
 export const getAllUsersByTitlesSucces = createAction('[Folder Page] Get All Users By Titles Success', props<{ users: IUser[] }>());
 export const getAllUsersByTitlesError = createAction('[Folder Page] Get All Users By Titles Error', (error: Error) => error);
+
+export const getTournaments = createAction('[Admin Page] Get Tournaments', props<{tournamentParams: ITournamentsParams}>());
+export const getTournamentsSuccess = createAction('[Admin Page] Get Tournaments Success', props<{ tournaments: ITournament[] }>());
+export const getTournamentsError = createAction('[Admin Page] Get Tournaments Error', (error: Error) => error);

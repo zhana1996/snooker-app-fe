@@ -43,7 +43,7 @@ const routes: Routes = [
         component: ScoresComponent,
         children: [
           {
-            path: 'month-tournaments/month/:month',
+            path: 'month-tournaments/month/:month/year/:year',
             component: MonthTournamentsComponent
           },
           {
@@ -51,7 +51,7 @@ const routes: Routes = [
             component: MonthsComponent
           },
           {
-            path: 'month-tournaments/month/:month/tournament-score/id/:id',
+            path: 'month-tournaments/month/:month/year/:year/tournament-score/id/:id',
             component: TournamenScoreComponent
           }
         ]

@@ -26,6 +26,19 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   public isPlayerParticipant = false;
 
+  private monthNames = ["Яну", "Фев", "Март", "Апр", "Май", "Юни", "Юли", "Авг", "Сеп", "Окт", "Ное", "Дек"];
+  public month: string;
+  public day: number;
+  public year: number;
+  public time: string;
+  public clubName: string;
+  public city: string;
+  public timeLeft: number = 60;
+  public interval;
+  public minutes: number;
+  public hours: number;
+  public days: number;
+
   constructor(public router: Router,
               private facade: FolderFacade,
               public route: ActivatedRoute,
@@ -45,7 +58,19 @@ export class HomePageComponent implements OnInit, OnDestroy {
       if(data) {
         this.tournament = data;
         if (this.tournament.tournament) {
+          const dayOfTournament = new Date(this.tournament.tournament.startDate);
           this.showEarliestTournament = true;
+          this.day = dayOfTournament.getUTCDate();
+          this.month = this.monthNames[dayOfTournament.getMonth()];
+          this.year = dayOfTournament.getFullYear();
+          this.time = (dayOfTournament.getUTCHours() + 2).toString() + ':' + (dayOfTournament.getMinutes()).toString();
+          this.clubName = this.tournament.tournament.place.split(',')[0];
+          this.city = this.tournament.tournament.place.split(',')[1];
+          this.minutes = this.tournament.minutes;
+          this.hours = this.tournament.hours;
+          this.days = this.tournament.days;
+          this.setInterval();
+          console.log(this.time);
           this.isPlayerParticipant = this.tournament.tournament.tournamentParticipants.length > 0;
         } else {
           this.showEarliestTournament = false;
@@ -123,6 +148,32 @@ export class HomePageComponent implements OnInit, OnDestroy {
     });
 
     await alert.present();
+  }
+
+  setInterval(): void {
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = 59;
+        if (this.minutes > 0) {
+          this.minutes--;
+        } else {
+          this.minutes = 59;
+          if (this.hours > 0) {
+            this.hours--;
+          } else {
+            this.hours = 23;
+            if (this.days > 0) {
+              this.days--;
+            } else {
+              this.days = this.hours = this.minutes = this.timeLeft =  0;
+              clearInterval(this.interval);
+            }
+          }
+        }
+      }
+    },1000)
   }
 
   ngOnDestroy(): void {

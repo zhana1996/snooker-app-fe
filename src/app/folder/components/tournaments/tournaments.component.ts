@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AdminFacade } from 'src/app/admin/store/facade/admin.facade';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
+import { FolderFacade } from '../../store/facade/folder.facade';
 import { ITournament } from '../../store/models/tournament';
 
 @Component({
@@ -24,18 +25,18 @@ export class TournamentsComponent implements OnInit, OnDestroy {
     private tournamentsSubs: Subscription;
 
     public months = [
-        {label: 'СЕП', value: 8},
-        {label: 'ОКТ', value: 9},
-        {label: 'НОЕ', value: 10},
-        {label: 'ДЕК', value: 11},
-        {label: 'ЯНУ', value: 0},
-        {label: 'ФЕВ', value: 1},
-        {label: 'МАР', value: 2},
-        {label: 'АПР', value: 3},
-        {label: 'МАЙ', value: 4}
+        {label: 'СЕП', value: 8, clicked: false},
+        {label: 'ОКТ', value: 9, clicked: false},
+        {label: 'НОЕ', value: 10, clicked: false},
+        {label: 'ДЕК', value: 11, clicked: false},
+        {label: 'ЯНУ', value: 0, clicked: false},
+        {label: 'ФЕВ', value: 1, clicked: false},
+        {label: 'МАР', value: 2, clicked: false},
+        {label: 'АПР', value: 3, clicked: false},
+        {label: 'МАЙ', value: 4, clicked: false}
     ];
   constructor(public router: Router,
-              private facade: AdminFacade,
+              private facade: FolderFacade,
               private toaster: ToasterService,
               private formBuilder: FormBuilder) {
     this.initForm();
@@ -78,7 +79,6 @@ export class TournamentsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-      const formObj = this.form.value;
       let monthSearch = this.selectedMonth > -1 ? this.selectedMonth : null;
       let year: number;
       if (this.selectedMonth > -1) {
@@ -87,11 +87,21 @@ export class TournamentsComponent implements OnInit, OnDestroy {
         } else {
           year = +this.fromYear;
         }
+        this.months.forEach(element => {
+          element.clicked = this.selectedMonth === element.value;
+        });
         this.facade.getTournaments({month: monthSearch, year});
       } else {
         year = null;
         this.facade.getTournaments({season: this.season});
       }
+  }
+
+  chooseMonth(month: number): void {
+    this.selectedMonth = month;
+    this.months.forEach(element => {
+      element.clicked = this.selectedMonth === element.value;
+    });
   }
 
   ngOnDestroy(): void {

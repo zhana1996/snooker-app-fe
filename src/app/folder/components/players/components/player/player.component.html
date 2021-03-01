@@ -1,11 +1,3 @@
-<ion-header translucent>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-button color="danger" (click)="this.modalController.dismiss()"><ion-icon style="color: white;" name="arrow-back-outline"></ion-icon></ion-button>
-          </ion-buttons>
-      <ion-title>Профил</ion-title>
-    </ion-toolbar>
-  </ion-header>
 <ion-content>
     <ion-grid>
         <ion-row>
@@ -49,13 +41,13 @@
             <ion-col>
                 <ion-row>
                     <ion-col>
-                        <ion-row class="ion-justify-content-center" style="color: #ce132d;"><ion-label><strong>Място</strong></ion-label></ion-row>
+                        <ion-row class="ion-justify-content-center"><ion-label><strong>Място</strong></ion-label></ion-row>
                         <ion-row class="ion-justify-content-center"><ion-button color="danger" class="button-scores" shape="round" fill="outline"><span style="color: white; font-size: 25px;">{{player.userDetails.rank ? player.userDetails.rank : ''}}</span></ion-button></ion-row>
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <ion-row class="ion-justify-content-center" style="color: #ce132d;"><ion-label><strong>Брейк</strong></ion-label></ion-row>
+                        <ion-row class="ion-justify-content-center"><ion-label><strong>Брейк</strong></ion-label></ion-row>
                         <ion-row class="ion-justify-content-center"><ion-button color="danger"  class="button-scores" shape="round" fill="outline"><span style="color: white; font-size: 25px;">{{player.userDetails.break ? player.userDetails.break : ''}}</span></ion-button></ion-row>
                     </ion-col>
                 </ion-row>

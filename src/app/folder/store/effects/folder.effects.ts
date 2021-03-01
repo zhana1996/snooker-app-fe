@@ -7,7 +7,7 @@ import { ToasterService } from "src/app/core/services/toaster/toaster.service";
 import { FolderService } from "../services/folder.services";
 import { IUser } from "../models/players";
 import { ITraining } from "../models/trainings";
-import { IEarliestTournament } from "../models/tournament";
+import { IEarliestTournament, ITournament } from "../models/tournament";
 import { INews } from "../models/news";
 
 @Injectable()
@@ -188,5 +188,19 @@ export class FolderEffects {
       )
     )
   )
+  );
+
+  getTournaments$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.getTournaments),
+      switchMap(({tournamentParams}) =>
+        this.service.getTournaments(tournamentParams).pipe(
+          map((tournaments: ITournament[]) =>
+            fromActions.getTournamentsSuccess({ tournaments })
+          ),
+          catchError((error: Error) => [fromActions.getTournamentsError(error)])
+        )
+      )
+    )
   );
 }

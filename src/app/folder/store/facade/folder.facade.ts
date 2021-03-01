@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { select, Store } from '@ngrx/store';
+import { ITournamentsParams } from "src/app/admin/store/models/tournamentsParams";
 import * as fromAction from '../actions/folder.actions';
 import { ITraining } from "../models/trainings";
 import * as fromReducer from '../reducers/folder.reducers';
@@ -13,6 +14,7 @@ export class FolderFacade {
     tournament$ = this.store.pipe(select(fromReducer.getEaliestTournament));
     allNews$ = this.store.pipe(select(fromReducer.getAllNews));
     users$ = this.store.pipe(select(fromReducer.getAllUsersByTitles));
+    tournaments$ = this.store.pipe(select(fromReducer.getTournaments));
 
     constructor(private store: Store<FolderState>) {}
 
@@ -58,5 +60,13 @@ export class FolderFacade {
 
     getAllUsersByTitles(): void {
         this.store.dispatch(fromAction.getAllUsersByTitles());
+    }
+
+    getTournaments(tournamentParams: ITournamentsParams): void {
+        this.store.dispatch(fromAction.getTournaments({tournamentParams}));
+    }
+
+    resetTournaments(): void {
+        this.store.dispatch(fromAction.getTournamentsSuccess(null));
     }
 }

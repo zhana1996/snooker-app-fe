@@ -9,7 +9,7 @@ import { ITournament } from 'src/app/folder/store/models/tournament';
   templateUrl: 'new-tournament.component.html',
   styleUrls: ['new-tournament.component.scss']
 })
-export class NewTournamentComponent implements OnInit{
+export class NewTournamentComponent implements OnInit {
   private _tournament: ITournament;
   @Input() season: string;
   @Input() edit: boolean;

@@ -2,7 +2,7 @@ import { Action, createReducer, on, createFeatureSelector, createSelector } from
 import * as fromActions from '../actions/folder.actions';
 import { INews } from '../models/news';
 import { IUser } from '../models/players';
-import { IEarliestTournament } from '../models/tournament';
+import { IEarliestTournament, ITournament } from '../models/tournament';
 import { ITraining } from '../models/trainings';
 
 export interface FolderState {
@@ -11,7 +11,8 @@ export interface FolderState {
     trainers: IUser[],
     tournament: IEarliestTournament,
     news: INews[],
-    users: IUser[]
+    users: IUser[],
+    tournaments: ITournament[]
 }
 
 export const initialState: FolderState = {
@@ -20,7 +21,8 @@ export const initialState: FolderState = {
     trainers: null,
     tournament: null,
     news: null,
-    users: null
+    users: null,
+    tournaments: null
 }
 
 const featureReducer = createReducer (
@@ -66,6 +68,13 @@ const featureReducer = createReducer (
     on (fromActions.getAllUsersByTitlesSucces, (state, {users} )=> ({
         ...state,
         users
+    })),
+    on (fromActions.getTournaments, state => ({
+        ...state
+    })),
+    on (fromActions.getTournamentsSuccess, (state, {tournaments} )=> ({
+        ...state,
+        tournaments
     }))
 );
 
@@ -80,6 +89,7 @@ export const getTrainers = createSelector(getFolderState,(state: FolderState) =>
 export const getEaliestTournament = createSelector(getFolderState,(state: FolderState) => state.tournament);
 export const getAllNews = createSelector(getFolderState,(state: FolderState) => state.news);
 export const getAllUsersByTitles = createSelector(getFolderState,(state: FolderState) => state.users);
+export const getTournaments = createSelector(getFolderState,(state: FolderState) => state.tournaments);
 
 export function folderReducer (state: FolderState | undefined, action: Action) {
     return featureReducer(state, action);

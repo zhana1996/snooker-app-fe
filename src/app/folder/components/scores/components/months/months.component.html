@@ -5,7 +5,7 @@
                 <ion-item>
                     <ion-label>Изберете сезон</ion-label>
                     <ion-datetime formControlName="fromYear" max="2020" (ionChange)="changeFromDate()" display-format="YYYY" picker-format="YYYY"></ion-datetime>
-                    <ion-datetime formControlName="toYear" display-format="YYYY" picker-format="YYYY" disabledFormControl></ion-datetime>
+                    <ion-datetime formControlName="toYear" display-format="YYYY" picker-format="YYYY" readonly></ion-datetime>
                 </ion-item>
             </form>
         </ion-row>
@@ -17,7 +17,7 @@
                     shape="round" 
                     color="danger" 
                     expand="block" 
-                    (click)="goToTournaments(month.value)">
+                    (click)="searchTournament(month.value)">
                     {{month.label}}
                 </ion-button>
                 </ion-row>

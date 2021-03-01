@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../models/players';
 import { ITraining } from '../models/trainings';
-import { IEarliestTournament } from '../models/tournament';
+import { IEarliestTournament, ITournament } from '../models/tournament';
 import { INews } from '../models/news';
+import { ITournamentsParams } from 'src/app/admin/store/models/tournamentsParams';
 
 @Injectable({
     providedIn: 'root'
@@ -59,5 +60,16 @@ export class FolderService {
 
     getAllNews(): Observable<INews[]> {
         return this.http.get<INews[]>(`${environment.API_URL_NEWS}`);
+    }
+
+    getTournaments(tournamentsParams: ITournamentsParams): Observable<ITournament[]> {
+        let httpParams = new HttpParams();
+        Object.keys(tournamentsParams).forEach((key) => {
+          if (tournamentsParams[key] === null || tournamentsParams[key] === undefined) {
+            return;
+          }
+          httpParams = httpParams.append(key, tournamentsParams[key]);
+        });
+        return this.http.get<ITournament[]>(`${environment.API_URL_TOURNAMENT}`, {params: httpParams});
     }
 }   

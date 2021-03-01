@@ -10,3 +10,13 @@
     font-size: 9px;
     margin: 20px 0 20px 0;
 }
+
+::ng-deep .sc-ion-modal-md-h {
+    height: 80%;
+    margin: auto;
+    padding: 0 7%;
+}
+
+::ng-deep .modal-wrapper.sc-ion-modal-md {
+    border: 3px solid #ce132d;
+}

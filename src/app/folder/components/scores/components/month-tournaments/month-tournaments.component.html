@@ -1,23 +1,12 @@
 <ion-content>
     <ion-grid>
-        <ion-row style="margin-bottom: 10px;">
+        <ion-row style="margin-bottom: 10px;" *ngFor="let tournament of tournaments">
             <ion-col size="4" style="background-color: #ce132d;">
-                22/11/2020
+                {{tournament.startDate.toString().substring(0, 10)}}
             </ion-col>
             <ion-col class="col-style">
-                <ion-row class="row-title"><a style="color: #ce132d;" (click)="goToTournamentScores('1')"><strong>Ранкинг Турнир No1</strong></a></ion-row>
-                <ion-row class="row-subtitle">Георги Величков</ion-row>
-                <ion-row class="row-text">The Academy, София</ion-row>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col size="4" style="background-color: #ce132d;">
-                17/09/2020
-            </ion-col>
-            <ion-col class="col-style">
-                <ion-row class="row-title"><a style="color: #ce132d;"><strong>Ранкинг Турнир No2</strong></a></ion-row>
-                <ion-row class="row-subtitle">Братислав Кръстев</ion-row>
-                <ion-row class="row-text">Emotion, София</ion-row>
+                <ion-row class="row-title"><a style="color: #ce132d;" (click)="downloadTournamentResults(tournament.id)"><strong>{{tournament.name}}</strong></a></ion-row>
+                <ion-row class="row-subtitle">{{tournament.place}}</ion-row>
             </ion-col>
         </ion-row>
     </ion-grid>

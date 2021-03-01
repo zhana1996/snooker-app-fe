@@ -29,25 +29,90 @@
 
     <ion-card class="home-page-third-card" *ngIf="showEarliestTournament">
         <ion-card-header style="text-align: center; font-size: 18px; color: white;">
-            Следващият турнир
+            <ion-grid>
+                <ion-row style="padding-right: 20px; padding-left: 20px;">
+                    <ion-col>
+                        <ion-row class="ion-justify-content-center" style="font-size: 30px;
+                        color: #ce132d; font-weight: bold;">
+                            <span *ngIf="this.days < 10">0</span>{{this.days}}
+                        </ion-row>
+                        <ion-row class="ion-justify-content-center" style="font-size: 13px;">Дена</ion-row>
+                    </ion-col>
+                    <ion-col>
+                        <ion-row class="ion-justify-content-center" style="font-size: 30px;
+                        color: #ce132d; font-weight: bold;">
+                            <span *ngIf="this.hours < 10">0</span>{{this.hours}}
+                        </ion-row>
+                        <ion-row class="ion-justify-content-center" style="font-size: 13px;">Часа</ion-row>
+                    </ion-col>
+                    <ion-col>
+                        <ion-row class="ion-justify-content-center" style="font-size: 30px;
+                        color: #ce132d; font-weight: bold;">
+                            <span *ngIf="this.minutes < 10">0</span>{{this.minutes}}
+                        </ion-row>
+                        <ion-row class="ion-justify-content-center" style="font-size: 13px;">Минути</ion-row>
+                    </ion-col>
+                    <ion-col>
+                        <ion-row class="ion-justify-content-center" style="font-size: 30px;
+                        color: #ce132d; font-weight: bold;">
+                            <span *ngIf="timeLeft < 10">0</span>{{timeLeft}}
+                        </ion-row>
+                        <ion-row class="ion-justify-content-center" style="font-size: 13px;">Сек</ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </ion-card-header>
-        <ion-card-subtitle style="text-align: center; font-size: 20px;" class="subtitle-second-card">
+        <ion-card-subtitle style="text-align: center; font-size: 30px;font-weight: bold; color: #ce132d;" class="subtitle-second-card">
             {{this.tournament.tournament.name}} 
+            <ion-label style="color: grey; font-size: 15px;">Сезон {{this.tournament.tournament.season}}</ion-label>
         </ion-card-subtitle>
         <ion-card-content>
             <ion-grid>
-                <ion-row class="ion-justify-content-center" style="font-size: 20px;"><ion-label class="subtitle">Сезон {{this.tournament.tournament.season}}</ion-label></ion-row>
-                <ion-row class="ion-justify-content-center">
-                    <ion-label>
-                        <span style="color: #ce132d;">D </span> 
-                        <strong><span style="font-size: 20px; color: white;">{{this.tournament.days}}</span></strong>
-                        <span style="color: #ce132d;"> H </span> 
-                        <strong><span style="font-size: 20px; color: white;">{{this.tournament.hours}}</span></strong>
-                        <span style="color: #ce132d;"> M </span>
-                        <strong><span style="font-size: 20px; color: white;">{{this.tournament.minutes}}</span></strong>
-                </ion-label>
-            </ion-row>
-                <ion-row class="ion-justify-content-center" style="color: white;"><ion-label>{{this.tournament.tournament.place}}</ion-label></ion-row>
+                <ion-row style="margin-left: 40px;">
+                    <ion-col size="4">
+                        <ion-row>
+                            <ion-col style="padding: 0; color: white;">
+                                Дата
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col style="font-size: 25px; color: #ce132d; font-weight: bold; padding: 0;">
+                                <span *ngIf="this.day < 10">0</span>{{this.day}}
+                            </ion-col>
+                            <ion-col style="padding-left: 0; padding-top: 0; font-size: 11px; color: white; font-weight: bold;">
+                                <ion-row>{{this.month}}</ion-row>
+                                <ion-row>{{this.year}}</ion-row>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+
+                    <ion-col size="4">
+                        <ion-row>
+                            <ion-col style="padding: 0; color: white;">
+                                Час
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col style="font-size: 25px; color: #ce132d; font-weight: bold; padding: 0;">
+                                {{this.time}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+
+                    <ion-col size="4" style="padding-right: 0;">
+                        <ion-row>
+                            <ion-col style="padding: 0; color: white;">
+                                Място
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col style="font-weight: bold; padding: 0;">
+                                <span style="color: #ce132d;">{{clubName}}</span>
+                                <span style="color: white; font-size: 11px;">{{city}}</span>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
             </ion-grid>
         </ion-card-content>
     </ion-card>
