@@ -12,7 +12,7 @@
             <ion-list style="margin: auto; width: 100%;">
                 <ion-item *ngFor="let player of players" class="list-style">
                     <ion-avatar slot="start" style="margin-bottom: 50px;">
-                        <img src = {{player.userDetails.image}}>
+                        <img [src]="env.API_URL + '/uploads/' + player?.userDetails.image">
                     </ion-avatar>
                     <ion-label style="margin: 0px;">
                       <ion-grid>

@@ -203,4 +203,18 @@ export class FolderEffects {
       )
     )
   );
+
+  getUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.getUserById),
+      switchMap(({userId}) =>
+        this.service.getUser(userId).pipe(
+          map((user: IUser) =>
+            fromActions.getUserByIdSuccess({ user })
+          ),
+          catchError((error: Error) => [fromActions.getUserByIdError(error)])
+        )
+      )
+    )
+  );
 }

@@ -7,6 +7,7 @@ import { IUser, IUserDetails } from "src/app/folder/store/models/players";
 import { ToasterService } from "src/app/core/services/toaster/toaster.service";
 import { ITournament } from "src/app/folder/store/models/tournament";
 import { INews } from "src/app/folder/store/models/news";
+import { ITournamentParticipants } from "../models/tournamentsParams";
 
 @Injectable()
 export class AdminEffects {
@@ -167,7 +168,7 @@ export class AdminEffects {
       ofType(fromActions.shuffleUsers),
       switchMap((action) =>
         this.service.shuffleUsers(action.id).pipe(
-          map((shuffleUsers: Object) =>
+          map((shuffleUsers: ITournamentParticipants) =>
             fromActions.shuffleUsersSuccess({ shuffleUsers })
           ),
           catchError((error: Error) => [fromActions.shuffleUsersError(error)])

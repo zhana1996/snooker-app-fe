@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:3000',
-  API_URL_USER: 'http://localhost:3000/user',
-  API_URL_TOURNAMENT: 'http://localhost:3000/tournament',
-  API_URL_TOURNAMENT_PARTICIPANT: 'http://localhost:3000/torunament-participant',
-  API_URL_NEWS: 'http://localhost:3000/news'
+  API_URL: 'http://192.168.100.7:3000',
+  API_URL_USER: 'http://192.168.100.7:3000/user',
+  API_URL_TOURNAMENT: 'http://192.168.100.7:3000/tournament',
+  API_URL_TOURNAMENT_PARTICIPANT: 'http://192.168.100.7:3000/torunament-participant',
+  API_URL_NEWS: 'http://192.168.100.7:3000/news'
 };
 
 /*

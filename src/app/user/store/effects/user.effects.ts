@@ -92,4 +92,18 @@ export class UserEffects {
     ),
     {dispatch: false}
   );
+
+  uploadImage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.uploadImage),
+      switchMap(({ imageBlob, imageName }) =>
+        this.service.uploadImage(imageBlob, imageName).pipe(
+          map((response) => fromActions.uploadImageSuccess({ response })),
+          catchError((error: Error) => [
+            fromActions.uploadImageFailed(error),
+          ])
+        )
+      )
+    )
+  );
 }

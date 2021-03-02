@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { INews } from 'src/app/folder/store/models/news';
 import { IUser, IUserDetails } from 'src/app/folder/store/models/players';
 import { ITournament } from 'src/app/folder/store/models/tournament';
-import { ITournamentsParams } from '../models/tournamentsParams';
+import { ITournamentParticipants, ITournamentsParams } from '../models/tournamentsParams';
 
 //Players
 export const getAllPlayers = createAction('[Admin Page] Get All Players', props<{gender?: string}>());
@@ -43,7 +43,7 @@ export const getTournamentsSuccess = createAction('[Admin Page] Get Tournaments 
 export const getTournamentsError = createAction('[Admin Page] Get Tournaments Error', (error: Error) => error);
 
 export const shuffleUsers = createAction('[Admin Page] Shuffle Users', props<{id: string}>());
-export const shuffleUsersSuccess = createAction('[Admin Page] Shuffle Users Success', props<{ shuffleUsers: Object }>());
+export const shuffleUsersSuccess = createAction('[Admin Page] Shuffle Users Success', props<{ shuffleUsers: ITournamentParticipants }>());
 export const shuffleUsersError = createAction('[Admin Page] Shuffle Users Error', (error: Error) => error);
 
 export const getTournamentById = createAction('[Admin Page] Get Tournament By ID', props<{id: string}>());

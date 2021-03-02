@@ -3,6 +3,7 @@ import { INews } from 'src/app/folder/store/models/news';
 import { IUser, IUserDetails } from 'src/app/folder/store/models/players';
 import { ITournament } from 'src/app/folder/store/models/tournament';
 import * as fromActions from '../actions/admin.actions';
+import { ITournamentParticipants } from '../models/tournamentsParams';
 
 export interface AdminState {
     players: IUser[];
@@ -11,7 +12,7 @@ export interface AdminState {
     tournaments: ITournament[],
     deleteTournament: ITournament,
     news: INews[],
-    shuffleUsers: Object;
+    shuffleUsers: ITournamentParticipants;
     tournamentById: ITournament;
 }
 

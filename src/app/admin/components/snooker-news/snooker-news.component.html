@@ -16,7 +16,7 @@
                             <ion-grid>
                                 <ion-row>
                                     <ion-col size="8">
-                                        <strong><span style="color: white">{{item.title}}</span></strong>
+                                        <a><strong><span style="color: white" (click)="goToNews(item.url)">{{item.title}}</span></strong></a>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>

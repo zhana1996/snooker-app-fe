@@ -85,7 +85,7 @@
                         </ion-col>
                     </ion-row>
                     <ion-row>
-                        <ion-button style="color: white;" color="warning" expand="block">Качи снимка</ion-button>
+                        <ion-button style="color: white;" color="warning" expand="block" (click)="openCameraOptions()">Качи снимка</ion-button>
                     </ion-row>
                     <ion-row>
                         <ion-button [disabled]="form.invalid" color="danger" (click)="createNewUserProfile()" expand="block">ЗАПАЗИ</ion-button>

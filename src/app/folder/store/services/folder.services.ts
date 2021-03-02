@@ -20,6 +20,12 @@ export class FolderService {
         return this.http.get<IUser[]>(`${environment.API_URL_USER}/all`, {params});
     }
 
+    getUser(userId: string): Observable<IUser>{
+        const params = new HttpParams()
+        .set('userId', userId);
+        return this.http.get<IUser>(`${environment.API_URL_USER}`, {params});
+    }
+
     createTraining(userId: string, training: ITraining): Observable<Object>{
         const params = new HttpParams()
         .set('userId', userId);

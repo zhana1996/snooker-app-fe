@@ -5,6 +5,9 @@
     </ion-buttons>
     <img style="margin: 0 35% 0 30%; width: 40%;" src="assets/images/logo.png">
     <ion-buttons slot="end">
+      <ion-button (click)="router.navigateByUrl('/folder/profile');">
+        <ion-icon color="light" name="person-circle-outline"></ion-icon>
+      </ion-button>
       <ion-button color="light" (click)="logOut()">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>

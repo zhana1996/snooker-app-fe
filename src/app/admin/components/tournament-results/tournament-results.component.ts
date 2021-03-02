@@ -10,10 +10,9 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { ITournament } from 'src/app/folder/store/models/tournament';
 import { AdminFacade } from '../../store/facade/admin.facade';
 import { Observable, Subscription } from 'rxjs';
-import { File } from '@ionic-native/file/ngx';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { AdminService } from '../../store/services/admin.services';
-import { HttpEventType } from '@angular/common/http';
-import { Filesystem, FilesystemDirectory } from '@capacitor/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'tournament-results',
@@ -33,8 +32,7 @@ export class TournamentResultsComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder,
               private transfer: FileTransfer,
-              private file: File,
-              private service: AdminService,
+              private previewAnyFile: PreviewAnyFile,
               private fileChooser: FileChooser,
               public router: Router,
               public toaster: ToasterService,
@@ -90,8 +88,9 @@ export class TournamentResultsComponent implements OnInit, OnDestroy {
 
   async openFileChoose(tournament: ITournament): Promise<void> {
     const file = await this.fileChooser.open();
-    const fileTransfer: FileTransferObject  = this.transfer.create();
-    const result = await fileTransfer.upload(file, 'http://192.168.0.101:3000/file-storage/upload');
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    const result = await fileTransfer.upload(file, `${environment.API_URL}/file-storage/upload`, { fileName: 'tournament.pdf', mimeType: 'application/pdf' });
+    console.log(result);
     if (result.responseCode === 201) {
       const file = JSON.parse(result.response);
       tournament = {
@@ -99,22 +98,13 @@ export class TournamentResultsComponent implements OnInit, OnDestroy {
         fileName: file.filename
      };
      this.facade.editTournament(tournament);
+     this.facade.getTournaments({ season: this.season });
     }
   }
 
   async downLoadFile(tournament: ITournament): Promise<void> {
-    const fileTransfer: FileTransferObject  = this.transfer.create();
-    this.service.downloadFile(tournament.fileName).subscribe(async event => {
-      if (event.type === HttpEventType.DownloadProgress) {
-      } else if (event.type === HttpEventType.Response) {
-        const base64 = await this.convertBlobToBase64(event.body) as string;
-        const result = await Filesystem.writeFile({
-          path: tournament.fileName,
-          data: base64,
-          directory: FilesystemDirectory.Documents
-        });
-      }
-    });
+    const result = await this.previewAnyFile.preview(`${environment.API_URL}/uploads/${tournament.fileName}`);
+    console.log(result);
   }
 
   private convertBlobToBase64 = (blob: Blob) =>

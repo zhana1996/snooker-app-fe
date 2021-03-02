@@ -9,6 +9,10 @@ export const getAllPlayers = createAction('[Folder Page] Get All Players', props
 export const getAllPlayersSuccess = createAction('[Folder Page] Get All Players Success', props<{ players: IUser[] }>());
 export const getAllPlayersError = createAction('[Folder Page] Get All Players Error', (error: Error) => error);
 
+export const getUserById = createAction('[Folder Page] Get User By Id', props<{userId: string}>());
+export const getUserByIdSuccess = createAction('[Folder Page] Get User By Id Success', props<{ user: IUser }>());
+export const getUserByIdError = createAction('[Folder Page] Get User By Id Error', (error: Error) => error);
+
 export const createTraining = createAction('[Folder Page] Create Training', props<{userId?: string, training: ITraining}>());
 export const CreateTrainingSuccess = createAction('[Folder Page] Create Training Success', props<{ training: Object }>());
 export const CreateTrainingError = createAction('[Folder Page] Create Training Error', (error: Error) => error);

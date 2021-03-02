@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { IUser } from 'src/app/folder/store/models/players';
+import { environment } from 'src/environments/environment';
 import { AdminFacade } from '../../store/facade/admin.facade';
 
 @Component({
@@ -12,6 +13,7 @@ import { AdminFacade } from '../../store/facade/admin.facade';
   styleUrls: ['coach-approve.component.scss']
 })
 export class CoachApproveComponent implements OnInit, OnDestroy {
+    readonly env = environment;
     public users: IUser[] = [];
     private users$: Observable<IUser[]>;
     private usersSubs: Subscription;

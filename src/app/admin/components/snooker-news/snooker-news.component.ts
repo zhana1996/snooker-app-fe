@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
@@ -18,7 +19,8 @@ export class SnookerNewsComponent implements OnInit, OnDestroy {
   private newsSubs: Subscription;
   public showResults = false;
     
-  constructor(public toaster: ToasterService,
+  constructor(@Inject(DOCUMENT) private document: Document,
+              public toaster: ToasterService,
               private facade: AdminFacade,
               public route: ActivatedRoute,
               public router: Router,
@@ -76,6 +78,10 @@ export class SnookerNewsComponent implements OnInit, OnDestroy {
       translucent: true,
     });
     return await popover.present();
+  }
+
+  goToNews(link: string): void {
+    this.document.location.href = link;
   }
 
   ngOnDestroy(): void {

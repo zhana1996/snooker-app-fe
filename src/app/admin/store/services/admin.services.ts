@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IUser, IUserDetails } from 'src/app/folder/store/models/players';
 import { ITournament } from 'src/app/folder/store/models/tournament';
-import { ITournamentsParams } from '../models/tournamentsParams';
+import { ITournamentParticipants, ITournamentsParams } from '../models/tournamentsParams';
 import { INews } from 'src/app/folder/store/models/news';
 
 @Injectable({
@@ -72,8 +72,8 @@ export class AdminService {
         return this.http.get<ITournament>(`${environment.API_URL_TOURNAMENT}/${id}`);
     }
 
-    shuffleUsers(id: string): Observable<Object> {
-        return this.http.get<Object>(`${environment.API_URL_TOURNAMENT}/shuffle/${id}`);
+    shuffleUsers(id: string): Observable<ITournamentParticipants> {
+        return this.http.get<ITournamentParticipants>(`${environment.API_URL_TOURNAMENT}/shuffle/${id}`);
     }
 
     createNews(news: Object): Observable<Object> {

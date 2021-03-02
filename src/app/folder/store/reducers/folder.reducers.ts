@@ -12,7 +12,8 @@ export interface FolderState {
     tournament: IEarliestTournament,
     news: INews[],
     users: IUser[],
-    tournaments: ITournament[]
+    tournaments: ITournament[],
+    user: IUser
 }
 
 export const initialState: FolderState = {
@@ -22,7 +23,8 @@ export const initialState: FolderState = {
     tournament: null,
     news: null,
     users: null,
-    tournaments: null
+    tournaments: null,
+    user: null
 }
 
 const featureReducer = createReducer (
@@ -75,6 +77,13 @@ const featureReducer = createReducer (
     on (fromActions.getTournamentsSuccess, (state, {tournaments} )=> ({
         ...state,
         tournaments
+    })),
+    on (fromActions.getUserById, state => ({
+        ...state
+    })),
+    on (fromActions.getUserByIdSuccess, (state, {user} )=> ({
+        ...state,
+        user
     }))
 );
 
@@ -90,6 +99,7 @@ export const getEaliestTournament = createSelector(getFolderState,(state: Folder
 export const getAllNews = createSelector(getFolderState,(state: FolderState) => state.news);
 export const getAllUsersByTitles = createSelector(getFolderState,(state: FolderState) => state.users);
 export const getTournaments = createSelector(getFolderState,(state: FolderState) => state.tournaments);
+export const getUser = createSelector(getFolderState,(state: FolderState) => state.user);
 
 export function folderReducer (state: FolderState | undefined, action: Action) {
     return featureReducer(state, action);

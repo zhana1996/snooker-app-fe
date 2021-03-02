@@ -1,0 +1,61 @@
+<ion-content>
+    <ion-card>
+        <ion-card-subtitle class="subtitle">
+            <ion-grid style="color: white;">
+                <ion-row>
+                    <ion-col>
+                        <ion-row>
+                            <img style="max-width: 335px;" [src]="env.API_URL + '/uploads/' + user?.userDetails.image">
+                        </ion-row>
+                        <ion-row>
+                            <h1 style="margin-left: 10px;">{{user?.userDetails.name}}</h1>
+                        </ion-row>
+                        <ion-row style="margin-top: 10px;">
+                            <ion-label><span style="color: #ce132d; margin-left: 10px; margin-right: 20px;">Клуб: </span>{{user?.userDetails.club}}</ion-label>
+                        </ion-row>
+                        <ion-row>
+                            <ion-label><span style="color: #ce132d; margin-left: 10px; margin-right: 20px;">Възраст: </span>{{user?.userDetails.age}}</ion-label>
+                        </ion-row>
+                        <ion-row>
+                            <ion-label><span style="color: #ce132d; margin-left: 10px; margin-right: 20px;">Започнал: </span>{{user?.userDetails.startDate.substring(0, 4)}}</ion-label>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col style="margin-top: 25px; margin-left: 10px;">
+                        <ion-row>
+                            <ion-col size="8" class="col-style-text">Спечелени титли</ion-col>
+                            <ion-col size="4" class="col-style-results">{{user?.userDetails.titles ? user?.userDetails.titles : ''}}</ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="8" class="col-style-text">Спечелени мача</ion-col>
+                            <ion-col size="4" class="col-style-results">{{user?.userDetails.wins ? user?.userDetails.wins : ''}}</ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="8" class="col-style-text">Загубени мача</ion-col>
+                            <ion-col size="4" class="col-style-results">{{user?.userDetails.losts ? user?.userDetails.losts : ''}}</ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="8" class="col-style-text">Изиграни мача</ion-col>
+                            <ion-col size="4" class="col-style-results">{{user?.userDetails.matches ? user?.userDetails.matches : ''}}</ion-col>
+                        </ion-row>
+                    </ion-col>
+                    <ion-col>
+                        <ion-row>
+                            <ion-col>
+                                <ion-row class="ion-justify-content-center"><ion-label><strong>Място</strong></ion-label></ion-row>
+                                <ion-row class="ion-justify-content-center"><ion-button color="danger" class="button-scores" shape="round" fill="outline"><span style="color: white; font-size: 25px;">{{user?.userDetails.rank ? user?.userDetails.rank : ''}}</span></ion-button></ion-row>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-row class="ion-justify-content-center"><ion-label><strong>Брейк</strong></ion-label></ion-row>
+                                <ion-row class="ion-justify-content-center"><ion-button color="danger"  class="button-scores" shape="round" fill="outline"><span style="color: white; font-size: 25px;">{{user?.userDetails.break ? user?.userDetails.break : ''}}</span></ion-button></ion-row>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-subtitle>
+    </ion-card>
+</ion-content>

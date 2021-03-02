@@ -23,4 +23,13 @@ export class UserService {
         const token = localStorage.getItem('accessToken')
         return jwt_decode.default(token);
     }
+
+    uploadImage(file: Blob, imageName: string): Observable<any> {
+        const form = new FormData();
+        form.append('file', file, imageName);
+        return this.http.post<any>(
+          `${environment.API_URL}/file-storage/upload`,
+          form
+        );
+      }
 }   

@@ -2,7 +2,7 @@ export interface IUser {
     email: string;
     id?: string;
     role: string;
-    userDetails: IUserDetails;
+    userDetails?: IUserDetails;
     isEnabled?: boolean;
     username: string;
     password?: string;

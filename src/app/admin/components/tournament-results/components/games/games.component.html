@@ -32,6 +32,21 @@
                     </ion-item>
                 </ion-list>
             </ion-row>
+            <ion-row *ngIf="onePlayer">
+                <ion-list style="width: 100%; padding: 0px;">
+                    <ion-item class="list-style">
+                        <ion-label style="margin: 0px;">
+                          <ion-grid>
+                              <ion-row>
+                                  <ion-col class="col-style" size="1">1</ion-col>
+                                  <ion-col class="col-style" size="5">{{onePlayer.username}}</ion-col>
+                                  <ion-col class="col-style" size="1">v</ion-col>
+                              </ion-row>
+                          </ion-grid>
+                      </ion-label>
+                    </ion-item>
+                </ion-list>
+            </ion-row>
         </ion-grid>
     </ion-item>
 </ion-content>

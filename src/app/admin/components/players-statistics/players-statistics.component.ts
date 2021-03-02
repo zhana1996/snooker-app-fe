@@ -4,6 +4,7 @@ import { AlertController, PopoverController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { IUser } from 'src/app/folder/store/models/players';
+import { environment } from 'src/environments/environment';
 import { AdminFacade } from '../../store/facade/admin.facade';
 import { EditPlayerComponent } from './components/edit-player/edit-player.component';
 
@@ -13,6 +14,7 @@ import { EditPlayerComponent } from './components/edit-player/edit-player.compon
   styleUrls: ['players-statistics.component.scss']
 })
 export class PlayersStatisticsComponent implements OnInit, OnDestroy {
+  readonly env = environment;
   private players$: Observable<IUser[]>;
   private playersSubs: Subscription;
   public players: IUser[] = [];

@@ -71,7 +71,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
           this.days = this.tournament.days;
           this.setInterval();
           console.log(this.time);
-          this.isPlayerParticipant = this.tournament.tournament.tournamentParticipants.length > 0;
+          this.isPlayerParticipant = this.tournament.isParticipating;
         } else {
           this.showEarliestTournament = false;
         }

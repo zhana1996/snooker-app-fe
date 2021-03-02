@@ -1,15 +1,17 @@
-import { Action, createReducer, on, createFeatureSelector } from '@ngrx/store';
+import { Action, createReducer, on, createFeatureSelector, createSelector } from '@ngrx/store';
 import { IUser } from 'src/app/folder/store/models/players';
 import * as fromActions from '../actions/user.actions';
 
 export interface UserState {
     user: IUser,
-    logIn: Object
+    logIn: Object,
+    response: any
 }
 
 export const initialState: UserState = {
     user: null,
-    logIn: null
+    logIn: null,
+    response: null
 }
 
 const featureReducer = createReducer (
@@ -27,6 +29,13 @@ const featureReducer = createReducer (
     on (fromActions.logInUserSuccess, (state, {logIn} )=> ({
         ...state,
         logIn
+    })),
+    on (fromActions.uploadImage, state => ({
+        ...state
+    })),
+    on (fromActions.uploadImageSuccess, (state, { response } )=> ({
+        ...state,
+        response
     }))
 );
 
@@ -35,6 +44,7 @@ export interface State {
 }
 
 export const getUserState = createFeatureSelector<UserState>('user');
+export const getImage = createSelector(getUserState, (state: UserState) => state.response);
 
 export function userReducer (state: UserState | undefined, action: Action) {
     return featureReducer(state, action);

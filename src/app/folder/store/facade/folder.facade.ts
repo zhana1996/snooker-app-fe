@@ -15,11 +15,16 @@ export class FolderFacade {
     allNews$ = this.store.pipe(select(fromReducer.getAllNews));
     users$ = this.store.pipe(select(fromReducer.getAllUsersByTitles));
     tournaments$ = this.store.pipe(select(fromReducer.getTournaments));
+    user$ = this.store.pipe(select(fromReducer.getUser));
 
     constructor(private store: Store<FolderState>) {}
 
     getAllPlayers(gender?: string): void {
         this.store.dispatch(fromAction.getAllPlayers({gender}));
+    }
+
+    getUserById(userId: string): void {
+        this.store.dispatch(fromAction.getUserById({userId}));
     }
 
     createTraining(userId: string, training: ITraining): void {

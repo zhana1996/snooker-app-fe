@@ -9,6 +9,7 @@ import { TournamentGamesResultsComponent } from './components/tournament-games-r
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 
 @NgModule({
   imports: [
@@ -23,6 +24,6 @@ import { File } from '@ionic-native/file/ngx';
    GamesComponent,
    TournamentGamesResultsComponent
 ],
-  providers: [FileTransfer, FileChooser, File]
+  providers: [FileTransfer, FileChooser, File, PreviewAnyFile]
 })
 export class TournamentResultsModule {}

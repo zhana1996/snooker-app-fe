@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { StatisticComponent } from './components/home-page/components/statistics/statistics.component';
 import { WorkoutComponent } from './components/home-page/components/workout/workout.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { MyProfileComponent } from './components/my-profile/myProfile.component';
 import { NewsComponent } from './components/news/news.component';
 import { PlayersComponent } from './components/players/players.component';
 import { MonthTournamentsComponent } from './components/scores/components/month-tournaments/month-tournaments.component';
@@ -59,6 +60,10 @@ const routes: Routes = [
       {
         path: 'players',
         component: PlayersComponent
+      },
+      {
+        path: 'profile',
+        component: MyProfileComponent
       },
       {
         path: '',

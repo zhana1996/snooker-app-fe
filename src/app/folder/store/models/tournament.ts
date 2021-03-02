@@ -13,5 +13,6 @@ export interface IEarliestTournament {
     days: number,
     hours: number,
     minutes: number,
+    isParticipating: boolean,
     tournament: ITournament
 }

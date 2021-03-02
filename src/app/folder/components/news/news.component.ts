@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
@@ -17,7 +18,8 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   public showResults = false;
 
-  constructor(public router: Router,
+  constructor(@Inject(DOCUMENT) private document: Document,
+              public router: Router,
               public toaster: ToasterService,
               private facade: FolderFacade) {
     this.news$ = this.facade.allNews$;
@@ -36,6 +38,10 @@ export class NewsComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  goToNews(link: string): void {
+    this.document.location.href = link;
   }
 
   ngOnDestroy(): void {
