@@ -8,10 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['months.component.scss']
 })
 export class MonthsComponent {
-  public form: FormGroup;
-  public selectedMonth = -1;
-  public season = '2020/2021';
-  public months = [
+  form: FormGroup;
+  selectedMonth = -1;
+  season = '2020/2021';
+  months = [
     {label: 'СЕПTЕМВРИ', value: 8},
     {label: 'ОКТОМВРИ', value: 9},
     {label: 'НОЕМВРИ', value: 10},

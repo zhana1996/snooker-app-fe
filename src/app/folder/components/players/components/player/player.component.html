@@ -3,7 +3,7 @@
         <ion-row>
             <ion-col>
                 <ion-row>
-                    <img style="max-width: 335px;" src="{{player.userDetails.image}}">
+                    <img style="max-width: 335px;" [src]="env.API_URL + '/uploads/' + player?.userDetails.image">
                 </ion-row>
                 <ion-row>
                     <h1 style="margin-left: 10px;">{{player.userDetails.name}}</h1>

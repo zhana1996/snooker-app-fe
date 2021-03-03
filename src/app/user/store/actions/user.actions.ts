@@ -9,15 +9,6 @@ export const logInUser = createAction('[LogIn Page] LogIn', props<{ user: Object
 export const logInUserSuccess = createAction('[LogIn Page] LogIn Success', props<{ logIn: Object }>());
 export const logInUserError = createAction('[LogIn Page] LogIn Error', (error: Error) => error);
 
-export const uploadImage = createAction(
-    '[Register Page] Upload image',
-    props<{ imageBlob: Blob; imageName: string }>()
-  );
-  export const uploadImageSuccess = createAction(
-    '[Register Page] Upload image success',
-    props<{ response: any }>()
-  );
-  export const uploadImageFailed = createAction(
-    '[Register Page] Upload image failed',
-    (error: Error) => error
-  );
+export const uploadImage = createAction('[Register Page] Upload image',props<{ imageBlob: Blob; imageName: string }>());
+export const uploadImageSuccess = createAction('[Register Page] Upload image success',props<{ response: any }>());
+export const uploadImageFailed = createAction('[Register Page] Upload image failed',(error: Error) => error);

@@ -4,6 +4,8 @@ import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { FolderFacade } from 'src/app/folder/store/facade/folder.facade';
 import { ITournament } from 'src/app/folder/store/models/tournament';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'month-tournaments',
@@ -11,14 +13,14 @@ import { ITournament } from 'src/app/folder/store/models/tournament';
   styleUrls: ['month-tournaments.component.scss']
 })
 export class MonthTournamentsComponent implements OnInit, OnDestroy {
-  public tournaments: ITournament[] = [];
+  month: number;
+  year: number;
+  tournaments: ITournament[] = [];
   private tournaments$: Observable<ITournament[]>;
   private tournamentsSubs: Subscription;
 
-  private month: number;
-  private year: number;
-
   constructor(public router: Router,
+              private previewAnyFile: PreviewAnyFile,
               private facade: FolderFacade,
               private toaster: ToasterService,
               public route: ActivatedRoute) {
@@ -27,7 +29,7 @@ export class MonthTournamentsComponent implements OnInit, OnDestroy {
     this.tournaments$ = this.facade.tournaments$;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.facade.getTournaments({month: this.month, year: this.year});
 
     this.tournamentsSubs = this.tournaments$.subscribe((data: ITournament[]) => {
@@ -43,15 +45,16 @@ export class MonthTournamentsComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngOnDestroy(): void {
+    this.tournamentsSubs.unsubscribe();
+  }
+
   goToTournamentScores(id: string): void {
     this.router.navigate(['./tournament-score/id/' + id ], { relativeTo: this.route });
   }
 
-  downloadTournamentResults(tournamentId: string): void {
-    // download file
-  }
-
-  ngOnDestroy(): void {
-    this.tournamentsSubs.unsubscribe();
+  async downLoadFile(tournament: ITournament): Promise<void> {
+    const result = await this.previewAnyFile.preview(`${environment.API_URL}/uploads/${tournament.fileName}`);
+    console.log(result);
   }
 }

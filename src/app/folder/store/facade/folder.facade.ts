@@ -16,6 +16,7 @@ export class FolderFacade {
     users$ = this.store.pipe(select(fromReducer.getAllUsersByTitles));
     tournaments$ = this.store.pipe(select(fromReducer.getTournaments));
     user$ = this.store.pipe(select(fromReducer.getUser));
+    tokenResponse$ = this.store.pipe(select(fromReducer.getTokenResponse));
 
     constructor(private store: Store<FolderState>) {}
 
@@ -73,5 +74,9 @@ export class FolderFacade {
 
     resetTournaments(): void {
         this.store.dispatch(fromAction.getTournamentsSuccess(null));
+    }
+
+    getTokenResponse(userId: string, notificationToken: string): void {
+        this.store.dispatch(fromAction.updateToken({userId, notificationToken}));
     }
 }

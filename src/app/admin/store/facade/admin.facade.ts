@@ -17,6 +17,7 @@ export class AdminFacade {
     allNews$ = this.store.pipe(select(fromReducer.getAllNews));
     shuffleUsers$ = this.store.pipe(select(fromReducer.getShuffleUsers));
     tournamentById$ = this.store.pipe(select(fromReducer.getTournamentByID));
+    response$ = this.store.pipe(select(fromReducer.uploadImage));
 
     constructor(private store: Store<fromReducer.AdminState>) {}
 
@@ -66,6 +67,10 @@ export class AdminFacade {
         this.store.dispatch(fromAction.shuffleUsers({id}));
     }
 
+    resetShuffleUsers(): void {
+        this.store.dispatch(fromAction.shuffleUsersSuccess(null));
+    }
+
     getTournamentByID(id: string): void {
         this.store.dispatch(fromAction.getTournamentById({id}));
     }
@@ -89,5 +94,11 @@ export class AdminFacade {
 
     resetNews(): void {
         this.store.dispatch(fromAction.getAllNewsSuccess(null));
+    }
+
+    uploadImage(imageBlob: Blob, imageName: string): void {
+        this.store.dispatch(
+          fromAction.uploadImage({ imageBlob, imageName })
+        );
     }
 }

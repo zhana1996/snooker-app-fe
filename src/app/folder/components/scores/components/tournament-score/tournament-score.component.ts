@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,14 +6,14 @@ import { Router } from '@angular/router';
   templateUrl: 'tournament-score.component.html',
   styleUrls: ['tournament-score.component.scss']
 })
-export class TournamenScoreComponent implements OnInit {
-  public firstStep = true;
-  public secondStep = false;
-  public thirdStep = false;
-  public nextStep = true;
-  public prevStep = false;
+export class TournamenScoreComponent {
+  firstStep = true;
+  secondStep = false;
+  thirdStep = false;
+  nextStep = true;
+  prevStep = false;
+
   constructor(public router: Router) {}
-  ngOnInit() {}
 
   goToNextStep(): void {
     if (this.firstStep) {

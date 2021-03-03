@@ -14,6 +14,7 @@ export interface AdminState {
     news: INews[],
     shuffleUsers: ITournamentParticipants;
     tournamentById: ITournament;
+    response: any;
 }
 
 export const initialState: AdminState = {
@@ -24,7 +25,8 @@ export const initialState: AdminState = {
     deleteTournament: null,
     news: null,
     shuffleUsers: null,
-    tournamentById: null
+    tournamentById: null,
+    response: null
 }
 
 const featureReducer = createReducer (
@@ -84,6 +86,13 @@ const featureReducer = createReducer (
     on (fromActions.getTournamentByIdSuccess, (state, {tournamentById} )=> ({
         ...state,
         tournamentById
+    })),
+    on (fromActions.uploadImage, state => ({
+        ...state
+    })),
+    on (fromActions.uploadImageSuccess, (state, {response} )=> ({
+        ...state,
+        response
     }))
 );
 
@@ -100,6 +109,7 @@ export const deleteTournament = createSelector(getAdminState,(state: AdminState)
 export const getAllNews = createSelector(getAdminState,(state: AdminState) => state.news);
 export const getShuffleUsers = createSelector(getAdminState,(state: AdminState) => state.shuffleUsers);
 export const getTournamentByID = createSelector(getAdminState,(state: AdminState) => state.tournamentById);
+export const uploadImage = createSelector(getAdminState,(state: AdminState) => state.response);
 
 export function adminReducer (state: AdminState | undefined, action: Action) {
     return featureReducer(state, action);

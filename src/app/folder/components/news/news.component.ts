@@ -3,6 +3,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
+import { environment } from 'src/environments/environment';
 import { FolderFacade } from '../../store/facade/folder.facade';
 import { INews } from '../../store/models/news';
 
@@ -12,11 +13,11 @@ import { INews } from '../../store/models/news';
   styleUrls: ['news.component.scss']
 })
 export class NewsComponent implements OnInit, OnDestroy {
-  public news: INews[] = [];
+  readonly env = environment;
+  news: INews[] = [];
+  showResults = false;
   private news$: Observable<INews[]>;
   private newsSubs: Subscription;
-
-  public showResults = false;
 
   constructor(@Inject(DOCUMENT) private document: Document,
               public router: Router,
@@ -24,7 +25,8 @@ export class NewsComponent implements OnInit, OnDestroy {
               private facade: FolderFacade) {
     this.news$ = this.facade.allNews$;
   }
-  ngOnInit() {
+
+  ngOnInit(): void {
     this.facade.getAllNews();
 
     this.newsSubs = this.news$.subscribe((data: INews[]) => {
@@ -40,11 +42,11 @@ export class NewsComponent implements OnInit, OnDestroy {
     });
   }
 
-  goToNews(link: string): void {
-    this.document.location.href = link;
-  }
-
   ngOnDestroy(): void {
     this.newsSubs.unsubscribe();
+  }
+
+  goToNews(link: string): void {
+    this.document.location.href = link;
   }
 }

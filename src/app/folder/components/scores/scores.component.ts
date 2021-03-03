@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +6,6 @@ import { Router } from '@angular/router';
   templateUrl: 'scores.component.html',
   styleUrls: ['scores.component.scss']
 })
-export class ScoresComponent implements OnInit {
+export class ScoresComponent {
   constructor(public router: Router) {}
-  ngOnInit() {}
 }

@@ -14,8 +14,8 @@ const { Camera } = Plugins;
   styleUrls: ['registration.component.scss']
 })
 export class RegistrationComponent implements OnDestroy {
-  public form: FormGroup;
-  public inventoryImageUrl: string;
+  form: FormGroup;
+  userImageUrl: string;
 
   private image$: Observable<any>;
   private imageSubs: Subscription;
@@ -111,7 +111,7 @@ export class RegistrationComponent implements OnDestroy {
       `image/${capturedPhoto.format}`
     );
 
-    this.inventoryImageUrl = `data:image/jpeg;base64, ${capturedPhoto.base64String}`;
+    this.userImageUrl = `data:image/jpeg;base64, ${capturedPhoto.base64String}`;
     const imageName = `${new Date().getTime()}_avatar_image.${
       capturedPhoto.format
     }`;

@@ -7,6 +7,9 @@ import { ScoresRoutingModule } from './scores-routing.module';
 import { MonthTournamentsComponent } from './components/month-tournaments/month-tournaments.component';
 import { MonthsComponent } from './components/months/months.component';
 import { TournamenScoreComponent } from './components/tournament-score/tournament-score.component';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 
 @NgModule({
   imports: [
@@ -22,6 +25,6 @@ import { TournamenScoreComponent } from './components/tournament-score/tournamen
       MonthsComponent,
       TournamenScoreComponent
     ],
-  providers: []
+  providers: [FileTransfer, FileChooser, PreviewAnyFile]
 })
 export class ScoresModule {}

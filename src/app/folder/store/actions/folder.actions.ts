@@ -52,3 +52,7 @@ export const getAllUsersByTitlesError = createAction('[Folder Page] Get All User
 export const getTournaments = createAction('[Admin Page] Get Tournaments', props<{tournamentParams: ITournamentsParams}>());
 export const getTournamentsSuccess = createAction('[Admin Page] Get Tournaments Success', props<{ tournaments: ITournament[] }>());
 export const getTournamentsError = createAction('[Admin Page] Get Tournaments Error', (error: Error) => error);
+
+export const updateToken = createAction('[Folder Page] Update Token', props<{userId: string, notificationToken: string}>());
+export const updateTokenSuccess = createAction('[Folder Page] Update Token Success', props<{ tokenResponse: any }>());
+export const updateTokenError = createAction('[Folder Page] Update Token Error', (error: Error) => error);

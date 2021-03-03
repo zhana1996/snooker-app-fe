@@ -5,6 +5,7 @@ import { AlertController, PopoverController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { INews } from 'src/app/folder/store/models/news';
+import { environment } from 'src/environments/environment';
 import { AdminFacade } from '../../store/facade/admin.facade';
 import { AddNewsComponent } from './components/add-news.component';
 
@@ -14,10 +15,11 @@ import { AddNewsComponent } from './components/add-news.component';
   styleUrls: ['snooker-news.component.scss']
 })
 export class SnookerNewsComponent implements OnInit, OnDestroy {
-  public news: INews[] = [];
+  readonly env = environment;
+  news: INews[] = [];
+  showResults = false;
   private news$: Observable<INews[]>;
   private newsSubs: Subscription;
-  public showResults = false;
     
   constructor(@Inject(DOCUMENT) private document: Document,
               public toaster: ToasterService,

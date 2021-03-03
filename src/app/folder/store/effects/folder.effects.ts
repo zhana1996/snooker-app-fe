@@ -217,4 +217,18 @@ export class FolderEffects {
       )
     )
   );
+
+  updateToken$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.updateToken),
+      switchMap(({userId, notificationToken}) =>
+        this.service.updateToken(userId, notificationToken).pipe(
+          map((tokenResponse: any) =>
+            fromActions.updateTokenSuccess({ tokenResponse })
+          ),
+          catchError((error: Error) => [fromActions.updateTokenError(error)])
+        )
+      )
+    )
+  );
 }

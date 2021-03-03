@@ -52,13 +52,6 @@
                         </ion-row>
                         <ion-row class="ion-justify-content-center" style="font-size: 13px;">Минути</ion-row>
                     </ion-col>
-                    <ion-col>
-                        <ion-row class="ion-justify-content-center" style="font-size: 30px;
-                        color: #ce132d; font-weight: bold;">
-                            <span *ngIf="timeLeft < 10">0</span>{{timeLeft}}
-                        </ion-row>
-                        <ion-row class="ion-justify-content-center" style="font-size: 13px;">Сек</ion-row>
-                    </ion-col>
                 </ion-row>
             </ion-grid>
         </ion-card-header>
@@ -149,7 +142,7 @@
             <ion-grid>
                 <ion-row style="margin-bottom: 10px;" *ngFor="let player of players; let i = index" [ngStyle]="{'background-image': style[i]}">
                     <ion-col size = "5">
-                        <img style="max-width: 50px;" src="{{player.userDetails.image}}">
+                        <img style="max-width: 50px;" [src]="env.API_URL + '/uploads/' + player?.userDetails.image">
                     </ion-col>
                     <ion-col size="5">
                         <ion-label style="color: white;">{{player.userDetails.name}}</ion-label>

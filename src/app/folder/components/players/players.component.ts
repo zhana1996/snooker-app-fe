@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
+import { environment } from 'src/environments/environment';
 import { FolderFacade } from '../../store/facade/folder.facade';
 import { IUser } from '../../store/models/players';
 import { PlayerComponent } from './components/player/player.component';
@@ -13,9 +14,14 @@ import { PlayerComponent } from './components/player/player.component';
   styleUrls: ['players.component.scss']
 })
 export class PlayersComponent implements OnInit, OnDestroy {
+  readonly env = environment;
+  players: IUser[] = [];
+  allPlayers = true;
+  femalePlayers = false;
+  malePlayers = false;
   private player$: Observable<IUser[]>;
   private playersSubs: Subscription;
-  public players: IUser[] = [];
+
 
   constructor(public router: Router,
               public facade: FolderFacade,
@@ -50,6 +56,9 @@ export class PlayersComponent implements OnInit, OnDestroy {
   }
 
   getAllPlayersByGender(gender: string): void {
+    this.allPlayers = gender === '';
+    this.femalePlayers = gender === 'FEMALE';
+    this.malePlayers = gender === 'MALE';
     this.facade.getAllPlayers(gender);
   }
 

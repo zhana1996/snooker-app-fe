@@ -14,15 +14,13 @@ import { AdminFacade } from '../../store/facade/admin.facade';
 })
 export class CoachApproveComponent implements OnInit, OnDestroy {
     readonly env = environment;
-    public users: IUser[] = [];
+    users: IUser[] = [];
+    selectedRole = 'TRAINER';
+    showResults = false;
+    trainerButton = true;
+
     private users$: Observable<IUser[]>;
     private usersSubs: Subscription;
-
-    private approveUser$: Observable<IUser>;
-    private approveUserSubs: Subscription;
-
-    public selectedRole: string;
-    public showResults = false;
   
     constructor(public toaster: ToasterService,
                 public router: Router,
@@ -32,15 +30,18 @@ export class CoachApproveComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+      this.facade.getDisabledUsers(this.selectedRole);
+
       this.usersSubs = this.users$.subscribe((data: IUser[]) => {
         if(data) {
           if(data.length > 0) {
             this.users = data;
             this.showResults = true;
           } else {
+            let user = this.selectedRole === 'TRAINER' ? 'треньори' : 'играчи';
             this.users = [];
             this.showResults = false;
-            this.toaster.showToaster('Няма чакащи за одобрение потребители', 'success');
+            this.toaster.showToaster(`Няма чакащи за одобрение ${user}`, 'success');
           }
         }
       });
@@ -98,6 +99,7 @@ export class CoachApproveComponent implements OnInit, OnDestroy {
 
       getAllPlayersByRole(role: string): void {
         this.selectedRole = role;
+        this.trainerButton = this.selectedRole === 'TRAINER';
         this.facade.getDisabledUsers(role);
       }
 

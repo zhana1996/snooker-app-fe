@@ -15,7 +15,7 @@
                         <ion-item>
                             <ion-label>Изберете сезон</ion-label>
                             <ion-datetime formControlName="fromDate" max="2020" (ionChange)="changeFromDate()" display-format="YYYY" picker-format="YYYY"></ion-datetime>
-                            <ion-datetime formControlName="toDate" display-format="YYYY" picker-format="YYYY" disabledFormControl></ion-datetime>
+                            <ion-datetime formControlName="toDate" display-format="YYYY" picker-format="YYYY" [disabled]="true"></ion-datetime>
                         </ion-item>
                     </ion-row>
                 </form>
@@ -38,7 +38,7 @@
                           <ion-row class="ion-justify-content-end">
                             <ion-button size="small" color="warning" (click)="openFileChoose(tournament)">Качване</ion-button>
                             <ion-button size="small" color="success" (click)="downLoadFile(tournament)">Преглед</ion-button>
-                            <ion-button size="small" color="danger" (click)="openGamesModal(tournament)" [disabled]="!tournament.isEarliest">Жребий</ion-button>
+                            <ion-button size="small" color="danger" (click)="openGamesModal(tournament)" [disabled]="!tournament.isEarliest || season !== '2020/2021'">Жребий</ion-button>
                         </ion-row>
                       </ion-grid>
                   </ion-label>

@@ -7,5 +7,10 @@ export interface ITraining {
     startDate: Date,
     endDate: Date,
     user?: IUser,
-    participant?: Object,
+    participant?: IParticipant,
+}
+
+export interface IParticipant {
+    id: string,
+    player: IUser
 }

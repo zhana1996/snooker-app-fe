@@ -1,8 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { element } from 'protractor';
 import { Observable, Subscription } from 'rxjs';
 import { AdminFacade } from 'src/app/admin/store/facade/admin.facade';
-import { ITournamentParticipants } from 'src/app/admin/store/models/tournamentsParams';
+import { IPlayers, ITournamentParticipants } from 'src/app/admin/store/models/tournamentsParams';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { IUser } from 'src/app/folder/store/models/players';
 import { ITournament } from 'src/app/folder/store/models/tournament';
@@ -14,17 +15,15 @@ import { ITournament } from 'src/app/folder/store/models/tournament';
 })
 export class GamesComponent implements OnInit, OnDestroy {
   @Input() tournament: ITournament;
+  numberOfPlayers = 0;
+  allPlayers: IPlayers[] = [];
+  onePlayer: IUser;
+  showResults = false;
 
-  public players: IUser[] = [];
-  public onePlayer: IUser;
   private players$: Observable<ITournamentParticipants>;
   private playersSubs: Subscription;
-
-  public numberOfPlayers = 0;
   private tournament$: Observable<Object>;
   private tournamentSubs: Subscription;
-
-  public showResults = false;
 
   constructor(public modalController: ModalController,
               private toaster: ToasterService,
@@ -39,10 +38,10 @@ export class GamesComponent implements OnInit, OnDestroy {
     this.playersSubs = this.players$.subscribe((data: ITournamentParticipants) => {
       if (data) {
         if (data.players.length > 0) {
-          this.players = data.players;
+          this.allPlayers = data.players;
           this.showResults = true;
         } else {
-          this.players = [];
+          this.allPlayers = [];
           this.showResults = false;
           if (!data.numberOnePlayer) {
             this.toaster.showToaster('Няма записани играчи до този момент', 'danger');
@@ -63,7 +62,16 @@ export class GamesComponent implements OnInit, OnDestroy {
     this.facade.shuffleUsers(this.tournament.id);
   }
 
+  closeModal(): void {
+    this.allPlayers = [];
+    this.showResults = false;
+    this.onePlayer = null;
+    this.facade.resetShuffleUsers();
+    this.modalController.dismiss();
+  }
+
   ngOnDestroy(): void {
     this.playersSubs.unsubscribe();
+    this.tournamentSubs.unsubscribe();
   }
 }

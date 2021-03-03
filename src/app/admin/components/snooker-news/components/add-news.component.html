@@ -13,14 +13,9 @@
                     <ion-input type="text" formControlName="url"></ion-input>
                 </ion-item>
             </ion-row>
-            <ion-row>
-                <ion-item>
-                    <ion-label position="stacked">Снимка<span style="color: #ce132d;">*</span></ion-label>
-                    <ion-input type="text" formControlName="image"></ion-input>
-                </ion-item>
-            </ion-row>
             <ion-row class="ion-justify-content-end">
-                <ion-button color="danger" (click)="createNews()" [disabled]="form.invalid">Запази</ion-button>
+                <ion-button size="small" style="color: white;" color="warning" expand="block" (click)="openCameraOptions()">Качи снимка</ion-button>
+                <ion-button size="small" color="danger" expand="block" (click)="createNews()" [disabled]="form.invalid">Запази</ion-button>
             </ion-row>
         </ion-grid>
     </form>

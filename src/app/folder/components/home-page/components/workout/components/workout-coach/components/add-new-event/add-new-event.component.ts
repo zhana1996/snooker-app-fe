@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class AddNewEventComponent {
   @Output() eventObject: EventEmitter<any> = new EventEmitter();
   @Input() event;
-  public minDate = new Date().toISOString();
+  minDate = new Date().toISOString();
 
   constructor() {}
 

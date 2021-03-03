@@ -8,5 +8,9 @@ export interface ITournamentsParams {
 
 export interface ITournamentParticipants {
     numberOnePlayer: IUser;
-    players: []
+    players: IPlayers[];
+}
+
+export interface IPlayers {
+    players: IUser[];
 }

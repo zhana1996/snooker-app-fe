@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { element } from 'protractor';
 import { Observable, Subscription } from 'rxjs';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { FolderFacade } from 'src/app/folder/store/facade/folder.facade';
@@ -12,15 +13,14 @@ import { ITraining } from 'src/app/folder/store/models/trainings';
   styleUrls: ['../../workout.component.scss']
 })
 export class WorkoutPlayerComponent implements OnInit, OnDestroy {
-  public showResults = false;
-  public form: FormGroup;
-  public player_id: string;
+  showResults = false;
+  form: FormGroup;
+  player_id: string;
+  trainings: ITraining[] = [];
+  trainers: IUser[] = [];
 
-  public trainings: ITraining[] = [];
   private trainings$: Observable<ITraining[]>;
   private trainingsSubs: Subscription;
-
-  public trainers: IUser[] = [];
   private trainers$: Observable<IUser[]>;
   private trainersSubs: Subscription;
 
@@ -32,6 +32,7 @@ export class WorkoutPlayerComponent implements OnInit, OnDestroy {
     this.trainings$ = this.facade.trainings$;
     this.trainers$ = this.facade.trainers$;
   }
+
   ngOnInit(): void {
     this.facade.getTrainers();
     
@@ -39,7 +40,6 @@ export class WorkoutPlayerComponent implements OnInit, OnDestroy {
       if(data) {
         if(data.length > 0) {
           this.trainings = data;
-          // отделна заявка за свободните САМО
           this.showResults = true;
         } else {
           this.trainings = [];
@@ -68,6 +68,11 @@ export class WorkoutPlayerComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngOnDestroy(): void {
+    this.trainingsSubs.unsubscribe();
+    this.trainersSubs.unsubscribe();
+  }
+
   initForm(): void {
     this.form = this.formBuilder.group({
       userId: ['', Validators.required]});
@@ -82,10 +87,4 @@ export class WorkoutPlayerComponent implements OnInit, OnDestroy {
       this.facade.getTrainings(this.form.value['userId']);
     }, 1500);
   }
-
-  ngOnDestroy(): void {
-    this.trainingsSubs.unsubscribe();
-    this.trainersSubs.unsubscribe();
-  }
-  
 }

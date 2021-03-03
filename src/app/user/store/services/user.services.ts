@@ -31,5 +31,5 @@ export class UserService {
           `${environment.API_URL}/file-storage/upload`,
           form
         );
-      }
+    }
 }   

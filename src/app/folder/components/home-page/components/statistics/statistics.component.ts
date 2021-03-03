@@ -10,14 +10,16 @@ import { IUser } from 'src/app/folder/store/models/players';
   styleUrls: ['statistics.component.scss']
 })
 export class StatisticComponent implements OnInit, OnDestroy {
+  players: IUser[] = [];
   private players$: Observable<IUser[]>;
   private playersSubs: Subscription;
-  public players: IUser[] = [];
+
   constructor(private facade: FolderFacade,
               private toaster: ToasterService) {
     this.players$ = this.facade.players$;
   }
-  ngOnInit() {
+
+  ngOnInit(): void {
     this.facade.getAllPlayers('');
     this.playersSubs = this.players$.subscribe((data: IUser[]) => {
       if(data) {

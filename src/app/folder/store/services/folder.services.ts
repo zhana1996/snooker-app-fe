@@ -78,4 +78,8 @@ export class FolderService {
         });
         return this.http.get<ITournament[]>(`${environment.API_URL_TOURNAMENT}`, {params: httpParams});
     }
+
+    updateToken(userId: string, notificationToken: string): Observable<any> {
+        return this.http.put<any>(`${environment.API_URL_USER}/notification-token`, { userId, notificationToken });
+    }
 }   

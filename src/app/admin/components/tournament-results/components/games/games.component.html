@@ -2,7 +2,7 @@
     <ion-toolbar>
       <ion-title>Теглене на жребий</ion-title>
       <ion-buttons slot="end">
-        <ion-button color="warning" (click)="this.modalController.dismiss()">Close</ion-button>
+        <ion-button color="warning" (click)="closeModal()">Затвори</ion-button>
       </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -16,31 +16,31 @@
             <ion-row style="margin-top: 10px;" class="ion-justify-content-end">
                <ion-button color='warning' (click)="shufflePlayers()">Теглене на жребий</ion-button> 
             </ion-row>
-            <ion-row *ngIf="showResults">
-                <ion-list style="width: 100%; padding: 0px;">
-                    <ion-item class="list-style">
-                        <ion-label style="margin: 0px;">
-                          <ion-grid>
-                              <ion-row>
-                                  <ion-col class="col-style" size="1">1</ion-col>
-                                  <ion-col class="col-style" size="5">Zhana Mitova</ion-col>
-                                  <ion-col class="col-style" size="1">v</ion-col>
-                                  <ion-col class="col-style" size="5">Darko Andreev</ion-col>
-                              </ion-row>
-                          </ion-grid>
-                      </ion-label>
-                    </ion-item>
-                </ion-list>
-            </ion-row>
             <ion-row *ngIf="onePlayer">
                 <ion-list style="width: 100%; padding: 0px;">
                     <ion-item class="list-style">
                         <ion-label style="margin: 0px;">
                           <ion-grid>
                               <ion-row>
-                                  <ion-col class="col-style" size="1">1</ion-col>
-                                  <ion-col class="col-style" size="5">{{onePlayer.username}}</ion-col>
-                                  <ion-col class="col-style" size="1">v</ion-col>
+                                  <ion-col class="col-style" size="12">{{onePlayer?.userDetails.name}}</ion-col>
+                              </ion-row>
+                          </ion-grid>
+                      </ion-label>
+                    </ion-item>
+                </ion-list>
+            </ion-row>
+            <ion-row *ngIf="showResults">
+                <ion-list style="width: 100%; padding: 0px;">
+                    <ion-item class="list-style" *ngFor="let pairs of allPlayers; index as i">
+                        <ion-label style="margin: 0px;">
+                          <ion-grid>
+                              <ion-row>
+                                  <ion-col class="col-style" style="margin: auto" size="1">{{i + 1}}</ion-col>
+                                  <ion-col class="col-style">
+                                      <ion-row class="ion-justify-content-center">{{pairs[0]?.userDetails?.name}}</ion-row>
+                                      <ion-row class="ion-justify-content-center">vs</ion-row>
+                                      <ion-row class="ion-justify-content-center">{{pairs[1]?.userDetails?.name}}</ion-row>
+                                  </ion-col>
                               </ion-row>
                           </ion-grid>
                       </ion-label>

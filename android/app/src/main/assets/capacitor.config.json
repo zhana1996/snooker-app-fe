@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "tu.app.snooker",
   "appName": "snooker-app-fe",
   "bundledWebRuntime": false,
   "npmClient": "npm",

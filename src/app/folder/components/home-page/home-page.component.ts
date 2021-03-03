@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { FolderFacade } from '../../store/facade/folder.facade';
 import { IUser } from '../../store/models/players';
 import { IEarliestTournament } from '../../store/models/tournament';
@@ -12,32 +13,29 @@ import { IEarliestTournament } from '../../store/models/tournament';
   styleUrls: ['home-page.component.scss']
 })
 export class HomePageComponent implements OnInit, OnDestroy {
+  readonly env = environment;
+  tournament: IEarliestTournament;
+  players: IUser[] = [];
+  showEarliestTournament = false;
+  style: string[] = [];
+  isPlayerParticipant = false;
+  month: string;
+  day: number;
+  year: number;
+  time: string;
+  clubName: string;
+  city: string;
+  timeLeft: number = 60;
+  interval;
+  minutes: number;
+  hours: number;
+  days: number;
 
-  public tournament: IEarliestTournament;
   private tournament$: Observable<IEarliestTournament>;
   private tournamentSubs: Subscription;
-
-  public players: IUser[] = [];
   private players$: Observable<IUser[]>;
   private playersSubs: Subscription;
-
-  public showEarliestTournament = false;
-  public style: string[] = [];
-
-  public isPlayerParticipant = false;
-
   private monthNames = ["Яну", "Фев", "Март", "Апр", "Май", "Юни", "Юли", "Авг", "Сеп", "Окт", "Ное", "Дек"];
-  public month: string;
-  public day: number;
-  public year: number;
-  public time: string;
-  public clubName: string;
-  public city: string;
-  public timeLeft: number = 60;
-  public interval;
-  public minutes: number;
-  public hours: number;
-  public days: number;
 
   constructor(public router: Router,
               private facade: FolderFacade,
@@ -63,11 +61,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
           this.day = dayOfTournament.getUTCDate();
           this.month = this.monthNames[dayOfTournament.getMonth()];
           this.year = dayOfTournament.getFullYear();
-          this.time = (dayOfTournament.getUTCHours() + 2).toString() + ':' + (dayOfTournament.getMinutes()).toString();
+          this.time = (dayOfTournament.getHours() - 2).toString() + ':' + (dayOfTournament.getMinutes()).toString();
           this.clubName = this.tournament.tournament.place.split(',')[0];
           this.city = this.tournament.tournament.place.split(',')[1];
           this.minutes = this.tournament.minutes;
-          this.hours = this.tournament.hours;
+          this.hours = this.tournament.hours - 2;
           this.days = this.tournament.days;
           this.setInterval();
           console.log(this.time);
@@ -94,6 +92,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.tournamentSubs.unsubscribe();
+    this.playersSubs.unsubscribe();
   }
 
   goToStatisticsPage(): void {
@@ -174,9 +177,5 @@ export class HomePageComponent implements OnInit, OnDestroy {
         }
       }
     },1000)
-  }
-
-  ngOnDestroy(): void {
-    this.tournamentSubs.unsubscribe();
   }
 }

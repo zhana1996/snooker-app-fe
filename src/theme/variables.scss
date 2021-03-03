@@ -244,3 +244,8 @@
 .alert-title.sc-ion-alert-md {
   color: black;
 }
+
+.stc-action-sheet {
+  --color: var(--ion-color-primary);
+  --button-color: var(--ion-text-color);
+}

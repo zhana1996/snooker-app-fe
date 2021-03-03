@@ -13,10 +13,10 @@ import { ITraining } from 'src/app/folder/store/models/trainings';
 })
 export class WorkoutCoachComponent implements OnInit, OnDestroy {
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
-  public coach_id: string;
-  public collapseCard = false;
-  public viewTitle = '';
-  public event = {
+  coach_id: string;
+  collapseCard = false;
+  viewTitle = '';
+  event = {
     title: '',
     desc: '',
     startTime: '',
@@ -25,18 +25,18 @@ export class WorkoutCoachComponent implements OnInit, OnDestroy {
     allDay: false
   }
 
-  public minDate = new Date().toISOString();
-  public eventSource = [];
+  minDate = new Date().toISOString();
+  eventSource = [];
   calendar = {
     mode: 'month',
     currentDate: new Date()
   };
 
-  public trainings: ITraining[] = [];
+  trainings: ITraining[] = [];
+  showAddNewTraining = false;
+
   private trainings$: Observable<ITraining[]>;
   private trainingsSubs: Subscription;
-
-  public showAddNewTraining = false;
 
   constructor(@Inject(LOCALE_ID) private locale: string,
               private facade: FolderFacade,
@@ -55,16 +55,27 @@ export class WorkoutCoachComponent implements OnInit, OnDestroy {
         if(data.length > 0) {
           this.trainings = data;
           for(let i = 0; i < this.trainings.length; i ++) {
+            let start = new Date(this.trainings[i].startDate);
+            start.setHours(start.getHours() - 2);
+            let end = new Date(this.trainings[i].endDate);
+            end.setHours(end.getHours() - 2);
+            let title: string;
+            let description: string;
+            if (this.trainings[i].participant) {
+              title = `${this.trainings[i].title} - ${this.trainings[i].participant.player.userDetails.name}`;
+              description = `Тренировката e запазена от играча ${this.trainings[i].participant.player.userDetails.name}`;
+            } else {
+              title = this.trainings[i].title;
+              description = this.trainings[i].description;
+            }
             this.eventSource.push({
-              title: this.trainings[i].title,
-              desc: this.trainings[i].description,
-              startTime:  new Date(this.trainings[i].startDate),
-              endTime: new Date(this.trainings[i].endDate),
-              eventColor: this.trainings[i].description === 'Свободна' ? '#3a87ad' : '',
+              title: title,
+              desc: description,
+              startTime:  start,
+              endTime: end,
               allDay: false
             });
           }
-          console.log(this.eventSource);
           this.myCal.loadEvents();
           this.resetEvent();
         } else {
@@ -72,7 +83,10 @@ export class WorkoutCoachComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
 
+  ngOnDestroy(): void {
+    this.trainingsSubs.unsubscribe();
   }
 
   async onEventSelected(event){
@@ -81,6 +95,7 @@ export class WorkoutCoachComponent implements OnInit, OnDestroy {
 
     const alert = await this.alertCtrl.create({
       header: event.title,
+      subHeader: event.desc,
       message: 'From: ' + start + '<br><br>To: ' + end,
       buttons: ['OK']
     });
@@ -119,11 +134,15 @@ export class WorkoutCoachComponent implements OnInit, OnDestroy {
       allDay: false
     };
     this.eventSource.push(addEvent);
+    let start = new Date(this.event.startTime);
+    start.setHours(start.getHours() + 2);
+    let end = new Date(this.event.endTime);
+    end.setHours(end.getHours() + 2);
     this.facade.createTraining(this.coach_id, {
       title: this.event.title,
       description: this.event.desc,
-      startDate: new Date(this.event.startTime),
-      endDate: new Date(this.event.endTime)
+      startDate: start,
+      endDate: end
     });
     this.myCal.loadEvents();
     this.resetEvent();
@@ -148,9 +167,5 @@ export class WorkoutCoachComponent implements OnInit, OnDestroy {
 
   today(): void {
     this.calendar.currentDate = new Date();
-  }
-
-  ngOnDestroy(): void {
-    this.trainingsSubs.unsubscribe();
   }
 }

@@ -22,7 +22,7 @@ import { environment } from 'src/environments/environment';
 export class TournamentResultsComponent implements OnInit, OnDestroy {
   public myForm: FormGroup;
   public toDate = '2021';
-  private season = '2020/2021';
+  public season = '2020/2021';
 
   public tournaments: ITournament[] = [];
   private tournament$: Observable<ITournament[]>;

@@ -101,4 +101,13 @@ export class AdminService {
             observe: 'events'
         });
     }
+
+    uploadImage(file: Blob, imageName: string): Observable<any> {
+        const form = new FormData();
+        form.append('file', file, imageName);
+        return this.http.post<any>(
+          `${environment.API_URL}/file-storage/upload`,
+          form
+        );
+    }
 }   

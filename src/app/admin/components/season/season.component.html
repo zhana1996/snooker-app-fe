@@ -15,7 +15,7 @@
                         <ion-item>
                             <ion-label>Изберете сезон</ion-label>
                             <ion-datetime formControlName="fromDate" max="2020" (ionChange)="changeFromDate()" display-format="YYYY" picker-format="YYYY"></ion-datetime>
-                            <ion-datetime formControlName="toDate" display-format="YYYY" picker-format="YYYY" disabledFormControl></ion-datetime>
+                            <ion-datetime formControlName="toDate" display-format="YYYY" picker-format="YYYY" [disabled]="true"></ion-datetime>
                         </ion-item>
                     </ion-row>
                 </form>

@@ -5,8 +5,11 @@
                 {{tournament.startDate.toString().substring(0, 10)}}
             </ion-col>
             <ion-col class="col-style">
-                <ion-row class="row-title"><a style="color: #ce132d;" (click)="downloadTournamentResults(tournament.id)"><strong>{{tournament.name}}</strong></a></ion-row>
+                <ion-row class="row-title"><a style="color: #ce132d;"><strong>{{tournament.name}}</strong></a></ion-row>
                 <ion-row class="row-subtitle">{{tournament.place}}</ion-row>
+                <ion-row class="row-subtitle ion-justify-content-end">
+                    <ion-button [disabled]="!tournament.fileName" style="font-size: 10px;" size="small" color="danger"  (click)="downLoadFile(tournament)">Преглед</ion-button>
+                </ion-row>
             </ion-col>
         </ion-row>
     </ion-grid>

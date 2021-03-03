@@ -9,7 +9,7 @@ export const environment = {
   API_URL_TOURNAMENT: 'http://192.168.100.7:3000/tournament',
   API_URL_TOURNAMENT_PARTICIPANT: 'http://192.168.100.7:3000/torunament-participant',
   API_URL_NEWS: 'http://192.168.100.7:3000/news'
-};
+}; // 192.168.100.7
 
 /*
  * For easier debugging in development mode, you can import the following file

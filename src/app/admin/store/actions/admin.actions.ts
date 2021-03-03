@@ -67,3 +67,7 @@ export const deleteNewsError = createAction('[Admin Page] Delete News Error', (e
 export const updateNews = createAction('[Admin Page] Update News', props<{news: INews}>());
 export const updateNewsSuccess = createAction('[Admin Page] Update News Success', props<{ updateNews: INews }>());
 export const updateNewsError = createAction('[Admin Page] Update News Error', (error: Error) => error);
+
+export const uploadImage = createAction('[Register Page] Upload image',props<{ imageBlob: Blob; imageName: string }>());
+export const uploadImageSuccess = createAction('[Register Page] Upload image success',props<{ response: any }>());
+export const uploadImageFailed = createAction('[Register Page] Upload image failed',(error: Error) => error);
